@@ -14,22 +14,48 @@ namespace Jack.FoodTracker
 {
     public partial class Form1 : Form
     {
+        private FoodTracker ftracker;
+
         public Form1()
         {
+            ftracker = new FoodTracker();
+
             InitializeComponent();
 
             Context ctx = new Context();
             Food bacon = new Food();
 
             bacon.Name = "Bacon";
-            bacon.Id = 0;
             bacon.Calories = 2000;
             bacon.Description = "Filthy Pig Fat";
 
             ctx.Foods.Add(bacon);
+            ctx.Foods.Add(bacon);
+
+            foreach(Food food in ctx.Foods)
+            {
+                ctx.Foods.Remove(food);
+            }
+
+            
             ctx.SaveChanges();
 
-            textBox1.Text = ctx.Foods.ToList()[0].Name;
+            tbName.Text = ctx.Foods.ToList()[0].Name;
+            tbCalories.Text = "" + ctx.Foods.ToList().Count;
+        }
+
+        private void btnAddFood_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                FoodDTO dto = new FoodDTO();
+
+                ftracker.AddFood(dto);
+            }
+            catch(Exception ex)
+            {
+
+            }
         }
     }
 }
