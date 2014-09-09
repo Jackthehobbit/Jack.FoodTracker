@@ -5,14 +5,14 @@ namespace Jack.FoodTracker.EntityDatabase.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Jack.FoodTracker.EntityDatabase.Context>
+    internal sealed class Configuration : DbMigrationsConfiguration<Jack.FoodTracker.EntityDatabase.FoodContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
         }
 
-        protected override void Seed(Jack.FoodTracker.EntityDatabase.Context context)
+        protected override void Seed(Jack.FoodTracker.EntityDatabase.FoodContext context)
         {
             //  This method will be called after migrating to the latest version.
 

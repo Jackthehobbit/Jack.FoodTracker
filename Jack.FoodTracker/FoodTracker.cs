@@ -15,7 +15,7 @@ namespace Jack.FoodTracker
 
         public void AddFood(FoodDTO dto)
         {
-
+            throw new NotImplementedException();
         }
     }
 }

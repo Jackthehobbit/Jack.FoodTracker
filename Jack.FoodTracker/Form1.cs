@@ -21,27 +21,6 @@ namespace Jack.FoodTracker
             ftracker = new FoodTracker();
 
             InitializeComponent();
-
-            Context ctx = new Context();
-            Food bacon = new Food();
-
-            bacon.Name = "Bacon";
-            bacon.Calories = 2000;
-            bacon.Description = "Filthy Pig Fat";
-
-            ctx.Foods.Add(bacon);
-            ctx.Foods.Add(bacon);
-
-            foreach(Food food in ctx.Foods)
-            {
-                ctx.Foods.Remove(food);
-            }
-
-            
-            ctx.SaveChanges();
-
-            tbName.Text = ctx.Foods.ToList()[0].Name;
-            tbCalories.Text = "" + ctx.Foods.ToList().Count;
         }
 
         private void btnAddFood_Click(object sender, EventArgs e)

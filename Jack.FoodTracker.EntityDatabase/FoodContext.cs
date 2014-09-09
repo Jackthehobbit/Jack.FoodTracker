@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Jack.FoodTracker.EntityDatabase
 {   
-    public class Context : DbContext
+    public class FoodContext : DbContext
     {
-        public Context() : base("FoodContext")
+        public FoodContext() : base("FoodContext")
         {
         }
 
