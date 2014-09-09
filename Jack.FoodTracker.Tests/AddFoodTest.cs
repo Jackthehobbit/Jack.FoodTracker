@@ -162,6 +162,7 @@ namespace Jack.FoodTracker.Tests
             try
             {
                 ftracker.AddFood(dto);
+                ftracker.AddFood(dto);
             }
             catch (ArgumentException aex)
             {
