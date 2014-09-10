@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FoodDTO.cs" />
+    <Compile Include="FoodDTOParser.cs" />
     <Compile Include="FoodTracker.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

@@ -29,11 +29,19 @@ namespace Jack.FoodTracker
             {
                 FoodDTO dto = new FoodDTO();
 
+                dto.Name = tbName.Text;
+                dto.Description = tbDesc.Text;
+                dto.Calories = tbCalories.Text;
+                dto.Sugar = tbSugar.Text;
+                dto.Fat = tbFat.Text;
+                dto.Saturates = tbSatFat.Text;
+                dto.Salt = tbSalt.Text;
+
                 ftracker.AddFood(dto);
             }
-            catch(Exception ex)
+            catch(ArgumentException ex)
             {
-
+                MessageBox.Show(ex.Message);
             }
         }
     }
