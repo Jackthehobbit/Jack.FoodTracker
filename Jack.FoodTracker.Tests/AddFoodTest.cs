@@ -9,7 +9,7 @@ namespace Jack.FoodTracker.Tests
         [TestMethod]
         public void SuccessfulAdd()
         {
-            FoodTracker ftracker = new FoodTracker();
+            FoodTracker ftracker = new FoodTracker(new MockFoodRepository());
 
             FoodDTO dto = helper("Bacon", "Filthy Pig", "200", "100", "99", "12", "6");
 
@@ -23,7 +23,7 @@ namespace Jack.FoodTracker.Tests
         {
             Exception ex = null;
 
-            FoodTracker ftracker = new FoodTracker();
+            FoodTracker ftracker = new FoodTracker(new MockFoodRepository());
 
             FoodDTO dto = helper("", "Filthy Pig", "200", "100", "99", "12", "6");
 
@@ -45,7 +45,7 @@ namespace Jack.FoodTracker.Tests
         {
             Exception ex = null;
 
-            FoodTracker ftracker = new FoodTracker();
+            FoodTracker ftracker = new FoodTracker(new MockFoodRepository());
 
             FoodDTO dto = helper("Bacon", "Filthy Pig", "hello", "100", "99", "12", "6");
 
@@ -67,7 +67,7 @@ namespace Jack.FoodTracker.Tests
         {
             Exception ex = null;
 
-            FoodTracker ftracker = new FoodTracker();
+            FoodTracker ftracker = new FoodTracker(new MockFoodRepository());
 
             FoodDTO dto = helper("Bacon", "Filthy Pig", "200", "hello", "99", "12", "6");
 
@@ -89,7 +89,7 @@ namespace Jack.FoodTracker.Tests
         {
             Exception ex = null;
 
-            FoodTracker ftracker = new FoodTracker();
+            FoodTracker ftracker = new FoodTracker(new MockFoodRepository());
 
             FoodDTO dto = helper("Bacon", "Filthy Pig", "200", "100", "hello", "12", "6");
 
@@ -111,7 +111,7 @@ namespace Jack.FoodTracker.Tests
         {
             Exception ex = null;
 
-            FoodTracker ftracker = new FoodTracker();
+            FoodTracker ftracker = new FoodTracker(new MockFoodRepository());
 
             FoodDTO dto = helper("Bacon", "Filthy Pig", "200", "100", "99", "hello", "6");
 
@@ -133,7 +133,7 @@ namespace Jack.FoodTracker.Tests
         {
             Exception ex = null;
 
-            FoodTracker ftracker = new FoodTracker();
+            FoodTracker ftracker = new FoodTracker(new MockFoodRepository());
 
             FoodDTO dto = helper("Bacon", "Filthy Pig", "200", "100", "99", "12", "food");
 
@@ -155,7 +155,7 @@ namespace Jack.FoodTracker.Tests
         {
             Exception ex = null;
 
-            FoodTracker ftracker = new FoodTracker();
+            FoodTracker ftracker = new FoodTracker(new MockFoodRepository());
 
             FoodDTO dto = helper("Bacon", "Filthy Pig", "200", "100", "99", "12", "6");
 

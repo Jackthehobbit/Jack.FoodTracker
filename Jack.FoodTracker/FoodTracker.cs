@@ -10,9 +10,11 @@ namespace Jack.FoodTracker
 {
     public class FoodTracker
     {
-        public FoodTracker()
-        {
+        private readonly IFoodRepository foodRepository;
 
+        public FoodTracker(IFoodRepository foodRepository)
+        {
+            this.foodRepository = foodRepository;
         }
 
         public void AddFood(FoodDTO dto)
@@ -23,17 +25,13 @@ namespace Jack.FoodTracker
             Food newFood = parser.Parse(dto);
 
             //Check the food doesn't already exist in the database
-            FoodContext fContext = new FoodContext();
-            
-            if(fContext.Foods.Where(x => x.Name.Equals(newFood.Name)).Any())
+            if(foodRepository.GetAll().Where(x => x.Name.Equals(newFood.Name)).Any())
             {
                 throw new ArgumentException("This food already exists.");
             }
 
             //Add the food to the database
-            fContext.Foods.Add(newFood);
-            fContext.SaveChanges();
-            fContext.Dispose();
+            foodRepository.Add(newFood);
         }
     }
 }

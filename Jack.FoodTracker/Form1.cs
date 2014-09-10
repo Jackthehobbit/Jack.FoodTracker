@@ -18,7 +18,7 @@ namespace Jack.FoodTracker
 
         public Form1()
         {
-            ftracker = new FoodTracker();
+            ftracker = new FoodTracker(new FoodRepository(new FoodContext()));
 
             InitializeComponent();
         }
