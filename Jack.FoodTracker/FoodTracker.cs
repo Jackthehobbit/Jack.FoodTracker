@@ -17,8 +17,6 @@ namespace Jack.FoodTracker
 
         public void AddFood(FoodDTO dto)
         {
-            throw new NotImplementedException();
-
             //Parse input strings into a food object
             FoodDTOParser parser = new FoodDTOParser();
 

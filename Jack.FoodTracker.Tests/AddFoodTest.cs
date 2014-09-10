@@ -37,7 +37,7 @@ namespace Jack.FoodTracker.Tests
             }
 
             Assert.IsNotNull(ex);
-            Assert.Equals(ex.Message, "Name is empty.");
+            Assert.AreEqual("Name is empty.", ex.Message);
         }
 
         [TestMethod]
@@ -59,7 +59,7 @@ namespace Jack.FoodTracker.Tests
             }
 
             Assert.IsNotNull(ex);
-            Assert.Equals(ex.Message, "Calories is not a whole number.");
+            Assert.AreEqual("Calories is not a whole number.", ex.Message);
         }
 
         [TestMethod]
@@ -81,7 +81,7 @@ namespace Jack.FoodTracker.Tests
             }
 
             Assert.IsNotNull(ex);
-            Assert.Equals(ex.Message, "Sugar is not a number.");
+            Assert.AreEqual("Sugar is not a number.", ex.Message);
         }
 
         [TestMethod]
@@ -103,7 +103,7 @@ namespace Jack.FoodTracker.Tests
             }
 
             Assert.IsNotNull(ex);
-            Assert.Equals(ex.Message, "Fat is not a number.");
+            Assert.AreEqual("Fat is not a number.", ex.Message);
         }
 
         [TestMethod]
@@ -125,7 +125,7 @@ namespace Jack.FoodTracker.Tests
             }
 
             Assert.IsNotNull(ex);
-            Assert.Equals(ex.Message, "Saturated Fats is not a number.");
+            Assert.AreEqual("Saturated Fats is not a number.", ex.Message);
         }
 
         [TestMethod]
@@ -147,7 +147,7 @@ namespace Jack.FoodTracker.Tests
             }
 
             Assert.IsNotNull(ex);
-            Assert.Equals(ex.Message, "Salt is not a number.");
+            Assert.AreEqual("Salt is not a number.", ex.Message);
         }
 
         [TestMethod]
@@ -170,7 +170,7 @@ namespace Jack.FoodTracker.Tests
             }
 
             Assert.IsNotNull(ex);
-            Assert.Equals(ex.Message, "This food already exists.");
+            Assert.AreEqual("This food already exists.", ex.Message);
         }
 
         private FoodDTO helper(string name, string description, string calories, string sugar, string fat, string sats, string salt)

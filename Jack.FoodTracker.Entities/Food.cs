@@ -27,5 +27,16 @@ namespace Jack.FoodTracker.Entities
         public float Saturates { get; set; }
 
         public float Salt { get; set; }
+
+        public Food(string name, string description, int calories, float sugars, float fat, float saturates, float salt)
+        {
+            this.Name = name;
+            this.Description = description;
+            this.Calories = calories;
+            this.Sugars = sugars;
+            this.Fat = fat;
+            this.Saturates = saturates;
+            this.Salt = salt;
+        }
     }
 }
