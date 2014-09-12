@@ -79,42 +79,42 @@
             this.tbSalt.Location = new System.Drawing.Point(131, 213);
             this.tbSalt.Name = "tbSalt";
             this.tbSalt.Size = new System.Drawing.Size(150, 20);
-            this.tbSalt.TabIndex = 0;
+            this.tbSalt.TabIndex = 6;
             // 
             // tbSatFat
             // 
             this.tbSatFat.Location = new System.Drawing.Point(131, 187);
             this.tbSatFat.Name = "tbSatFat";
             this.tbSatFat.Size = new System.Drawing.Size(150, 20);
-            this.tbSatFat.TabIndex = 0;
+            this.tbSatFat.TabIndex = 5;
             // 
             // tbFat
             // 
             this.tbFat.Location = new System.Drawing.Point(131, 161);
             this.tbFat.Name = "tbFat";
             this.tbFat.Size = new System.Drawing.Size(150, 20);
-            this.tbFat.TabIndex = 0;
+            this.tbFat.TabIndex = 4;
             // 
             // tbSugar
             // 
             this.tbSugar.Location = new System.Drawing.Point(131, 135);
             this.tbSugar.Name = "tbSugar";
             this.tbSugar.Size = new System.Drawing.Size(150, 20);
-            this.tbSugar.TabIndex = 0;
+            this.tbSugar.TabIndex = 3;
             // 
             // tbCalories
             // 
             this.tbCalories.Location = new System.Drawing.Point(131, 109);
             this.tbCalories.Name = "tbCalories";
             this.tbCalories.Size = new System.Drawing.Size(150, 20);
-            this.tbCalories.TabIndex = 0;
+            this.tbCalories.TabIndex = 2;
             // 
             // tbDesc
             // 
             this.tbDesc.Location = new System.Drawing.Point(131, 83);
             this.tbDesc.Name = "tbDesc";
             this.tbDesc.Size = new System.Drawing.Size(150, 20);
-            this.tbDesc.TabIndex = 0;
+            this.tbDesc.TabIndex = 1;
             // 
             // tbName
             // 
