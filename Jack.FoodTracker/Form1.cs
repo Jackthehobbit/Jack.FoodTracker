@@ -38,6 +38,14 @@ namespace Jack.FoodTracker
                 dto.Salt = tbSalt.Text;
 
                 ftracker.AddFood(dto);
+
+                tbName.Text = "";
+                tbDesc.Text = "";
+                tbCalories.Text = "";
+                tbSugar.Text = "";
+                tbFat.Text = "";
+                tbSatFat.Text = "";
+                tbSalt.Text = "";
             }
             catch(ArgumentException ex)
             {
