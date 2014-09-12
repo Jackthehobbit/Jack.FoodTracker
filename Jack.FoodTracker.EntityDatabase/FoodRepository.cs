@@ -26,5 +26,10 @@ namespace Jack.FoodTracker.EntityDatabase
         {
             return context.Foods.ToList();
         }
+
+        public IList<Food> GetByCategory(FoodCategory fCat)
+        {
+            return context.Foods.Where(x => x.Category.Id == fCat.Id).ToList();
+        }
     }
 }

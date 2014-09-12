@@ -28,6 +28,9 @@ namespace Jack.FoodTracker.Entities
 
         public float Salt { get; set; }
 
+        //[Required]
+        public FoodCategory Category { get; set; }
+
         public Food()
         {
         }

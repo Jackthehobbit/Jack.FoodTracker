@@ -15,5 +15,7 @@ namespace Jack.FoodTracker.EntityDatabase
         }
 
         public DbSet<Food> Foods { get; set; }
+
+        public DbSet<FoodCategory> Categories { get; set; }
     }
 }
