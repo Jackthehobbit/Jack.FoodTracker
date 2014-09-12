@@ -123,6 +123,7 @@
             // 
             // cbCategoryEdit
             // 
+            this.cbCategoryEdit.Enabled = false;
             this.cbCategoryEdit.FormattingEnabled = true;
             this.cbCategoryEdit.Location = new System.Drawing.Point(522, 201);
             this.cbCategoryEdit.Name = "cbCategoryEdit";
@@ -202,7 +203,7 @@
             this.btnEditFood.TabIndex = 8;
             this.btnEditFood.Text = "Edit";
             this.btnEditFood.UseVisualStyleBackColor = true;
-            this.btnEditFood.Click += new System.EventHandler(this.btnAddFood_Click);
+            this.btnEditFood.Click += new System.EventHandler(this.btnEditFood_Click);
             // 
             // label7
             // 
@@ -269,6 +270,7 @@
             // 
             // tbSalt
             // 
+            this.tbSalt.Enabled = false;
             this.tbSalt.Location = new System.Drawing.Point(522, 358);
             this.tbSalt.Name = "tbSalt";
             this.tbSalt.Size = new System.Drawing.Size(150, 20);
@@ -276,6 +278,7 @@
             // 
             // tbSatFat
             // 
+            this.tbSatFat.Enabled = false;
             this.tbSatFat.Location = new System.Drawing.Point(522, 332);
             this.tbSatFat.Name = "tbSatFat";
             this.tbSatFat.Size = new System.Drawing.Size(150, 20);
@@ -283,6 +286,7 @@
             // 
             // tbFat
             // 
+            this.tbFat.Enabled = false;
             this.tbFat.Location = new System.Drawing.Point(522, 306);
             this.tbFat.Name = "tbFat";
             this.tbFat.Size = new System.Drawing.Size(150, 20);
@@ -290,6 +294,7 @@
             // 
             // tbSugar
             // 
+            this.tbSugar.Enabled = false;
             this.tbSugar.Location = new System.Drawing.Point(522, 280);
             this.tbSugar.Name = "tbSugar";
             this.tbSugar.Size = new System.Drawing.Size(150, 20);
@@ -297,6 +302,7 @@
             // 
             // tbCalories
             // 
+            this.tbCalories.Enabled = false;
             this.tbCalories.Location = new System.Drawing.Point(522, 254);
             this.tbCalories.Name = "tbCalories";
             this.tbCalories.Size = new System.Drawing.Size(150, 20);
@@ -304,6 +310,7 @@
             // 
             // tbDesc
             // 
+            this.tbDesc.Enabled = false;
             this.tbDesc.Location = new System.Drawing.Point(522, 228);
             this.tbDesc.Name = "tbDesc";
             this.tbDesc.Size = new System.Drawing.Size(150, 20);
@@ -311,6 +318,7 @@
             // 
             // tbName
             // 
+            this.tbName.Enabled = false;
             this.tbName.Location = new System.Drawing.Point(522, 177);
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(150, 20);

@@ -16,5 +16,35 @@ namespace Jack.FoodTracker
         {
             InitializeComponent();
         }
+
+        private void btnAddFood_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                FoodDTO dto = new FoodDTO();
+
+                dto.Name = tbName.Text;
+                dto.Description = tbDesc.Text;
+                dto.Calories = tbCalories.Text;
+                dto.Sugar = tbSugar.Text;
+                dto.Fat = tbFat.Text;
+                dto.Saturates = tbSatFat.Text;
+                dto.Salt = tbSalt.Text;
+
+                //ftracker.AddFood(dto);
+
+                tbName.Text = "";
+                tbDesc.Text = "";
+                tbCalories.Text = "";
+                tbSugar.Text = "";
+                tbFat.Text = "";
+                tbSatFat.Text = "";
+                tbSalt.Text = "";
+            }
+            catch (ArgumentException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }
