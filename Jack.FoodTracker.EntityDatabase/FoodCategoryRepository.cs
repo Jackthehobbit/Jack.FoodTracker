@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Jack.FoodTracker.EntityDatabase
 {
-    public class FoodCategoryRepository
+    public class FoodCategoryRepository : IFoodCategoryRepository
     {
         private readonly FoodContext context;
 

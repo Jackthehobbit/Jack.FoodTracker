@@ -26,5 +26,10 @@ namespace Jack.FoodTracker.Tests
         {
             return foods;
         }
+
+        IList<Food> GetByCategory(FoodCategory fCat)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

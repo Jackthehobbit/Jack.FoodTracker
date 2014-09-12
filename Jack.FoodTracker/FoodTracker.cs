@@ -11,10 +11,12 @@ namespace Jack.FoodTracker
     public class FoodTracker
     {
         private readonly IFoodRepository foodRepository;
+        private readonly IFoodCategoryRepository foodCatRepository;
 
-        public FoodTracker(IFoodRepository foodRepository)
+        public FoodTracker(IFoodRepository foodRepository, IFoodCategoryRepository foodCatRepository)
         {
             this.foodRepository = foodRepository;
+            this.foodCatRepository = foodCatRepository;
         }
 
         public void AddFood(FoodDTO dto)
@@ -32,6 +34,16 @@ namespace Jack.FoodTracker
 
             //Add the food to the database
             foodRepository.Add(newFood);
+        }
+
+        public IList<FoodCategory> GetAllFoodCategories()
+        {
+            return foodCatRepository.GetAll();
+        }
+
+        public IList<Food> GetFoodByCategory(FoodCategory category)
+        {
+            return foodRepository.GetByCategory(category);
         }
     }
 }

@@ -23,15 +23,17 @@ namespace Jack.FoodTracker
             InitializeComponent();
 
             FoodRepository fRepository = new FoodRepository(context);
-
-            ftracker = new FoodTracker(fRepository);
-
             FoodCategoryRepository fCatRepository = new FoodCategoryRepository(context);
 
-            List<FoodCategory> fCatList = fCatRepository.GetAll();
+            ftracker = new FoodTracker(fRepository, fCatRepository);
+
+            IList<FoodCategory> fCatList = ftracker.GetAllFoodCategories();
 
             lbCategory.DataSource = fCatList;
             lbCategory.DisplayMember = "Name";
+
+            cbCategoryEdit.DataSource = fCatList;
+            cbCategoryEdit.DisplayMember = "Name";
         }
 
         private void btnAddFood_Click(object sender, EventArgs e)
@@ -66,11 +68,9 @@ namespace Jack.FoodTracker
 
         private void lbCategories_SelectedValueChanged(object sender, EventArgs e)
         {
-            FoodRepository fRepository = new FoodRepository(context);
-
             FoodCategory selectedCategory = (FoodCategory)lbCategory.SelectedValue;
 
-            IList<Food> fList = fRepository.GetByCategory(selectedCategory);
+            IList<Food> fList = ftracker.GetFoodByCategory(selectedCategory);
 
             lbFood.DataSource = fList;
             lbFood.DisplayMember = "Name";
@@ -87,6 +87,7 @@ namespace Jack.FoodTracker
             tbFat.Text = "" + selectedFood.Fat;
             tbSatFat.Text = "" + selectedFood.Saturates;
             tbSalt.Text = "" + selectedFood.Salt;
+            
         }
     }
 }

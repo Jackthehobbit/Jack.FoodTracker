@@ -9,5 +9,7 @@ namespace Jack.FoodTracker.EntityDatabase
         void Add(Food newFood);
 
         IList<Food> GetAll();
+
+        IList<Food> GetByCategory(FoodCategory fCat);
     }
 }

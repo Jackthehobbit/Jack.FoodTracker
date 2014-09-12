@@ -49,6 +49,7 @@
     <Compile Include="FoodCategoryRepository.cs" />
     <Compile Include="FoodContext.cs" />
     <Compile Include="FoodRepository.cs" />
+    <Compile Include="IFoodCategoryRepository.cs" />
     <Compile Include="IFoodRepository.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
