@@ -111,7 +111,7 @@ namespace Jack.FoodTracker
             Food selectedFood = (Food)lbFood.SelectedValue;
 
             tbName.Text = selectedFood.Name;
-            cbCategoryEdit.SelectedIndex = lbCategory.SelectedIndex;
+            cbCategoryEdit.SelectedItem = selectedFood.Category;
             tbDesc.Text = selectedFood.Description;
             tbCalories.Text = "" + selectedFood.Calories;
             tbSugar.Text = "" + selectedFood.Sugars;
