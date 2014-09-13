@@ -9,13 +9,24 @@ namespace Jack.FoodTracker.Tests
         [TestMethod]
         public void SuccessfulAdd()
         {
+            Exception ex = null;
+
             FoodTracker ftracker = new FoodTracker(new MockFoodRepository(), new MockFoodCategoryRepository());
 
             FoodDTO dto = helper("Bacon", "Filthy Pig", "200", "100", "99", "12", "6");
 
-            ftracker.AddFood(dto);
+            try
+            {
+                ftracker.AddFood(dto);
 
-            Assert.IsTrue(true);
+            }
+            catch(Exception aex)
+            {
+                ex = aex;
+            }
+
+            
+            Assert.IsNull(ex);
         }
 
         [TestMethod]
@@ -63,6 +74,27 @@ namespace Jack.FoodTracker.Tests
         }
 
         [TestMethod]
+        public void EmptyCalories()
+        {
+            Exception ex = null;
+
+            FoodTracker ftracker = new FoodTracker(new MockFoodRepository(), new MockFoodCategoryRepository());
+
+            FoodDTO dto = helper("Bacon", "Filthy Pig", "", "100", "99", "12", "6");
+
+            try
+            {
+                ftracker.AddFood(dto);
+            }
+            catch (Exception aex)
+            {
+                ex = aex;
+            }
+
+            Assert.IsNull(ex);
+        }
+
+        [TestMethod]
         public void SugarNotANumber()
         {
             Exception ex = null;
@@ -82,6 +114,27 @@ namespace Jack.FoodTracker.Tests
 
             Assert.IsNotNull(ex);
             Assert.AreEqual("Sugar is not a number.", ex.Message);
+        }
+
+        [TestMethod]
+        public void EmptySugar()
+        {
+            Exception ex = null;
+
+            FoodTracker ftracker = new FoodTracker(new MockFoodRepository(), new MockFoodCategoryRepository());
+
+            FoodDTO dto = helper("Bacon", "Filthy Pig", "100", "", "99", "12", "6");
+
+            try
+            {
+                ftracker.AddFood(dto);
+            }
+            catch (Exception aex)
+            {
+                ex = aex;
+            }
+
+            Assert.IsNull(ex);
         }
 
         [TestMethod]
@@ -107,6 +160,27 @@ namespace Jack.FoodTracker.Tests
         }
 
         [TestMethod]
+        public void EmptyFat()
+        {
+            Exception ex = null;
+
+            FoodTracker ftracker = new FoodTracker(new MockFoodRepository(), new MockFoodCategoryRepository());
+
+            FoodDTO dto = helper("Bacon", "Filthy Pig", "100", "100", "", "12", "6");
+
+            try
+            {
+                ftracker.AddFood(dto);
+            }
+            catch (Exception aex)
+            {
+                ex = aex;
+            }
+
+            Assert.IsNull(ex);
+        }
+
+        [TestMethod]
         public void SatFatNotANumber()
         {
             Exception ex = null;
@@ -129,6 +203,27 @@ namespace Jack.FoodTracker.Tests
         }
 
         [TestMethod]
+        public void EmptySatFat()
+        {
+            Exception ex = null;
+
+            FoodTracker ftracker = new FoodTracker(new MockFoodRepository(), new MockFoodCategoryRepository());
+
+            FoodDTO dto = helper("Bacon", "Filthy Pig", "12", "100", "99", "", "6");
+
+            try
+            {
+                ftracker.AddFood(dto);
+            }
+            catch (Exception aex)
+            {
+                ex = aex;
+            }
+
+            Assert.IsNull(ex);
+        }
+
+        [TestMethod]
         public void SaltNotANumber()
         {
             Exception ex = null;
@@ -148,6 +243,27 @@ namespace Jack.FoodTracker.Tests
 
             Assert.IsNotNull(ex);
             Assert.AreEqual("Salt is not a number.", ex.Message);
+        }
+
+        [TestMethod]
+        public void EmptySalt()
+        {
+            Exception ex = null;
+
+            FoodTracker ftracker = new FoodTracker(new MockFoodRepository(), new MockFoodCategoryRepository());
+
+            FoodDTO dto = helper("Bacon", "Filthy Pig", "12", "100", "99", "12", "");
+
+            try
+            {
+                ftracker.AddFood(dto);
+            }
+            catch (Exception aex)
+            {
+                ex = aex;
+            }
+
+            Assert.IsNull(ex);
         }
 
         [TestMethod]
