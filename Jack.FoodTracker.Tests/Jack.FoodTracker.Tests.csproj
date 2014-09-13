@@ -51,6 +51,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="AddFoodTest.cs" />
+    <Compile Include="MockFoodCategoryRepository.cs" />
     <Compile Include="MockFoodRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
