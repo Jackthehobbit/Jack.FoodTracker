@@ -22,6 +22,12 @@ namespace Jack.FoodTracker.EntityDatabase
             context.SaveChanges();
         }
 
+        public void Delete(Food food)
+        {
+            context.Foods.Remove(food);
+            context.SaveChanges();
+        }
+
         public IList<Food> GetAll()
         {
             return context.Foods.ToList();

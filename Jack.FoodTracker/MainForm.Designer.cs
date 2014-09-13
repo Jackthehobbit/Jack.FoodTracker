@@ -152,12 +152,14 @@
             // 
             // btnDeleteFood
             // 
+            this.btnDeleteFood.Enabled = false;
             this.btnDeleteFood.Location = new System.Drawing.Point(603, 401);
             this.btnDeleteFood.Name = "btnDeleteFood";
             this.btnDeleteFood.Size = new System.Drawing.Size(75, 23);
             this.btnDeleteFood.TabIndex = 15;
             this.btnDeleteFood.Text = "Delete";
             this.btnDeleteFood.UseVisualStyleBackColor = true;
+            this.btnDeleteFood.Click += new System.EventHandler(this.btnDeleteFood_Click);
             // 
             // label10
             // 
@@ -197,6 +199,7 @@
             // 
             // btnEditFood
             // 
+            this.btnEditFood.Enabled = false;
             this.btnEditFood.Location = new System.Drawing.Point(522, 401);
             this.btnEditFood.Name = "btnEditFood";
             this.btnEditFood.Size = new System.Drawing.Size(75, 23);

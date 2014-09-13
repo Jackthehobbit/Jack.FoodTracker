@@ -36,6 +36,18 @@ namespace Jack.FoodTracker
             foodRepository.Add(newFood);
         }
 
+        public void DeleteFood(Food food)
+        {
+            try
+            {
+                foodRepository.Delete(food);
+            }
+            catch(InvalidOperationException)
+            {
+                throw new ArgumentException("This food does not exist, hence can't be deleted.");
+            }
+        }
+
         public IList<FoodCategory> GetAllFoodCategories()
         {
             return foodCatRepository.GetAll();

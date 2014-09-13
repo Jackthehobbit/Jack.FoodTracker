@@ -46,39 +46,86 @@ namespace Jack.FoodTracker
         {
             if(inEditMode)
             {
-                inEditMode = false;
-                btnEditFood.Text = "Edit";
-                btnDeleteFood.Text = "Delete";
-
-                lbCategory.Enabled = true;
-                lbFood.Enabled = true;
-
                 //Save the edited changes to the database
                 
             }
-            else
-            {
-                inEditMode = true;
-                btnEditFood.Text = "Save";
-                btnDeleteFood.Text = "Cancel";
 
-                lbCategory.Enabled = false;
-                lbFood.Enabled = false;
-            }
-
-            switchFoodEnabled();
+            switchEditMode();
         }
 
-        private void switchFoodEnabled()
+        private void btnDeleteFood_Click(object sender, EventArgs e)
         {
-            tbName.Enabled = !tbName.Enabled;
-            cbCategoryEdit.Enabled = !cbCategoryEdit.Enabled;
-            tbDesc.Enabled = !tbDesc.Enabled;
-            tbCalories.Enabled = !tbCalories.Enabled;
-            tbSugar.Enabled = !tbSugar.Enabled;
-            tbFat.Enabled = !tbFat.Enabled;
-            tbSatFat.Enabled = !tbSatFat.Enabled;
-            tbSalt.Enabled = !tbSalt.Enabled;
+            //Button is displaying Cancel when in edit mode
+            if(inEditMode)
+            {
+                setFoodInfo();
+
+                switchEditMode();
+            }
+            else
+            {
+                Food selectedFood = (Food)lbFood.SelectedValue;
+
+                ftracker.DeleteFood(selectedFood);
+
+                int foodIndex = lbFood.SelectedIndex;
+
+                FoodCategory selectedCategory = (FoodCategory)lbCategory.SelectedValue;
+
+                IList<Food> fList = ftracker.GetFoodByCategory(selectedCategory);
+
+                lbFood.DataSource = fList;
+                lbFood.DisplayMember = "Name";
+
+                if (fList.Count == 0)
+                {
+                    tbName.Text = "";
+                    cbCategoryEdit.SelectedIndex = -1;
+                    tbDesc.Text = "";
+                    tbCalories.Text = "";
+                    tbSugar.Text = "";
+                    tbFat.Text = "";
+                    tbSatFat.Text = "";
+                    tbSalt.Text = "";
+
+                    btnDeleteFood.Enabled = false;
+                    btnEditFood.Enabled = false;
+                }
+                else
+                {
+                    lbFood.SelectedIndex = foodIndex > 0 ? foodIndex - 1 : 0;
+                    btnDeleteFood.Enabled = true;
+                    btnEditFood.Enabled = true;
+                }
+            }
+        }
+
+        private void switchEditMode()
+        {
+            if(inEditMode)
+            {
+                btnEditFood.Text = "Edit";
+                btnDeleteFood.Text = "Delete";
+            }
+            else
+            {
+                btnEditFood.Text = "Save";
+                btnDeleteFood.Text = "Cancel";
+            }
+
+            inEditMode = !inEditMode;
+
+            lbCategory.Enabled = !inEditMode;
+            lbFood.Enabled = !inEditMode;
+
+            tbName.Enabled = inEditMode;
+            cbCategoryEdit.Enabled = inEditMode;
+            tbDesc.Enabled = inEditMode;
+            tbCalories.Enabled = inEditMode;
+            tbSugar.Enabled = inEditMode;
+            tbFat.Enabled = inEditMode;
+            tbSatFat.Enabled = inEditMode;
+            tbSalt.Enabled = inEditMode;
         }
 
         private void lbCategories_SelectedValueChanged(object sender, EventArgs e)
@@ -90,8 +137,6 @@ namespace Jack.FoodTracker
             lbFood.DataSource = fList;
             lbFood.DisplayMember = "Name";
 
-           
-
             if(fList.Count == 0)
             {
                 tbName.Text = "";
@@ -102,11 +147,24 @@ namespace Jack.FoodTracker
                 tbFat.Text = "";
                 tbSatFat.Text = "";
                 tbSalt.Text = "";
+
+                btnDeleteFood.Enabled = false;
+                btnEditFood.Enabled = false;
+            }
+            else
+            {
+                btnDeleteFood.Enabled = true;
+                btnEditFood.Enabled = true;
             }
             
         }
 
         private void lbFood_SelectedValueChanged(object sender, EventArgs e)
+        {
+            setFoodInfo();
+        }
+
+        private void setFoodInfo()
         {
             Food selectedFood = (Food)lbFood.SelectedValue;
 

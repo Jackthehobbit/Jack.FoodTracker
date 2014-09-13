@@ -10,7 +10,7 @@ namespace Jack.FoodTracker.Tests
 {
     class MockFoodRepository : IFoodRepository
     {
-        private List<Food> foods;
+        public List<Food> foods { get; set; }
 
         public MockFoodRepository()
         {
@@ -20,6 +20,16 @@ namespace Jack.FoodTracker.Tests
         public void Add(Food newFood)
         {
             foods.Add(newFood);
+        }
+
+        public void Delete(Food food)
+        {
+            bool deleted = foods.Remove(food);
+
+            if(!deleted)
+            {
+                throw new InvalidOperationException();
+            }
         }
 
         public IList<Food> GetAll()

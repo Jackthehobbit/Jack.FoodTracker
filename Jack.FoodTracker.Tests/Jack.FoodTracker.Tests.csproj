@@ -54,6 +54,7 @@
     <Compile Include="MockFoodCategoryRepository.cs" />
     <Compile Include="MockFoodRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="DeleteFoodTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Jack.FoodTracker.Entities\Jack.FoodTracker.Entities.csproj">

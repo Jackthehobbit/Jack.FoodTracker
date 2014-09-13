@@ -8,6 +8,8 @@ namespace Jack.FoodTracker.EntityDatabase
     {
         void Add(Food newFood);
 
+        void Delete(Food food);
+
         IList<Food> GetAll();
 
         IList<Food> GetByCategory(FoodCategory fCat);
