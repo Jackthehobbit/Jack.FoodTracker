@@ -12,10 +12,10 @@ namespace Jack.FoodTracker
         public Food Parse(FoodDTO dto)
         {
             int calories;
-            float sugar;
-            float fat;
-            float saturates;
-            float salt;
+            double sugar;
+            double fat;
+            double saturates;
+            double salt;
 
             if(dto.Name == "")
             {
@@ -35,7 +35,7 @@ namespace Jack.FoodTracker
             {
                 sugar = 0;
             }
-            else if(!float.TryParse(dto.Sugar, out sugar))
+            else if (!double.TryParse(dto.Sugar, out sugar))
             {
                 throw new ArgumentException("Sugar is not a number.");
             }
@@ -44,7 +44,7 @@ namespace Jack.FoodTracker
             {
                 fat = 0;
             }
-            else if(!float.TryParse(dto.Fat, out fat))
+            else if (!double.TryParse(dto.Fat, out fat))
             {
                 throw new ArgumentException("Fat is not a number.");
             }
@@ -53,7 +53,7 @@ namespace Jack.FoodTracker
             {
                 saturates = 0;
             }
-            else if(!float.TryParse(dto.Saturates, out saturates))
+            else if (!double.TryParse(dto.Saturates, out saturates))
             {
                 throw new ArgumentException("Saturated Fats is not a number.");
             }
@@ -62,7 +62,7 @@ namespace Jack.FoodTracker
             {
                 salt = 0;
             }
-            else if(!float.TryParse(dto.Salt, out salt))
+            else if (!double.TryParse(dto.Salt, out salt))
             {
                 throw new ArgumentException("Salt is not a number.");
             }

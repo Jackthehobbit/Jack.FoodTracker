@@ -20,13 +20,13 @@ namespace Jack.FoodTracker.Entities
 
         public int Calories { get; set; }
 
-        public float Sugars { get; set; }
+        public double Sugars { get; set; }
 
-        public float Fat { get; set; }
+        public double Fat { get; set; }
 
-        public float Saturates { get; set; }
+        public double Saturates { get; set; }
 
-        public float Salt { get; set; }
+        public double Salt { get; set; }
 
         //[Required]
         public FoodCategory Category { get; set; }
@@ -35,7 +35,7 @@ namespace Jack.FoodTracker.Entities
         {
         }
 
-        public Food(string name, string description, int calories, float sugars, float fat, float saturates, float salt)
+        public Food(string name, string description, int calories, double sugars, double fat, double saturates, double salt)
         {
             this.Name = name;
             this.Description = description;
