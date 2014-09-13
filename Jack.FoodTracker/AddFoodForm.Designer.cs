@@ -44,6 +44,8 @@
             this.tbCalories = new System.Windows.Forms.TextBox();
             this.tbDesc = new System.Windows.Forms.TextBox();
             this.tbName = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.cbCategoryEdit = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label8
@@ -58,17 +60,18 @@
             // 
             // btnAddFood
             // 
-            this.btnAddFood.Location = new System.Drawing.Point(250, 377);
+            this.btnAddFood.Location = new System.Drawing.Point(250, 403);
             this.btnAddFood.Name = "btnAddFood";
             this.btnAddFood.Size = new System.Drawing.Size(75, 23);
             this.btnAddFood.TabIndex = 40;
             this.btnAddFood.Text = "Add Food";
             this.btnAddFood.UseVisualStyleBackColor = true;
+            this.btnAddFood.Click += new System.EventHandler(this.btnAddFood_Click);
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(178, 342);
+            this.label7.Location = new System.Drawing.Point(178, 368);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(40, 13);
             this.label7.TabIndex = 39;
@@ -77,7 +80,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(132, 316);
+            this.label6.Location = new System.Drawing.Point(132, 342);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(86, 13);
             this.label6.TabIndex = 37;
@@ -86,7 +89,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(181, 290);
+            this.label5.Location = new System.Drawing.Point(181, 316);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(37, 13);
             this.label5.TabIndex = 35;
@@ -95,7 +98,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(168, 264);
+            this.label4.Location = new System.Drawing.Point(168, 290);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(50, 13);
             this.label4.TabIndex = 33;
@@ -104,7 +107,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(171, 238);
+            this.label3.Location = new System.Drawing.Point(171, 264);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(47, 13);
             this.label3.TabIndex = 31;
@@ -113,7 +116,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(155, 212);
+            this.label2.Location = new System.Drawing.Point(155, 238);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(63, 13);
             this.label2.TabIndex = 29;
@@ -130,42 +133,42 @@
             // 
             // tbSalt
             // 
-            this.tbSalt.Location = new System.Drawing.Point(221, 338);
+            this.tbSalt.Location = new System.Drawing.Point(221, 364);
             this.tbSalt.Name = "tbSalt";
             this.tbSalt.Size = new System.Drawing.Size(150, 20);
             this.tbSalt.TabIndex = 38;
             // 
             // tbSatFat
             // 
-            this.tbSatFat.Location = new System.Drawing.Point(221, 312);
+            this.tbSatFat.Location = new System.Drawing.Point(221, 338);
             this.tbSatFat.Name = "tbSatFat";
             this.tbSatFat.Size = new System.Drawing.Size(150, 20);
             this.tbSatFat.TabIndex = 36;
             // 
             // tbFat
             // 
-            this.tbFat.Location = new System.Drawing.Point(221, 286);
+            this.tbFat.Location = new System.Drawing.Point(221, 312);
             this.tbFat.Name = "tbFat";
             this.tbFat.Size = new System.Drawing.Size(150, 20);
             this.tbFat.TabIndex = 34;
             // 
             // tbSugar
             // 
-            this.tbSugar.Location = new System.Drawing.Point(221, 260);
+            this.tbSugar.Location = new System.Drawing.Point(221, 286);
             this.tbSugar.Name = "tbSugar";
             this.tbSugar.Size = new System.Drawing.Size(150, 20);
             this.tbSugar.TabIndex = 32;
             // 
             // tbCalories
             // 
-            this.tbCalories.Location = new System.Drawing.Point(221, 234);
+            this.tbCalories.Location = new System.Drawing.Point(221, 260);
             this.tbCalories.Name = "tbCalories";
             this.tbCalories.Size = new System.Drawing.Size(150, 20);
             this.tbCalories.TabIndex = 30;
             // 
             // tbDesc
             // 
-            this.tbDesc.Location = new System.Drawing.Point(221, 208);
+            this.tbDesc.Location = new System.Drawing.Point(221, 234);
             this.tbDesc.Name = "tbDesc";
             this.tbDesc.Size = new System.Drawing.Size(150, 20);
             this.tbDesc.TabIndex = 28;
@@ -177,11 +180,31 @@
             this.tbName.Size = new System.Drawing.Size(150, 20);
             this.tbName.TabIndex = 26;
             // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(166, 211);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(52, 13);
+            this.label13.TabIndex = 43;
+            this.label13.Text = "Category:";
+            // 
+            // cbCategoryEdit
+            // 
+            this.cbCategoryEdit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCategoryEdit.FormattingEnabled = true;
+            this.cbCategoryEdit.Location = new System.Drawing.Point(221, 207);
+            this.cbCategoryEdit.Name = "cbCategoryEdit";
+            this.cbCategoryEdit.Size = new System.Drawing.Size(150, 21);
+            this.cbCategoryEdit.TabIndex = 42;
+            // 
             // AddFoodForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(503, 544);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.cbCategoryEdit);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.btnAddFood);
             this.Controls.Add(this.label7);
@@ -223,6 +246,8 @@
         private System.Windows.Forms.TextBox tbCalories;
         private System.Windows.Forms.TextBox tbDesc;
         private System.Windows.Forms.TextBox tbName;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.ComboBox cbCategoryEdit;
 
     }
 }

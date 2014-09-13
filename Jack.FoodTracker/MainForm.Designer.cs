@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnAddFood = new System.Windows.Forms.Button();
             this.lbFood = new System.Windows.Forms.ListBox();
             this.lbCategory = new System.Windows.Forms.ListBox();
             this.label13 = new System.Windows.Forms.Label();
@@ -62,6 +63,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnAddFood);
             this.groupBox1.Controls.Add(this.lbFood);
             this.groupBox1.Controls.Add(this.lbCategory);
             this.groupBox1.Controls.Add(this.label13);
@@ -94,6 +96,16 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
+            // btnAddFood
+            // 
+            this.btnAddFood.Location = new System.Drawing.Point(250, 248);
+            this.btnAddFood.Name = "btnAddFood";
+            this.btnAddFood.Size = new System.Drawing.Size(75, 23);
+            this.btnAddFood.TabIndex = 22;
+            this.btnAddFood.Text = "Add Food";
+            this.btnAddFood.UseVisualStyleBackColor = true;
+            this.btnAddFood.Click += new System.EventHandler(this.btnAddFood_Click);
+            // 
             // lbFood
             // 
             this.lbFood.FormattingEnabled = true;
@@ -123,6 +135,7 @@
             // 
             // cbCategoryEdit
             // 
+            this.cbCategoryEdit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbCategoryEdit.Enabled = false;
             this.cbCategoryEdit.FormattingEnabled = true;
             this.cbCategoryEdit.Location = new System.Drawing.Point(522, 201);
@@ -386,6 +399,7 @@
         private System.Windows.Forms.ComboBox cbCategoryEdit;
         private System.Windows.Forms.ListBox lbCategory;
         private System.Windows.Forms.ListBox lbFood;
+        private System.Windows.Forms.Button btnAddFood;
     }
 }
 

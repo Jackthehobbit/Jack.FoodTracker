@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Jack.FoodTracker.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,39 +13,47 @@ namespace Jack.FoodTracker
 {
     public partial class AddFoodForm : Form
     {
-        public AddFoodForm()
+        private readonly FoodTracker fTracker;
+
+        public AddFoodForm(FoodTracker fTracker)
         {
             InitializeComponent();
+
+            this.fTracker = fTracker;
+
+            cbCategoryEdit.DataSource = fTracker.GetAllFoodCategories();
+            cbCategoryEdit.DisplayMember = "Name";
         }
 
         private void btnAddFood_Click(object sender, EventArgs e)
         {
             try
             {
-                FoodDTO dto = new FoodDTO();
+                FoodDTO dto = new FoodDTO()
+                {
+                    Name = tbName.Text,
+                    Category = (FoodCategory)cbCategoryEdit.SelectedItem,
+                    Description = tbDesc.Text,
+                    Calories = tbCalories.Text,
+                    Sugar = tbSugar.Text,
+                    Fat = tbFat.Text,
+                    Saturates = tbSatFat.Text,
+                    Salt = tbSalt.Text
+                };
 
-                dto.Name = tbName.Text;
-                dto.Description = tbDesc.Text;
-                dto.Calories = tbCalories.Text;
-                dto.Sugar = tbSugar.Text;
-                dto.Fat = tbFat.Text;
-                dto.Saturates = tbSatFat.Text;
-                dto.Salt = tbSalt.Text;
+                fTracker.AddFood(dto);
 
-                //ftracker.AddFood(dto);
-
-                tbName.Text = "";
-                tbDesc.Text = "";
-                tbCalories.Text = "";
-                tbSugar.Text = "";
-                tbFat.Text = "";
-                tbSatFat.Text = "";
-                tbSalt.Text = "";
+                this.Close();
             }
             catch (ArgumentException ex)
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        public FoodCategory GetFoodCategorySelected()
+        {
+            return (FoodCategory)cbCategoryEdit.SelectedItem;
         }
     }
 }

@@ -69,14 +69,20 @@ namespace Jack.FoodTracker
                         lbCategory.SelectedItem = dto.Category;
                         lbFood.SelectedItem = selectedFood;
                     }
+
+                    switchEditMode();
                 }
                 catch(ArgumentException aex)
                 {
                     MessageBox.Show(aex.Message);
                 }
             }
+            else
+            {
+                switchEditMode();
+            }
 
-            switchEditMode();
+            
         }
 
         private void btnDeleteFood_Click(object sender, EventArgs e)
@@ -111,6 +117,21 @@ namespace Jack.FoodTracker
         private void lbFood_SelectedValueChanged(object sender, EventArgs e)
         {
             setFoodInfo();
+        }
+
+        private void btnAddFood_Click(object sender, EventArgs e)
+        {
+            AddFoodForm addFood = new AddFoodForm(fTracker);
+            addFood.Show();
+            addFood.FormClosed += new FormClosedEventHandler(AddFoodForm_Close);
+        }
+
+        private void AddFoodForm_Close(object sender, EventArgs e)
+        {
+            if (((AddFoodForm)sender).GetFoodCategorySelected().Equals(lbCategory.SelectedItem))
+            {
+                setFoodCatInfo(lbFood.SelectedIndex);
+            }
         }
 
         private void switchEditMode()
