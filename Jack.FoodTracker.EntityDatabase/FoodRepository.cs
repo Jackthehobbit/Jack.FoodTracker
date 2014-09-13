@@ -28,6 +28,12 @@ namespace Jack.FoodTracker.EntityDatabase
             context.SaveChanges();
         }
 
+        public void Edit(Food changedFood)
+        {
+            context.Entry(changedFood).State = System.Data.Entity.EntityState.Modified;
+            context.SaveChanges();
+        }
+
         public IList<Food> GetAll()
         {
             return context.Foods.ToList();

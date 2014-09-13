@@ -36,6 +36,17 @@ namespace Jack.FoodTracker
             foodRepository.Add(newFood);
         }
 
+        public void EditFood(FoodDTO dto, Food food)
+        {
+            //Parse input strings into a food object
+            FoodDTOParser parser = new FoodDTOParser();
+
+            Food newFood = parser.ParseIntoExisting(dto, food);
+
+            //Add the food to the database
+            foodRepository.Edit(newFood);
+        }
+
         public void DeleteFood(Food food)
         {
             try

@@ -17,7 +17,7 @@ namespace Jack.FoodTracker.Tests
 
             FoodTracker ftracker = new FoodTracker(fRepo, new MockFoodCategoryRepository());
 
-            Food food = new Food("Bacon", "Meat", 1, 2, 3, 4, 5);
+            Food food = new Food("Bacon", null, "Meat", 1, 2, 3, 4, 5);
 
             fRepo.foods.Add(food);
 
@@ -41,7 +41,7 @@ namespace Jack.FoodTracker.Tests
 
             FoodTracker ftracker = new FoodTracker(new MockFoodRepository(), new MockFoodCategoryRepository());
 
-            Food food = new Food("Bacon", "Meat", 1, 2, 3, 4, 5);
+            Food food = new Food("Bacon", null, "Meat", 1, 2, 3, 4, 5);
 
             try
             {
@@ -66,8 +66,8 @@ namespace Jack.FoodTracker.Tests
 
             FoodTracker ftracker = new FoodTracker(fRepo, new MockFoodCategoryRepository());
 
-            Food food = new Food("Bacon", "Meat", 1, 2, 3, 4, 5);
-            Food food2 = new Food("Beef", "Meat", 2, 6, 3, 6, 1);
+            Food food = new Food("Bacon", null, "Meat", 1, 2, 3, 4, 5);
+            Food food2 = new Food("Beef", null, "Meat", 2, 6, 3, 6, 1);
 
             fRepo.foods.Add(food);
 

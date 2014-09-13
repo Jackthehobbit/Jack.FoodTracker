@@ -14,7 +14,7 @@ namespace Jack.FoodTracker
 {
     public partial class MainForm : Form
     {
-        private FoodTracker ftracker;
+        private FoodTracker fTracker;
 
         private FoodContext context = new FoodContext();
 
@@ -29,9 +29,9 @@ namespace Jack.FoodTracker
             FoodRepository fRepository = new FoodRepository(context);
             FoodCategoryRepository fCatRepository = new FoodCategoryRepository(context);
 
-            ftracker = new FoodTracker(fRepository, fCatRepository);
+            fTracker = new FoodTracker(fRepository, fCatRepository);
 
-            IList<FoodCategory> fCatList = ftracker.GetAllFoodCategories();
+            IList<FoodCategory> fCatList = fTracker.GetAllFoodCategories();
 
             IList<FoodCategory> fCatList2 = new List<FoodCategory>(fCatList);
 
@@ -47,7 +47,33 @@ namespace Jack.FoodTracker
             if(inEditMode)
             {
                 //Save the edited changes to the database
-                
+                FoodDTO dto = new FoodDTO()
+                {
+                    Name = tbName.Text,
+                    Category = (FoodCategory)cbCategoryEdit.SelectedItem,
+                    Description = tbDesc.Text,
+                    Calories = tbCalories.Text,
+                    Sugar = tbSugar.Text,
+                    Fat = tbFat.Text,
+                    Saturates = tbSatFat.Text,
+                    Salt = tbSalt.Text
+                };
+
+                Food selectedFood = (Food)lbFood.SelectedItem;
+
+                try
+                {
+                    fTracker.EditFood(dto, selectedFood);
+                    if(!dto.Category.Equals(lbCategory.SelectedItem))
+                    {
+                        lbCategory.SelectedItem = dto.Category;
+                        lbFood.SelectedItem = selectedFood;
+                    }
+                }
+                catch(ArgumentException aex)
+                {
+                    MessageBox.Show(aex.Message);
+                }
             }
 
             switchEditMode();
@@ -68,7 +94,7 @@ namespace Jack.FoodTracker
             {
                 Food selectedFood = (Food)lbFood.SelectedValue;
 
-                ftracker.DeleteFood(selectedFood);
+                fTracker.DeleteFood(selectedFood);
 
                 int foodIndex = lbFood.SelectedIndex;
 
@@ -119,7 +145,7 @@ namespace Jack.FoodTracker
         {
             FoodCategory selectedCategory = (FoodCategory)lbCategory.SelectedValue;
 
-            IList<Food> fList = ftracker.GetFoodByCategory(selectedCategory);
+            IList<Food> fList = fTracker.GetFoodByCategory(selectedCategory);
 
             lbFood.DataSource = fList;
             lbFood.DisplayMember = "Name";

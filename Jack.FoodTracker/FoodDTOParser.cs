@@ -67,7 +67,23 @@ namespace Jack.FoodTracker
                 throw new ArgumentException("Salt is not a number.");
             }
 
-            return new Food(dto.Name, dto.Description, calories, sugar, fat, saturates, salt);
+            return new Food(dto.Name, dto.Category, dto.Description, calories, sugar, fat, saturates, salt);
+        }
+
+        public Food ParseIntoExisting(FoodDTO dto, Food food)
+        {
+            Food parsedFood = Parse(dto);
+
+            food.Name = parsedFood.Name;
+            food.Category = parsedFood.Category;
+            food.Description = parsedFood.Description;
+            food.Calories = parsedFood.Calories;
+            food.Sugars = parsedFood.Sugars;
+            food.Fat = parsedFood.Fat;
+            food.Saturates = parsedFood.Saturates;
+            food.Salt = parsedFood.Salt;
+
+            return food;
         }
     }
 }

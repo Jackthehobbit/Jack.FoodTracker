@@ -35,9 +35,10 @@ namespace Jack.FoodTracker.Entities
         {
         }
 
-        public Food(string name, string description, int calories, double sugars, double fat, double saturates, double salt)
+        public Food(string name, FoodCategory category, string description, int calories, double sugars, double fat, double saturates, double salt)
         {
             this.Name = name;
+            this.Category = category;
             this.Description = description;
             this.Calories = calories;
             this.Sugars = sugars;

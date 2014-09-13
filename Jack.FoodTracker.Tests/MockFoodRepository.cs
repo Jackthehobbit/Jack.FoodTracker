@@ -21,6 +21,11 @@ namespace Jack.FoodTracker.Tests
         {
             foods.Add(newFood);
         }
+        
+        public void Edit(Food changedFood)
+        {
+            throw new NotImplementedException();
+        }
 
         public void Delete(Food food)
         {
