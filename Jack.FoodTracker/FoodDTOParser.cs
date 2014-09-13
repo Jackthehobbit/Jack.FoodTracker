@@ -22,27 +22,47 @@ namespace Jack.FoodTracker
                 throw new ArgumentException("Name is empty.");
             }
 
-            if(!Int32.TryParse(dto.Calories, out calories))
+            if(dto.Calories == "")
+            {
+                calories = 0;
+            }
+            else if(!Int32.TryParse(dto.Calories, out calories))
             {
                 throw new ArgumentException("Calories is not a whole number.");
             }
 
-            if(!float.TryParse(dto.Sugar, out sugar))
+            if(dto.Sugar == "")
+            {
+                sugar = 0;
+            }
+            else if(!float.TryParse(dto.Sugar, out sugar))
             {
                 throw new ArgumentException("Sugar is not a number.");
             }
 
-            if(!float.TryParse(dto.Fat, out fat))
+            if(dto.Fat == "")
+            {
+                fat = 0;
+            }
+            else if(!float.TryParse(dto.Fat, out fat))
             {
                 throw new ArgumentException("Fat is not a number.");
             }
 
-            if(!float.TryParse(dto.Saturates, out saturates))
+            if(dto.Saturates == "")
+            {
+                saturates = 0;
+            }
+            else if(!float.TryParse(dto.Saturates, out saturates))
             {
                 throw new ArgumentException("Saturated Fats is not a number.");
             }
 
-            if(!float.TryParse(dto.Salt, out salt))
+            if(dto.Salt == "")
+            {
+                salt = 0;
+            }
+            else if(!float.TryParse(dto.Salt, out salt))
             {
                 throw new ArgumentException("Salt is not a number.");
             }
