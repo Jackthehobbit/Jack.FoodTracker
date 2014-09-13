@@ -58,8 +58,10 @@ namespace Jack.FoodTracker
             //Button is displaying Cancel when in edit mode
             if(inEditMode)
             {
+                //Return food back to original values
                 setFoodInfo();
 
+                //Return to normal mode
                 switchEditMode();
             }
             else
@@ -70,39 +72,24 @@ namespace Jack.FoodTracker
 
                 int foodIndex = lbFood.SelectedIndex;
 
-                FoodCategory selectedCategory = (FoodCategory)lbCategory.SelectedValue;
-
-                IList<Food> fList = ftracker.GetFoodByCategory(selectedCategory);
-
-                lbFood.DataSource = fList;
-                lbFood.DisplayMember = "Name";
-
-                if (fList.Count == 0)
-                {
-                    tbName.Text = "";
-                    cbCategoryEdit.SelectedIndex = -1;
-                    tbDesc.Text = "";
-                    tbCalories.Text = "";
-                    tbSugar.Text = "";
-                    tbFat.Text = "";
-                    tbSatFat.Text = "";
-                    tbSalt.Text = "";
-
-                    btnDeleteFood.Enabled = false;
-                    btnEditFood.Enabled = false;
-                }
-                else
-                {
-                    lbFood.SelectedIndex = foodIndex > 0 ? foodIndex - 1 : 0;
-                    btnDeleteFood.Enabled = true;
-                    btnEditFood.Enabled = true;
-                }
+                setFoodCatInfo(foodIndex > 0 ? foodIndex - 1 : 0);
             }
+        }
+
+        private void lbCategories_SelectedValueChanged(object sender, EventArgs e)
+        {
+            setFoodCatInfo(0);
+            
+        }
+
+        private void lbFood_SelectedValueChanged(object sender, EventArgs e)
+        {
+            setFoodInfo();
         }
 
         private void switchEditMode()
         {
-            if(inEditMode)
+            if (inEditMode)
             {
                 btnEditFood.Text = "Edit";
                 btnDeleteFood.Text = "Delete";
@@ -128,7 +115,7 @@ namespace Jack.FoodTracker
             tbSalt.Enabled = inEditMode;
         }
 
-        private void lbCategories_SelectedValueChanged(object sender, EventArgs e)
+        private void setFoodCatInfo(int foodIndex)
         {
             FoodCategory selectedCategory = (FoodCategory)lbCategory.SelectedValue;
 
@@ -137,7 +124,7 @@ namespace Jack.FoodTracker
             lbFood.DataSource = fList;
             lbFood.DisplayMember = "Name";
 
-            if(fList.Count == 0)
+            if (fList.Count == 0)
             {
                 tbName.Text = "";
                 cbCategoryEdit.SelectedIndex = -1;
@@ -153,29 +140,27 @@ namespace Jack.FoodTracker
             }
             else
             {
+                lbFood.SelectedIndex = foodIndex;
                 btnDeleteFood.Enabled = true;
                 btnEditFood.Enabled = true;
             }
-            
-        }
-
-        private void lbFood_SelectedValueChanged(object sender, EventArgs e)
-        {
-            setFoodInfo();
         }
 
         private void setFoodInfo()
         {
             Food selectedFood = (Food)lbFood.SelectedValue;
 
-            tbName.Text = selectedFood.Name;
-            cbCategoryEdit.SelectedItem = selectedFood.Category;
-            tbDesc.Text = selectedFood.Description;
-            tbCalories.Text = "" + selectedFood.Calories;
-            tbSugar.Text = "" + selectedFood.Sugars;
-            tbFat.Text = "" + selectedFood.Fat;
-            tbSatFat.Text = "" + selectedFood.Saturates;
-            tbSalt.Text = "" + selectedFood.Salt;
+            if(selectedFood != null)
+            {
+                tbName.Text = selectedFood.Name;
+                cbCategoryEdit.SelectedItem = selectedFood.Category;
+                tbDesc.Text = selectedFood.Description;
+                tbCalories.Text = "" + selectedFood.Calories;
+                tbSugar.Text = "" + selectedFood.Sugars;
+                tbFat.Text = "" + selectedFood.Fat;
+                tbSatFat.Text = "" + selectedFood.Saturates;
+                tbSalt.Text = "" + selectedFood.Salt;
+            }    
         }
     }
 }
