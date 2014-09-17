@@ -40,9 +40,18 @@ namespace Jack.FoodTracker
         {
             //Parse input strings into a food object
             FoodDTOParser parser = new FoodDTOParser();
+            
+            //if the name has changed check that there isn't an existing food with the new name
+            if(dto.Name != food.Name)
+            {
+                if (foodRepository.GetAll().Where(x => x.Name.ToLower().Equals(dto.Name.ToLower())).Any())
+                {
+                    throw new ArgumentException("A food with this name already exists.");
+                }
+            }
 
             Food newFood = parser.ParseIntoExisting(dto, food);
-
+            
             //Add the food to the database
             foodRepository.Edit(newFood);
         }
