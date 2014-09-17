@@ -54,6 +54,6 @@ namespace Jack.FoodTracker
         public FoodCategory GetFoodCategorySelected()
         {
             return (FoodCategory)cbCategoryEdit.SelectedItem;
-        }
+        }       
     }
 }

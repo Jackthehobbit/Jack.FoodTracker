@@ -139,6 +139,7 @@ namespace Jack.FoodTracker
             {
                 setFoodCatInfo(lbFood.SelectedIndex);
             }
+            
         }
 
         private void switchEditMode()
