@@ -27,7 +27,7 @@ namespace Jack.FoodTracker
             Food newFood = parser.Parse(dto);
 
             //Check the food doesn't already exist in the database
-            if(foodRepository.GetAll().Where(x => x.Name.Equals(newFood.Name)).Any())
+            if (foodRepository.GetAll().Where(x => x.Name.ToLower().Equals(newFood.Name.ToLower())).Any())
             {
                 throw new ArgumentException("This food already exists.");
             }
