@@ -216,5 +216,7 @@ namespace Jack.FoodTracker
                 tbSalt.Text = "" + selectedFood.Salt;
             }    
         }
+
+        
     }
 }
