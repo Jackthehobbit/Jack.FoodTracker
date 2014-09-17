@@ -98,13 +98,20 @@ namespace Jack.FoodTracker
             }
             else
             {
-                Food selectedFood = (Food)lbFood.SelectedValue;
+                
+                DialogResult delete =MessageBox.Show("Are you sure you want to delete "+ tbName.Text,"Delete Food?",MessageBoxButtons.YesNo);
 
-                fTracker.DeleteFood(selectedFood);
+                if(delete == DialogResult.Yes)
+                {
+                    Food selectedFood = (Food)lbFood.SelectedValue;
 
-                int foodIndex = lbFood.SelectedIndex;
+                    fTracker.DeleteFood(selectedFood);
 
-                setFoodCatInfo(foodIndex > 0 ? foodIndex - 1 : 0);
+                    int foodIndex = lbFood.SelectedIndex;
+
+                    setFoodCatInfo(foodIndex > 0 ? foodIndex - 1 : 0);
+                }
+                
             }
         }
 
