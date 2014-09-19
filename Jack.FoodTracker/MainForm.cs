@@ -129,18 +129,19 @@ namespace Jack.FoodTracker
         private void btnAddFood_Click(object sender, EventArgs e)
         {
             AddFoodForm addFood = new AddFoodForm(fTracker);
-            addFood.Show();
-            addFood.FormClosed += new FormClosedEventHandler(AddFoodForm_Close);
-        }
+            DialogResult result = addFood.ShowDialog();
 
-        private void AddFoodForm_Close(object sender, EventArgs e)
-        {
-            if (((AddFoodForm)sender).GetFoodCategorySelected().Equals(lbCategory.SelectedItem))
+            if(result == DialogResult.OK)
             {
-                setFoodCatInfo(lbFood.SelectedIndex);
+                if (addFood.GetFoodCategorySelected().Equals(lbCategory.SelectedItem))
+                {
+                    setFoodCatInfo(lbFood.SelectedIndex);
+                }
             }
+
             
         }
+
 
         private void switchEditMode()
         {
@@ -195,7 +196,11 @@ namespace Jack.FoodTracker
             }
             else
             {
-                lbFood.SelectedIndex = foodIndex;
+                if(foodIndex != -1)
+                {
+                    lbFood.SelectedIndex = foodIndex;
+                }
+                
                 btnDeleteFood.Enabled = true;
                 btnEditFood.Enabled = true;
             }
