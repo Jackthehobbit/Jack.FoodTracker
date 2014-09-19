@@ -20,5 +20,11 @@ namespace Jack.FoodTracker.EntityDatabase
         {
             return context.Categories.ToList();
         }
+
+        public void Add(FoodCategory foodCategory)
+        {
+            context.Categories.Add(foodCategory);
+            context.SaveChanges();
+        }
     }
 }

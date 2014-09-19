@@ -40,6 +40,11 @@ namespace Jack.FoodTracker
 
             lbCategory.DataSource = fCatList;
             lbCategory.DisplayMember = "Name";
+
+            if (fCatList.Count == 0)
+            {
+                btnAddFood.Enabled = false;
+            }
         }
 
         private void btnEditFood_Click(object sender, EventArgs e)
@@ -99,7 +104,7 @@ namespace Jack.FoodTracker
             else
             {
                 
-                DialogResult delete =MessageBox.Show("Are you sure you want to delete "+ tbName.Text,"Delete Food?",MessageBoxButtons.YesNo);
+                DialogResult delete = MessageBox.Show("Are you sure you want to delete "+ tbName.Text,"Delete Food?",MessageBoxButtons.YesNo);
 
                 if(delete == DialogResult.Yes)
                 {
@@ -131,12 +136,9 @@ namespace Jack.FoodTracker
             AddFoodForm addFood = new AddFoodForm(fTracker);
             DialogResult result = addFood.ShowDialog();
 
-            if(result == DialogResult.OK)
+            if(result == DialogResult.OK && addFood.GetFoodCategorySelected().Equals(lbCategory.SelectedItem))
             {
-                if (addFood.GetFoodCategorySelected().Equals(lbCategory.SelectedItem))
-                {
-                    setFoodCatInfo(lbFood.SelectedIndex);
-                }
+                 setFoodCatInfo(lbFood.SelectedIndex);
             }
 
             
@@ -175,35 +177,38 @@ namespace Jack.FoodTracker
         {
             FoodCategory selectedCategory = (FoodCategory)lbCategory.SelectedValue;
 
-            IList<Food> fList = fTracker.GetFoodByCategory(selectedCategory);
-
-            lbFood.DataSource = fList;
-            lbFood.DisplayMember = "Name";
-
-            if (fList.Count == 0)
+            if(selectedCategory != null)
             {
-                tbName.Text = "";
-                cbCategoryEdit.SelectedIndex = -1;
-                tbDesc.Text = "";
-                tbCalories.Text = "";
-                tbSugar.Text = "";
-                tbFat.Text = "";
-                tbSatFat.Text = "";
-                tbSalt.Text = "";
+                IList<Food> fList = fTracker.GetFoodByCategory(selectedCategory);
 
-                btnDeleteFood.Enabled = false;
-                btnEditFood.Enabled = false;
-            }
-            else
-            {
-                if(foodIndex != -1)
+                lbFood.DataSource = fList;
+                lbFood.DisplayMember = "Name";
+
+                if (fList.Count == 0)
                 {
-                    lbFood.SelectedIndex = foodIndex;
+                    tbName.Text = "";
+                    cbCategoryEdit.SelectedIndex = -1;
+                    tbDesc.Text = "";
+                    tbCalories.Text = "";
+                    tbSugar.Text = "";
+                    tbFat.Text = "";
+                    tbSatFat.Text = "";
+                    tbSalt.Text = "";
+
+                    btnDeleteFood.Enabled = false;
+                    btnEditFood.Enabled = false;
                 }
-                
-                btnDeleteFood.Enabled = true;
-                btnEditFood.Enabled = true;
-            }
+                else
+                {
+                    if (foodIndex != -1)
+                    {
+                        lbFood.SelectedIndex = foodIndex;
+                    }
+
+                    btnDeleteFood.Enabled = true;
+                    btnEditFood.Enabled = true;
+                }
+            }         
         }
 
         private void setFoodInfo()

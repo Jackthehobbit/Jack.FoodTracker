@@ -17,6 +17,14 @@ namespace Jack.FoodTracker
         {
             this.foodRepository = foodRepository;
             this.foodCatRepository = foodCatRepository;
+
+            //Check Uncategorised Category exists, else initiate it
+            List<FoodCategory> cats = foodCatRepository.GetAll();
+
+            if(!cats.Where(x => x.Name.Equals("Uncategorised")).Any())
+            {
+                foodCatRepository.Add(new FoodCategory() { Name = "Uncategorised" });
+            }
         }
 
         public void AddFood(FoodDTO dto)

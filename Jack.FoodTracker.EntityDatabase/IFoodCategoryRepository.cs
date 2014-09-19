@@ -6,5 +6,7 @@ namespace Jack.FoodTracker.EntityDatabase
     public interface IFoodCategoryRepository
     {
         List<FoodCategory> GetAll();
+
+        void Add(FoodCategory foodCategory);
     }
 }
