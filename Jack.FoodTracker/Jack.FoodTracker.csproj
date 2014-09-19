@@ -59,6 +59,12 @@
     </Compile>
     <Compile Include="FoodDTO.cs" />
     <Compile Include="FoodDTOParser.cs" />
+    <Compile Include="FoodItemPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FoodItemPanel.Designer.cs">
+      <DependentUpon>FoodItemPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="FoodTracker.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>

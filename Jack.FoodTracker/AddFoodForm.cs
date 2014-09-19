@@ -24,7 +24,7 @@ namespace Jack.FoodTracker
             cbCategoryEdit.DataSource = fTracker.GetAllFoodCategories();
             cbCategoryEdit.DisplayMember = "Name";
 
-            btnAddFood.DialogResult = DialogResult.OK;
+            
         }
 
         private void btnAddFood_Click(object sender, EventArgs e)
@@ -45,7 +45,7 @@ namespace Jack.FoodTracker
 
                 fTracker.AddFood(dto);
 
-                this.Close();
+                DialogResult = DialogResult.OK;
             }
             catch (ArgumentException ex)
             {

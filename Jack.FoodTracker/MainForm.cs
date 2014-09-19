@@ -16,21 +16,20 @@ namespace Jack.FoodTracker
     {
         private FoodTracker fTracker;
 
-        private FoodContext context = new FoodContext();
-
         private bool inEditMode;
 
         public MainForm()
         {
             InitializeComponent();
 
-            inEditMode = false;
-
+            //Create Repositories
+            FoodContext context = new FoodContext();
             FoodRepository fRepository = new FoodRepository(context);
             FoodCategoryRepository fCatRepository = new FoodCategoryRepository(context);
 
             fTracker = new FoodTracker(fRepository, fCatRepository);
 
+            //Get Food Categories
             IList<FoodCategory> fCatList = fTracker.GetAllFoodCategories();
 
             IList<FoodCategory> fCatList2 = new List<FoodCategory>(fCatList);
@@ -41,10 +40,19 @@ namespace Jack.FoodTracker
             lbCategory.DataSource = fCatList;
             lbCategory.DisplayMember = "Name";
 
+            inEditMode = false;
+
             if (fCatList.Count == 0)
             {
                 btnAddFood.Enabled = false;
             }
+
+            FoodItemPanel fpanel = new FoodItemPanel();
+            fpanel.AutoSize = true;
+            fpanel.Location = new Point(0, 0);
+            fpanel.BringToFront();
+
+            Controls.Add(fpanel);
         }
 
         private void btnEditFood_Click(object sender, EventArgs e)
@@ -133,15 +141,15 @@ namespace Jack.FoodTracker
 
         private void btnAddFood_Click(object sender, EventArgs e)
         {
-            AddFoodForm addFood = new AddFoodForm(fTracker);
-            DialogResult result = addFood.ShowDialog();
-
-            if(result == DialogResult.OK && addFood.GetFoodCategorySelected().Equals(lbCategory.SelectedItem))
+            using(AddFoodForm addFood = new AddFoodForm(fTracker))
             {
-                 setFoodCatInfo(lbFood.SelectedIndex);
-            }
+                DialogResult result = addFood.ShowDialog();
 
-            
+                if (result == DialogResult.OK && addFood.GetFoodCategorySelected().Equals(lbCategory.SelectedItem))
+                {
+                    setFoodCatInfo(lbFood.SelectedIndex);
+                }
+            }
         }
 
 
