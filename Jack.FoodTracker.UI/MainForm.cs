@@ -31,9 +31,9 @@ namespace Jack.FoodTracker
             fTracker = new FoodTracker(fRepository, fCatRepository);
 
             //Get Food Categories
-            IList<FoodCategory> fCatList = fTracker.GetAllFoodCategories();
+            IList<FoodCategory> fCatList = sortCategories(fTracker.GetAllFoodCategories());
 
-            IList<FoodCategory> fCatList2 = new List<FoodCategory>(fCatList);
+            IList<FoodCategory> fCatList2 = sortCategories(new List<FoodCategory>(fCatList));
 
             pnlFoodItem = new FoodItemPanel(fCatList2);
             pnlFoodItem.AutoSize = true;
@@ -42,8 +42,6 @@ namespace Jack.FoodTracker
 
             groupBox1.Controls.Add(pnlFoodItem);
 
-            lbFood.Sorted = true;
-            lbCategory.Sorted = true;
             lbCategory.DataSource = fCatList;
             lbCategory.DisplayMember = "Name";
 
@@ -53,6 +51,17 @@ namespace Jack.FoodTracker
             {
                 btnAddFood.Enabled = false;
             }
+        }
+
+        private IList<FoodCategory> sortCategories(IList<FoodCategory> cats)
+        {
+            IList<FoodCategory> newCats = cats.OrderBy(o => o.Name).ToList();
+
+            FoodCategory uncategorised = newCats.First(o => o.Name == "Uncategorised");
+            newCats.Remove(uncategorised);
+            newCats.Add(uncategorised);
+
+            return newCats;
         }
 
         private void btnEditFood_Click(object sender, EventArgs e)
@@ -173,6 +182,8 @@ namespace Jack.FoodTracker
             if(selectedCategory != null)
             {
                 IList<Food> fList = fTracker.GetFoodByCategory(selectedCategory);
+
+                fList = fList.OrderBy(o => o.Name).ToList();
 
                 lbFood.DataSource = fList;
                 lbFood.DisplayMember = "Name";
