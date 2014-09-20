@@ -10,14 +10,21 @@ namespace Jack.FoodTracker.Tests
 {
     class MockFoodCategoryRepository : IFoodCategoryRepository
     {
+        public List<FoodCategory> cats { get; set; }
+
+        public MockFoodCategoryRepository()
+        {
+            cats = new List<FoodCategory>();
+        }
+
         public List<FoodCategory> GetAll()
         {
-            throw new NotImplementedException();
+            return cats;
         }
 
         public void Add(FoodCategory fCategory)
         {
-            throw new NotImplementedException();
+            cats.Add(fCategory);
         }
     }
 }
