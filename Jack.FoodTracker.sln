@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jack.FoodTracker", "Jack.FoodTracker\Jack.FoodTracker.csproj", "{DCF1ABF9-0407-446C-8025-616A0F01974C}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jack.FoodTracker.Tests", "Jack.FoodTracker.Tests\Jack.FoodTracker.Tests.csproj", "{A96FC133-C51A-412D-9F64-9101926DB683}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jack.FoodTracker.Entities", "Jack.FoodTracker.Entities\Jack.FoodTracker.Entities.csproj", "{0E22F9C2-2080-4091-8BE3-8D04CA2F81BC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jack.FoodTracker.EntityDatabase", "Jack.FoodTracker.EntityDatabase\Jack.FoodTracker.EntityDatabase.csproj", "{15DF2C82-EBC3-4129-B969-506BC5323D70}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jack.FoodTracker.UI", "Jack.FoodTracker.UI\Jack.FoodTracker.UI.csproj", "{DCF1ABF9-0407-446C-8025-616A0F01974C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jack.FoodTracker", "Jack.FoodTracker\Jack.FoodTracker.csproj", "{911CB23A-BDB8-4334-A4C5-159321ACE691}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +19,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{DCF1ABF9-0407-446C-8025-616A0F01974C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DCF1ABF9-0407-446C-8025-616A0F01974C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DCF1ABF9-0407-446C-8025-616A0F01974C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DCF1ABF9-0407-446C-8025-616A0F01974C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A96FC133-C51A-412D-9F64-9101926DB683}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A96FC133-C51A-412D-9F64-9101926DB683}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A96FC133-C51A-412D-9F64-9101926DB683}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -33,6 +31,14 @@ Global
 		{15DF2C82-EBC3-4129-B969-506BC5323D70}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{15DF2C82-EBC3-4129-B969-506BC5323D70}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{15DF2C82-EBC3-4129-B969-506BC5323D70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCF1ABF9-0407-446C-8025-616A0F01974C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCF1ABF9-0407-446C-8025-616A0F01974C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCF1ABF9-0407-446C-8025-616A0F01974C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCF1ABF9-0407-446C-8025-616A0F01974C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{911CB23A-BDB8-4334-A4C5-159321ACE691}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{911CB23A-BDB8-4334-A4C5-159321ACE691}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{911CB23A-BDB8-4334-A4C5-159321ACE691}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{911CB23A-BDB8-4334-A4C5-159321ACE691}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,5 +1,6 @@
 ﻿using Jack.FoodTracker.Entities;
 using Jack.FoodTracker.EntityDatabase;
+using Jack.FoodTracker;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

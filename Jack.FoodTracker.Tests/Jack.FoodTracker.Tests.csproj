@@ -66,7 +66,7 @@
       <Name>Jack.FoodTracker.EntityDatabase</Name>
     </ProjectReference>
     <ProjectReference Include="..\Jack.FoodTracker\Jack.FoodTracker.csproj">
-      <Project>{dcf1abf9-0407-446c-8025-616a0f01974c}</Project>
+      <Project>{911cb23a-bdb8-4334-a4c5-159321ace691}</Project>
       <Name>Jack.FoodTracker</Name>
     </ProjectReference>
   </ItemGroup>

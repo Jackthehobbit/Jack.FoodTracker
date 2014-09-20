@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Jack.FoodTracker.EntityDatabase;
 using Jack.FoodTracker.Entities;
+using Jack.FoodTracker;
 
 namespace Jack.FoodTracker.Tests
 {
