@@ -34,8 +34,12 @@ namespace Jack.FoodTracker
 
             IList<FoodCategory> fCatList2 = new List<FoodCategory>(fCatList);
 
-            cbCategoryEdit.DataSource = fCatList2;
-            cbCategoryEdit.DisplayMember = "Name";
+            pnlFoodItem = new FoodItemPanel(fCatList2);
+            pnlFoodItem.AutoSize = true;
+            pnlFoodItem.Location = new Point(425, 177);
+            pnlFoodItem.Enabled = false;
+
+            groupBox1.Controls.Add(pnlFoodItem);
 
             lbCategory.DataSource = fCatList;
             lbCategory.DisplayMember = "Name";
@@ -46,13 +50,6 @@ namespace Jack.FoodTracker
             {
                 btnAddFood.Enabled = false;
             }
-
-            FoodItemPanel fpanel = new FoodItemPanel();
-            fpanel.AutoSize = true;
-            fpanel.Location = new Point(0, 0);
-            fpanel.BringToFront();
-
-            Controls.Add(fpanel);
         }
 
         private void btnEditFood_Click(object sender, EventArgs e)
@@ -60,23 +57,14 @@ namespace Jack.FoodTracker
             if(inEditMode)
             {
                 //Save the edited changes to the database
-                FoodDTO dto = new FoodDTO()
-                {
-                    Name = tbName.Text,
-                    Category = (FoodCategory)cbCategoryEdit.SelectedItem,
-                    Description = tbDesc.Text,
-                    Calories = tbCalories.Text,
-                    Sugar = tbSugar.Text,
-                    Fat = tbFat.Text,
-                    Saturates = tbSatFat.Text,
-                    Salt = tbSalt.Text
-                };
+                FoodDTO dto = pnlFoodItem.GetInputs();
 
                 Food selectedFood = (Food)lbFood.SelectedItem;
 
                 try
                 {
                     fTracker.EditFood(dto, selectedFood);
+
                     if(!dto.Category.Equals(lbCategory.SelectedItem))
                     {
                         lbCategory.SelectedItem = dto.Category;
@@ -112,7 +100,7 @@ namespace Jack.FoodTracker
             else
             {
                 
-                DialogResult delete = MessageBox.Show("Are you sure you want to delete "+ tbName.Text,"Delete Food?",MessageBoxButtons.YesNo);
+                DialogResult delete = MessageBox.Show("Are you sure you want to delete "+ pnlFoodItem.GetName(),"Delete Food?",MessageBoxButtons.YesNo);
 
                 if(delete == DialogResult.Yes)
                 {
@@ -155,30 +143,24 @@ namespace Jack.FoodTracker
 
         private void switchEditMode()
         {
+            inEditMode = !inEditMode;
+
             if (inEditMode)
-            {
-                btnEditFood.Text = "Edit";
-                btnDeleteFood.Text = "Delete";
-            }
-            else
             {
                 btnEditFood.Text = "Save";
                 btnDeleteFood.Text = "Cancel";
             }
-
-            inEditMode = !inEditMode;
+            else
+            {
+                btnEditFood.Text = "Edit";
+                btnDeleteFood.Text = "Delete";
+            }
 
             lbCategory.Enabled = !inEditMode;
             lbFood.Enabled = !inEditMode;
+            btnAddFood.Enabled = !inEditMode;
 
-            tbName.Enabled = inEditMode;
-            cbCategoryEdit.Enabled = inEditMode;
-            tbDesc.Enabled = inEditMode;
-            tbCalories.Enabled = inEditMode;
-            tbSugar.Enabled = inEditMode;
-            tbFat.Enabled = inEditMode;
-            tbSatFat.Enabled = inEditMode;
-            tbSalt.Enabled = inEditMode;
+            pnlFoodItem.Enabled = inEditMode;
         }
 
         private void setFoodCatInfo(int foodIndex)
@@ -194,14 +176,7 @@ namespace Jack.FoodTracker
 
                 if (fList.Count == 0)
                 {
-                    tbName.Text = "";
-                    cbCategoryEdit.SelectedIndex = -1;
-                    tbDesc.Text = "";
-                    tbCalories.Text = "";
-                    tbSugar.Text = "";
-                    tbFat.Text = "";
-                    tbSatFat.Text = "";
-                    tbSalt.Text = "";
+                    pnlFoodItem.ClearInputs();
 
                     btnDeleteFood.Enabled = false;
                     btnEditFood.Enabled = false;
@@ -225,14 +200,7 @@ namespace Jack.FoodTracker
 
             if(selectedFood != null)
             {
-                tbName.Text = selectedFood.Name;
-                cbCategoryEdit.SelectedItem = selectedFood.Category;
-                tbDesc.Text = selectedFood.Description;
-                tbCalories.Text = "" + selectedFood.Calories;
-                tbSugar.Text = "" + selectedFood.Sugars;
-                tbFat.Text = "" + selectedFood.Fat;
-                tbSatFat.Text = "" + selectedFood.Saturates;
-                tbSalt.Text = "" + selectedFood.Salt;
+                pnlFoodItem.SetInputs(selectedFood);
             }    
         }
 

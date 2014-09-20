@@ -21,27 +21,18 @@ namespace Jack.FoodTracker
 
             this.fTracker = fTracker;
 
-            cbCategoryEdit.DataSource = fTracker.GetAllFoodCategories();
-            cbCategoryEdit.DisplayMember = "Name";
+            pnlFoodItem = new FoodItemPanel(fTracker.GetAllFoodCategories());
+            pnlFoodItem.AutoSize = true;
+            pnlFoodItem.Location = new Point(1, 69);
 
-            
+            Controls.Add(pnlFoodItem);
         }
 
         private void btnAddFood_Click(object sender, EventArgs e)
         {
             try
             {
-                FoodDTO dto = new FoodDTO()
-                {
-                    Name = tbName.Text,
-                    Category = (FoodCategory)cbCategoryEdit.SelectedItem,
-                    Description = tbDesc.Text,
-                    Calories = tbCalories.Text,
-                    Sugar = tbSugar.Text,
-                    Fat = tbFat.Text,
-                    Saturates = tbSatFat.Text,
-                    Salt = tbSalt.Text
-                };
+                FoodDTO dto = pnlFoodItem.GetInputs();
 
                 fTracker.AddFood(dto);
 
@@ -55,7 +46,7 @@ namespace Jack.FoodTracker
 
         public FoodCategory GetFoodCategorySelected()
         {
-            return (FoodCategory)cbCategoryEdit.SelectedItem;
-        }       
+            return pnlFoodItem.GetSelectedCategory();
+        }
     }
 }
