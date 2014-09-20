@@ -36,11 +36,13 @@ namespace Jack.FoodTracker
 
             pnlFoodItem = new FoodItemPanel(fCatList2);
             pnlFoodItem.AutoSize = true;
-            pnlFoodItem.Location = new Point(425, 177);
+            pnlFoodItem.Location = new Point(425, 177); 
             pnlFoodItem.Enabled = false;
 
             groupBox1.Controls.Add(pnlFoodItem);
 
+            lbFood.Sorted = true;
+            lbCategory.Sorted = true;
             lbCategory.DataSource = fCatList;
             lbCategory.DisplayMember = "Name";
 

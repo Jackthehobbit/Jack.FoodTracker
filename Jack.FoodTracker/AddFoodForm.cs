@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,11 +20,14 @@ namespace Jack.FoodTracker
 
             this.fTracker = fTracker;
 
+            // Create Food Item Panel
             pnlFoodItem = new FoodItemPanel(fTracker.GetAllFoodCategories());
             pnlFoodItem.AutoSize = true;
-            pnlFoodItem.Location = new Point(1, 69);
+            pnlFoodItem.Location = new System.Drawing.Point(1, 69);
+            pnlFoodItem.Name = "pnlFoodItem";
+            pnlFoodItem.TabIndex = 0;
 
-            Controls.Add(pnlFoodItem);
+            Controls.Add(this.pnlFoodItem);
         }
 
         private void btnAddFood_Click(object sender, EventArgs e)

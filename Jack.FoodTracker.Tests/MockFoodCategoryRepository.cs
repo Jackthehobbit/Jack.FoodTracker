@@ -14,5 +14,10 @@ namespace Jack.FoodTracker.Tests
         {
             throw new NotImplementedException();
         }
+
+        public void Add(FoodCategory fCategory)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
