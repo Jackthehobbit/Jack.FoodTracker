@@ -50,5 +50,10 @@ namespace Jack.FoodTracker
         {
             return pnlFoodItem.GetSelectedCategory();
         }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Cancel;
+        }
     }
 }

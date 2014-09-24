@@ -30,6 +30,7 @@
         {
             this.lAddFood = new System.Windows.Forms.Label();
             this.btnAddFood = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lAddFood
@@ -39,12 +40,12 @@
             this.lAddFood.Location = new System.Drawing.Point(119, 24);
             this.lAddFood.Name = "lAddFood";
             this.lAddFood.Size = new System.Drawing.Size(95, 24);
+            this.lAddFood.TabIndex = 0;
             this.lAddFood.Text = "Add Food";
-
             // 
             // btnAddFood
             // 
-            this.btnAddFood.Location = new System.Drawing.Point(129, 290);
+            this.btnAddFood.Location = new System.Drawing.Point(73, 286);
             this.btnAddFood.Name = "btnAddFood";
             this.btnAddFood.Size = new System.Drawing.Size(75, 23);
             this.btnAddFood.TabIndex = 1;
@@ -52,11 +53,22 @@
             this.btnAddFood.UseVisualStyleBackColor = true;
             this.btnAddFood.Click += new System.EventHandler(this.btnAddFood_Click);
             // 
+            // btnCancel
+            // 
+            this.btnCancel.Location = new System.Drawing.Point(183, 286);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.TabIndex = 2;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
             // AddFoodForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(332, 335);
+            this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.lAddFood);
             this.Controls.Add(this.btnAddFood);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -72,5 +84,6 @@
         private System.Windows.Forms.Label lAddFood;
         private System.Windows.Forms.Button btnAddFood;
         private FoodItemPanel pnlFoodItem;
+        private System.Windows.Forms.Button btnCancel;
     }
 }
