@@ -63,6 +63,12 @@
     <Compile Include="FoodItemPanel.Designer.cs">
       <DependentUpon>FoodItemPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="FoodLookupPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FoodLookupPanel.Designer.cs">
+      <DependentUpon>FoodLookupPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

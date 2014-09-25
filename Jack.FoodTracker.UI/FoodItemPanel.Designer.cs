@@ -176,9 +176,10 @@ namespace Jack.FoodTracker
             this.tbSalt.Size = new System.Drawing.Size(150, 20);
             this.tbSalt.TabIndex = 7;
 
-            this.Name = "MainForm";
+            this.Name = "pnlFoodItem";
 
             this.ResumeLayout(false);
+            this.PerformLayout();
         }
     }
 }

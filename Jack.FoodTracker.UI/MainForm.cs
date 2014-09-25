@@ -40,10 +40,15 @@ namespace Jack.FoodTracker
             pnlFoodItem.Location = new Point(425, 177); 
             pnlFoodItem.Enabled = false;
 
-            groupBox1.Controls.Add(pnlFoodItem);
+            pnlFoodLookup = new FoodLookupPanel(fTracker, fCatList);
+            pnlFoodLookup.AutoSize = true;
+            pnlFoodLookup.Location = new Point(46, 143);
+            pnlFoodLookup.lbFood.SelectedIndexChanged += new System.EventHandler(this.FoodListItemChanged);
 
-            lbCategory.DataSource = fCatList;
-            lbCategory.DisplayMember = "Name";
+            groupBox1.Controls.Add(pnlFoodItem);
+            groupBox1.Controls.Add(pnlFoodLookup);
+
+            pnlFoodLookup.BringToFront();
 
             inEditMode = false;
 
@@ -57,9 +62,9 @@ namespace Jack.FoodTracker
         {
             IList<FoodCategory> newCats = cats.OrderBy(o => o.Name).ToList();
 
-            FoodCategory uncategorised = newCats.First(o => o.Name == "Uncategorised");
-            newCats.Remove(uncategorised);
-            newCats.Add(uncategorised);
+            FoodCategory uncategorisedCat = newCats.First(o => o.Name == "Uncategorised");
+            newCats.Remove(uncategorisedCat);
+            newCats.Add(uncategorisedCat);
 
             return newCats;
         }
@@ -71,16 +76,16 @@ namespace Jack.FoodTracker
                 //Save the edited changes to the database
                 FoodDTO dto = pnlFoodItem.GetInputs();
 
-                Food selectedFood = (Food)lbFood.SelectedItem;
+                Food selectedFood = pnlFoodLookup.SelectedFood;
 
                 try
                 {
                     fTracker.EditFood(dto, selectedFood);
 
-                    if(!dto.Category.Equals(lbCategory.SelectedItem))
+                    if(!dto.Category.Equals(pnlFoodLookup.SelectedCategory))
                     {
-                        lbCategory.SelectedItem = dto.Category;
-                        lbFood.SelectedItem = selectedFood;
+                        pnlFoodLookup.SelectedCategory = dto.Category;
+                        pnlFoodLookup.SelectedFood = selectedFood;
                     }
 
                     switchEditMode();
@@ -104,7 +109,7 @@ namespace Jack.FoodTracker
             if(inEditMode)
             {
                 //Return food back to original values
-                setFoodInfo();
+                setFood();
 
                 //Return to normal mode
                 switchEditMode();
@@ -116,27 +121,16 @@ namespace Jack.FoodTracker
 
                 if(delete == DialogResult.Yes)
                 {
-                    Food selectedFood = (Food)lbFood.SelectedValue;
+                    Food selectedFood = pnlFoodLookup.SelectedFood;
 
                     fTracker.DeleteFood(selectedFood);
 
-                    int foodIndex = lbFood.SelectedIndex;
+                    int foodIndex = pnlFoodLookup.SelectedFoodindex;
 
-                    setFoodCatInfo(foodIndex > 0 ? foodIndex - 1 : 0);
+                    pnlFoodLookup.SetFoodList(foodIndex > 0 ? foodIndex - 1 : 0);
                 }
                 
             }
-        }
-
-        private void lbCategories_SelectedValueChanged(object sender, EventArgs e)
-        {
-            setFoodCatInfo(0);
-            
-        }
-
-        private void lbFood_SelectedValueChanged(object sender, EventArgs e)
-        {
-            setFoodInfo();
         }
 
         private void btnAddFood_Click(object sender, EventArgs e)
@@ -145,13 +139,17 @@ namespace Jack.FoodTracker
             {
                 DialogResult result = addFood.ShowDialog();
 
-                if (result == DialogResult.OK && addFood.GetFoodCategorySelected().Equals(lbCategory.SelectedItem))
+                if (result == DialogResult.OK && addFood.GetFoodCategorySelected().Equals(pnlFoodLookup.SelectedCategory))
                 {
-                    setFoodCatInfo(lbFood.SelectedIndex);
+                    pnlFoodLookup.SetFoodList();
                 }
             }
         }
 
+        private void FoodListItemChanged(object sender, EventArgs e)
+        {
+            setFood();
+        }
 
         private void switchEditMode()
         {
@@ -168,54 +166,30 @@ namespace Jack.FoodTracker
                 btnDeleteFood.Text = "Delete";
             }
 
-            lbCategory.Enabled = !inEditMode;
-            lbFood.Enabled = !inEditMode;
+            pnlFoodLookup.Enabled = !inEditMode;
             btnAddFood.Enabled = !inEditMode;
 
             pnlFoodItem.Enabled = inEditMode;
         }
 
-        private void setFoodCatInfo(int foodIndex)
+        private void setFood()
         {
-            FoodCategory selectedCategory = (FoodCategory)lbCategory.SelectedValue;
-
-            if(selectedCategory != null)
-            {
-                IList<Food> fList = fTracker.GetFoodByCategory(selectedCategory);
-
-                fList = fList.OrderBy(o => o.Name).ToList();
-
-                lbFood.DataSource = fList;
-                lbFood.DisplayMember = "Name";
-
-                if (fList.Count == 0)
-                {
-                    pnlFoodItem.ClearInputs();
-
-                    btnDeleteFood.Enabled = false;
-                    btnEditFood.Enabled = false;
-                }
-                else
-                {
-                    if (foodIndex != -1)
-                    {
-                        lbFood.SelectedIndex = foodIndex;
-                    }
-
-                    btnDeleteFood.Enabled = true;
-                    btnEditFood.Enabled = true;
-                }
-            }         
-        }
-
-        private void setFoodInfo()
-        {
-            Food selectedFood = (Food)lbFood.SelectedValue;
+            Food selectedFood = pnlFoodLookup.SelectedFood;
 
             if(selectedFood != null)
             {
                 pnlFoodItem.SetInputs(selectedFood);
-            }    
+
+                btnDeleteFood.Enabled = true;
+                btnEditFood.Enabled = true;
+            }
+            else
+            {
+                pnlFoodItem.ClearInputs();
+
+                btnDeleteFood.Enabled = false;
+                btnEditFood.Enabled = false;
+            }
         }
 
         
