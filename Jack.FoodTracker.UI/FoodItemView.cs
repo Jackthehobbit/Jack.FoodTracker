@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace Jack.FoodTracker
 {
-    public partial class FoodItemPanel : Panel
+    public partial class FoodItemView : UserControl
     {
         private TextBox tbName;
         private TextBox tbDesc;
@@ -19,7 +19,7 @@ namespace Jack.FoodTracker
         private TextBox tbSatFat;
         private TextBox tbSalt;
 
-        public FoodItemPanel(IList<FoodCategory> cats)
+        public FoodItemView(IList<FoodCategory> cats)
         {
             InitializeComponent(cats);
         }

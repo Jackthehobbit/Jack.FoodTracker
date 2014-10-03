@@ -8,8 +8,9 @@ using System.Windows.Forms;
 
 namespace Jack.FoodTracker
 {
-    partial class FoodLookupPanel
+    partial class FoodLookupView
     {
+
         private void InitializeComponent(IList<FoodCategory> cats)
         {
             Label lCategory = new System.Windows.Forms.Label();
@@ -46,7 +47,7 @@ namespace Jack.FoodTracker
             this.lbCategory.TabIndex = 0;
             this.lbCategory.DataSource = cats;
             this.lbCategory.DisplayMember = "Name";
-            this.lbCategory.SelectedValueChanged += new System.EventHandler(this.lbCategories_SelectedValueChanged);
+            this.lbCategory.SelectedValueChanged += new System.EventHandler(this.OnCategoriesSelectedIndexChanged);
 
             //lbFood
             this.lbFood.FormattingEnabled = true;

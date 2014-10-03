@@ -51,28 +51,35 @@
             this.btnAddFood.TabIndex = 1;
             this.btnAddFood.Text = "Add Food";
             this.btnAddFood.UseVisualStyleBackColor = true;
-            this.btnAddFood.Click += new System.EventHandler(this.btnAddFood_Click);
+            this.btnAddFood.Click += new System.EventHandler(this.OnAddFoodButtonClick);
             // 
             // btnCancel
             // 
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Location = new System.Drawing.Point(183, 286);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 2;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            this.btnCancel.Click += new System.EventHandler(this.OnCancelButtonClick);
             // 
             // AddFoodForm
             // 
+            this.AcceptButton = this.btnAddFood;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(332, 335);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.lAddFood);
             this.Controls.Add(this.btnAddFood);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "AddFoodForm";
+            this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Add Food";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -83,7 +90,7 @@
 
         private System.Windows.Forms.Label lAddFood;
         private System.Windows.Forms.Button btnAddFood;
-        private FoodItemPanel pnlFoodItem;
+        private FoodItemView pnlFoodItem;
         private System.Windows.Forms.Button btnCancel;
     }
 }

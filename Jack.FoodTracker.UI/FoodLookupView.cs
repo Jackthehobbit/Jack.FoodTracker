@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace Jack.FoodTracker
 {
-    public partial class FoodLookupPanel : Panel
+    public partial class FoodLookupView : UserControl
     {
         public ListBox lbFood { get; private set; }
 
@@ -54,13 +54,13 @@ namespace Jack.FoodTracker
         private ListBox lbCategory;
         private readonly FoodTracker fTracker;
 
-        public FoodLookupPanel(FoodTracker fTracker, IList<FoodCategory> cats)
+        public FoodLookupView(FoodTracker fTracker, IList<FoodCategory> cats)
         {
             InitializeComponent(cats);
             this.fTracker = fTracker;
         }
 
-        private void lbCategories_SelectedValueChanged(object sender, EventArgs e)
+        private void OnCategoriesSelectedIndexChanged(object sender, EventArgs e)
         {
             SetFoodList(0);
         }

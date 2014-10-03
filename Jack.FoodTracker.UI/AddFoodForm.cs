@@ -21,7 +21,7 @@ namespace Jack.FoodTracker
             this.fTracker = fTracker;
 
             // Create Food Item Panel
-            pnlFoodItem = new FoodItemPanel(fTracker.GetAllFoodCategories());
+            pnlFoodItem = new FoodItemView(fTracker.GetAllFoodCategories());
             pnlFoodItem.AutoSize = true;
             pnlFoodItem.Location = new System.Drawing.Point(1, 69);
             pnlFoodItem.Name = "pnlFoodItem";
@@ -30,7 +30,7 @@ namespace Jack.FoodTracker
             Controls.Add(this.pnlFoodItem);
         }
 
-        private void btnAddFood_Click(object sender, EventArgs e)
+        private void OnAddFoodButtonClick(object sender, EventArgs e)
         {
             try
             {
@@ -51,7 +51,7 @@ namespace Jack.FoodTracker
             return pnlFoodItem.GetSelectedCategory();
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void OnCancelButtonClick(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
         }

@@ -57,17 +57,23 @@
     <Compile Include="AddFoodForm.Designer.cs">
       <DependentUpon>AddFoodForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="FoodItemPanel.cs">
+    <Compile Include="FoodItemView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FoodItemView.Designer.cs">
+      <DependentUpon>FoodItemView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FoodLookupView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FoodLookupView.Designer.cs">
+      <DependentUpon>FoodLookupView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FoodPanel.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="FoodItemPanel.Designer.cs">
-      <DependentUpon>FoodItemPanel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FoodLookupPanel.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="FoodLookupPanel.Designer.cs">
-      <DependentUpon>FoodLookupPanel.cs</DependentUpon>
+    <Compile Include="FoodPanel.Designer.cs">
+      <DependentUpon>FoodPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -77,8 +83,14 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RightPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <EmbeddedResource Include="AddFoodForm.resx">
       <DependentUpon>AddFoodForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FoodPanel.resx">
+      <DependentUpon>FoodPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
