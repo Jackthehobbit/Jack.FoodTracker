@@ -139,7 +139,17 @@ namespace Jack.FoodTracker
         {
             if (foodCategory.Name == "Uncategorised")
             {
-                throw new ArgumentException("Cannot delete the Uncategorised Category");
+                throw new ArgumentException("Cannot delete the Uncategorised Category.");
+            }
+
+            IList<Food> foodsInCat = GetFoodByCategory(foodCategory);
+
+            FoodCategory uncategorised = foodCatRepository.GetAll().Where(o => o.Name == "Uncategorised").First();
+
+            foreach (Food food in foodsInCat)
+            {
+                food.Category = uncategorised;
+                foodRepository.Edit(food);
             }
 
             try
