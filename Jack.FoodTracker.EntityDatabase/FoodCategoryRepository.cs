@@ -24,7 +24,15 @@ namespace Jack.FoodTracker.EntityDatabase
         public void Add(FoodCategory foodCategory)
         {
             context.Categories.Add(foodCategory);
+
             context.SaveChanges();
+
+            if(foodCategory.Order == 0)
+            {
+                foodCategory.Order = foodCategory.Id;
+
+                Edit(foodCategory);
+            }
         }
 
         public void Edit(FoodCategory foodCategory)

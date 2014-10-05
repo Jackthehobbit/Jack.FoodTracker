@@ -14,6 +14,7 @@ namespace Jack.FoodTracker.Entities
 
         [Index(IsUnique = true)]
         [MaxLength(255)]
+        [Required]
         public string Name { get; set; }
 
         public string Description { get; set; }
@@ -28,7 +29,7 @@ namespace Jack.FoodTracker.Entities
 
         public double Salt { get; set; }
 
-        //[Required]
+        [Required]
         public FoodCategory Category { get; set; }
 
         public Food()

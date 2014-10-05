@@ -31,5 +31,10 @@ namespace Jack.FoodTracker.Tests
         {
 
         }
+
+        public void Delete(FoodCategory fCategory)
+        {
+
+        }
     }
 }

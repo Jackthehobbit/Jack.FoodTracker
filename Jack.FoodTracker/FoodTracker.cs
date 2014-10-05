@@ -23,7 +23,7 @@ namespace Jack.FoodTracker
 
             if(!cats.Where(x => x.Name.Equals("Uncategorised")).Any())
             {
-                foodCatRepository.Add(new FoodCategory() { Name = "Uncategorised" });
+                foodCatRepository.Add(new FoodCategory() { Name = "Uncategorised" , Order = int.MaxValue });
             }
         }
 
