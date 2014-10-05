@@ -117,6 +117,8 @@ namespace Jack.FoodTracker
         {
             IList<FoodCategory> foodCategories = foodCatRepository.GetAll();
 
+            foodCategories = foodCategories.OrderBy(o => o.Order).ToList();
+
             if(!showUncategorised)
             {
                 FoodCategory uncategorised = foodCategories.Where(o => o.Name == "Uncategorised").First();
@@ -148,6 +150,16 @@ namespace Jack.FoodTracker
             {
                 throw new ArgumentException("This food does not exist, hence can't be deleted.");
             }
+        }
+
+        public void SwapCategoryOrder(FoodCategory foodCategory1, FoodCategory foodCategory2)
+        {
+            int tempOrder = foodCategory1.Order;
+            foodCategory1.Order = foodCategory2.Order;
+            foodCategory2.Order = tempOrder;
+
+            foodCatRepository.Edit(foodCategory1);
+            foodCatRepository.Edit(foodCategory2);
         }
     }
 }

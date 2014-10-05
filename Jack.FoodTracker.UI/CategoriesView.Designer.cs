@@ -110,6 +110,7 @@
             this.btnCategoryMoveUp.TabIndex = 7;
             this.btnCategoryMoveUp.Text = "^";
             this.btnCategoryMoveUp.UseVisualStyleBackColor = true;
+            this.btnCategoryMoveUp.Click += new System.EventHandler(this.OnCategoryMoveUpButtonClick);
             // 
             // btnCategoryMoveDown
             // 
@@ -119,6 +120,7 @@
             this.btnCategoryMoveDown.TabIndex = 8;
             this.btnCategoryMoveDown.Text = "V";
             this.btnCategoryMoveDown.UseVisualStyleBackColor = true;
+            this.btnCategoryMoveDown.Click += new System.EventHandler(this.OnCategoryMoveDownButtonClick);
             // 
             // CategoriesView
             // 

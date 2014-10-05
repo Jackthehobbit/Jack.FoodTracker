@@ -22,9 +22,9 @@ namespace Jack.FoodTracker
             InitializeComponent();
 
             //Get Food Categories
-            IList<FoodCategory> fCatList = sortCategories(fTracker.GetAllFoodCategories(true));
+            IList<FoodCategory> fCatList = fTracker.GetAllFoodCategories(true);
 
-            IList<FoodCategory> fCatList2 = sortCategories(new List<FoodCategory>(fCatList));
+            IList<FoodCategory> fCatList2 = new List<FoodCategory>(fCatList);
 
             pnlFoodItem = new FoodItemView(fCatList2);
             pnlFoodItem.AutoSize = true;
@@ -47,17 +47,6 @@ namespace Jack.FoodTracker
             {
                 btnAddFood.Enabled = false;
             }
-        }
-
-        private IList<FoodCategory> sortCategories(IList<FoodCategory> cats)
-        {
-            IList<FoodCategory> newCats = cats.OrderBy(o => o.Name).ToList();
-
-            FoodCategory uncategorisedCat = newCats.First(o => o.Name == "Uncategorised");
-            newCats.Remove(uncategorisedCat);
-            newCats.Add(uncategorisedCat);
-
-            return newCats;
         }
 
         private void OnEditFoodButtonClick(object sender, EventArgs e)

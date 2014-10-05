@@ -24,17 +24,41 @@ namespace Jack.FoodTracker
 
             InitializeComponent();
 
-            IList<FoodCategory> fCats = fTracker.GetAllFoodCategories(false);
-
-            lbCategories.DataSource = fCats;
             lbCategories.DisplayMember = "Name";
 
-            tbEditCatName.Enabled = false;
+            bool enabled = false;
+
+            tbEditCatName.Enabled = enabled;
+            btnCategoryMoveDown.Enabled = enabled;
+            btnCategoryMoveUp.Enabled = enabled;
+            btnDeleteCategory.Enabled = enabled;
+            btnEditCategory.Enabled = enabled;
+
+            updateCategoriesListBox(0);
         }
 
         private void OnCategorySelectedIndexChanged(object sender, EventArgs e)
         {
-            tbEditCatName.Text = ((FoodCategory)lbCategories.SelectedItem).Name;
+            bool enabled;
+
+            if (lbCategories.SelectedItem != null)
+            {
+                tbEditCatName.Text = ((FoodCategory)lbCategories.SelectedItem).Name;
+
+                enabled = true;
+            }
+            else
+            {
+                tbEditCatName.Text = "";
+
+                enabled = false;
+            }
+
+            btnCategoryMoveDown.Enabled = enabled;
+            btnCategoryMoveUp.Enabled = enabled;
+            btnDeleteCategory.Enabled = enabled;
+            btnEditCategory.Enabled = enabled;
+            
         }
 
         private void OnAddCategoriesButtonClick(object sender, EventArgs e)
@@ -42,20 +66,13 @@ namespace Jack.FoodTracker
             try
             {
                 fTracker.AddCategory(tbAddCatName.Text);
-                updateCategoriesListBox();
+                updateCategoriesListBox((FoodCategory)lbCategories.SelectedItem);
                 tbAddCatName.Text = "";
             }
             catch(ArgumentException aex)
             {
                 MessageBox.Show(aex.Message);
             }
-        }
-
-        private void updateCategoriesListBox()
-        {
-            IList<FoodCategory> fCats = fTracker.GetAllFoodCategories(false);
-
-            lbCategories.DataSource = fCats;
         }
 
         private void OnEditCategoryButtonClick(object sender, EventArgs e)
@@ -73,8 +90,7 @@ namespace Jack.FoodTracker
                     fTracker.EditFoodCategory(tbEditCatName.Text, selectedFoodCat);
 
                     switchEditMode();
-                    updateCategoriesListBox();
-                    lbCategories.SelectedItem = selectedFoodCat;
+                    updateCategoriesListBox(selectedFoodCat);
                 }
                 catch(ArgumentException aex)
                 {
@@ -82,29 +98,6 @@ namespace Jack.FoodTracker
                 }
 
             }
-        }
-
-        private void switchEditMode()
-        {
-            inEditMode = !inEditMode;
-
-            if(inEditMode)
-            {
-                btnEditCategory.Text = "Save";
-                btnDeleteCategory.Text = "Cancel";
-            }
-            else
-            {
-                btnEditCategory.Text = "Edit";
-                btnDeleteCategory.Text = "Delete";
-            }
-
-            tbEditCatName.Enabled = inEditMode;
-
-            btnCategoryMoveUp.Enabled = !inEditMode;
-            btnCategoryMoveDown.Enabled = !inEditMode;
-            btnAddCategory.Enabled = !inEditMode;
-            lbCategories.Enabled = !inEditMode;
         }
 
         private void OnDeleteCategoryButtonClick(object sender, EventArgs e)
@@ -129,9 +122,7 @@ namespace Jack.FoodTracker
 
                         int categoryIndex = lbCategories.SelectedIndex;
 
-                        updateCategoriesListBox();
-
-                        lbCategories.SelectedIndex = categoryIndex > 0 ? categoryIndex - 1 : 0;
+                        updateCategoriesListBox(categoryIndex);
                     }
                 }
                 catch(ArgumentException aex)
@@ -139,6 +130,95 @@ namespace Jack.FoodTracker
                     MessageBox.Show(aex.Message);
                 }
             }
+        }
+
+        private void OnCategoryMoveUpButtonClick(object sender, EventArgs e)
+        {
+            IList<FoodCategory> fCatList = (IList<FoodCategory>)lbCategories.DataSource;
+
+            int selectedIndex = lbCategories.SelectedIndex;
+
+            if(selectedIndex > 0)
+            {
+                FoodCategory fCat = fCatList.ElementAt(selectedIndex);
+                FoodCategory fCatAbove = fCatList.ElementAt(selectedIndex - 1);
+
+                fTracker.SwapCategoryOrder(fCat, fCatAbove);
+
+                updateCategoriesListBox(fCat);
+            }  
+        }
+
+        private void OnCategoryMoveDownButtonClick(object sender, EventArgs e)
+        {
+            IList<FoodCategory> fCatList = (IList<FoodCategory>)lbCategories.DataSource;
+
+            int selectedIndex = lbCategories.SelectedIndex;
+
+            if (selectedIndex < fCatList.Count-1)
+            {
+                FoodCategory fCat = fCatList.ElementAt(selectedIndex);
+                FoodCategory fCatBelow = fCatList.ElementAt(selectedIndex + 1);
+
+                fTracker.SwapCategoryOrder(fCat, fCatBelow);
+
+                updateCategoriesListBox(fCat);
+            } 
+        }
+
+        private void switchEditMode()
+        {
+            inEditMode = !inEditMode;
+
+            if (inEditMode)
+            {
+                btnEditCategory.Text = "Save";
+                btnDeleteCategory.Text = "Cancel";
+            }
+            else
+            {
+                btnEditCategory.Text = "Edit";
+                btnDeleteCategory.Text = "Delete";
+            }
+
+            tbEditCatName.Enabled = inEditMode;
+
+            btnCategoryMoveUp.Enabled = !inEditMode;
+            btnCategoryMoveDown.Enabled = !inEditMode;
+            btnAddCategory.Enabled = !inEditMode;
+            lbCategories.Enabled = !inEditMode;
+        }
+
+        private void updateCategoriesListBox(int selectedIndex)
+        {
+            IList<FoodCategory> fCats = fTracker.GetAllFoodCategories(false);
+
+            if(fCats.Count == 0)
+            {
+                lbCategories.SelectedIndex = -1;
+            }
+
+            lbCategories.DataSource = fCats;
+
+            if(fCats.Count != 0)
+            {
+                lbCategories.SelectedIndex = selectedIndex > 0 ? selectedIndex - 1 : 0;
+            }
+            
+        }
+
+        private void updateCategoriesListBox(FoodCategory selectedFCat)
+        {
+            IList<FoodCategory> fCats = fTracker.GetAllFoodCategories(false);
+
+            if (fCats.Count == 0)
+            {
+                lbCategories.SelectedIndex = -1;
+            }
+
+            lbCategories.DataSource = fCats;
+
+            lbCategories.SelectedItem = selectedFCat;
         }
     }
 }
