@@ -7,9 +7,9 @@ using System.Windows.Forms;
 
 namespace Jack.FoodTracker
 {
-    public abstract class RightPanel : Panel
+    public class RightView : UserControl
     {
-        public RightPanel()
+        public RightView()
         {
             Size = new System.Drawing.Size(800, 500);
             Location = new System.Drawing.Point(200,0);

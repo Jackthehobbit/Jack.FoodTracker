@@ -9,25 +9,20 @@ using System.Windows.Forms;
 
 namespace Jack.FoodTracker
 {
-    public partial class FoodPanel : RightPanel
+    public partial class FoodView : RightView
     {
         private FoodTracker fTracker;
 
         private bool inEditMode;
 
-        public FoodPanel()
+        public FoodView(FoodTracker fTracker)
         {
+            this.fTracker = fTracker;
+
             InitializeComponent();
 
-            //Create Repositories
-            FoodContext context = new FoodContext();
-            FoodRepository fRepository = new FoodRepository(context);
-            FoodCategoryRepository fCatRepository = new FoodCategoryRepository(context);
-
-            fTracker = new FoodTracker(fRepository, fCatRepository);
-
             //Get Food Categories
-            IList<FoodCategory> fCatList = sortCategories(fTracker.GetAllFoodCategories());
+            IList<FoodCategory> fCatList = sortCategories(fTracker.GetAllFoodCategories(true));
 
             IList<FoodCategory> fCatList2 = sortCategories(new List<FoodCategory>(fCatList));
 
@@ -110,8 +105,8 @@ namespace Jack.FoodTracker
             }
             else
             {
-                
-                DialogResult delete = MessageBox.Show("Are you sure you want to delete "+ pnlFoodItem.GetName(),"Delete Food?",MessageBoxButtons.YesNo);
+
+                DialogResult delete = MessageBox.Show("Are you sure you want to delete " + pnlFoodItem.GetName() + "?", "Delete Food?", MessageBoxButtons.YesNo);
 
                 if(delete == DialogResult.Yes)
                 {

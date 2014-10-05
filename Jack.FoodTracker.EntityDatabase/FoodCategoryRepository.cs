@@ -26,5 +26,17 @@ namespace Jack.FoodTracker.EntityDatabase
             context.Categories.Add(foodCategory);
             context.SaveChanges();
         }
+
+        public void Edit(FoodCategory foodCategory)
+        {
+            context.Entry(foodCategory).State = System.Data.Entity.EntityState.Modified;
+            context.SaveChanges();
+        }
+
+        public void Delete(FoodCategory foodCategory)
+        {
+            context.Categories.Remove(foodCategory);
+            context.SaveChanges();
+        }
     }
 }

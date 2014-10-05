@@ -26,5 +26,10 @@ namespace Jack.FoodTracker.Tests
         {
             cats.Add(fCategory);
         }
+
+        public void Edit(FoodCategory fCategory)
+        {
+
+        }
     }
 }

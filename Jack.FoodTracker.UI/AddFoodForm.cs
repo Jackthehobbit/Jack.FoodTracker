@@ -21,7 +21,7 @@ namespace Jack.FoodTracker
             this.fTracker = fTracker;
 
             // Create Food Item Panel
-            pnlFoodItem = new FoodItemView(fTracker.GetAllFoodCategories());
+            pnlFoodItem = new FoodItemView(fTracker.GetAllFoodCategories(true));
             pnlFoodItem.AutoSize = true;
             pnlFoodItem.Location = new System.Drawing.Point(1, 69);
             pnlFoodItem.Name = "pnlFoodItem";

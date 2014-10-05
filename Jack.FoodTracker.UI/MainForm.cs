@@ -15,14 +15,22 @@ namespace Jack.FoodTracker
 {
     public partial class MainForm : Form
     {
-        private FoodPanel fPanel;
+        private FoodView fPanel;
 
         public MainForm()
         {
             InitializeComponent();
 
-            fPanel = new FoodPanel();
-            Controls.Add(fPanel);
+            //Create Repositories
+            FoodContext context = new FoodContext();
+            FoodRepository fRepository = new FoodRepository(context);
+            FoodCategoryRepository fCatRepository = new FoodCategoryRepository(context);
+
+            FoodTracker fTracker = new FoodTracker(fRepository, fCatRepository);
+
+            fPanel = new FoodView(fTracker);
+            CategoriesView cPanel = new CategoriesView(fTracker);
+            Controls.Add(cPanel);
 
         }
     }

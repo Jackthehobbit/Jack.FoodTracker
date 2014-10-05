@@ -76,14 +76,78 @@ namespace Jack.FoodTracker
             }
         }
 
-        public IList<FoodCategory> GetAllFoodCategories()
+        public void AddCategory(string categoryName)
         {
-            return foodCatRepository.GetAll();
+            categoryName = categoryName.Trim();
+
+            CategoryChecker checker = new CategoryChecker();
+
+            checker.Check(categoryName);
+
+            if (foodCatRepository.GetAll().Where(o => o.Name.ToLower().Equals(categoryName.ToLower())).Any())
+            {
+                throw new ArgumentException("A category with this name already exists.");
+            }
+
+            foodCatRepository.Add(new FoodCategory() { Name = categoryName });
+        }
+
+        public void EditFoodCategory(string newCategoryName, FoodCategory foodCategory)
+        {
+            newCategoryName = newCategoryName.Trim();
+
+            CategoryChecker checker = new CategoryChecker();
+
+            checker.Check(newCategoryName);
+
+            if(newCategoryName != foodCategory.Name)
+            {
+                if (foodCatRepository.GetAll().Where(o => o.Name.ToLower().Equals(newCategoryName.ToLower())).Any())
+                {
+                    throw new ArgumentException("A category with this name already exists.");
+                }
+
+                foodCategory.Name = newCategoryName;
+            }
+
+            foodCatRepository.Edit(foodCategory);
+        }
+
+        public IList<FoodCategory> GetAllFoodCategories(bool showUncategorised)
+        {
+            IList<FoodCategory> foodCategories = foodCatRepository.GetAll();
+
+            if(!showUncategorised)
+            {
+                FoodCategory uncategorised = foodCategories.Where(o => o.Name == "Uncategorised").First();
+
+                foodCategories.Remove(uncategorised);
+            }
+
+            return foodCategories;
+            
         }
 
         public IList<Food> GetFoodByCategory(FoodCategory category)
         {
             return foodRepository.GetByCategory(category);
+        }
+
+        public void DeleteCategory(FoodCategory foodCategory)
+        {
+            if (foodCategory.Name == "Uncategorised")
+            {
+                throw new ArgumentException("Cannot delete the Uncategorised Category");
+            }
+
+            try
+            {
+                foodCatRepository.Delete(foodCategory);
+            }
+            catch (InvalidOperationException)
+            {
+                throw new ArgumentException("This food does not exist, hence can't be deleted.");
+            }
         }
     }
 }

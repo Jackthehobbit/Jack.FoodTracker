@@ -17,6 +17,9 @@ namespace Jack.FoodTracker
             double saturates;
             double salt;
 
+            dto.Name = dto.Name.Trim();
+            dto.Description = dto.Description.Trim();
+
             if(dto.Name == "")
             {
                 throw new ArgumentException("Name is empty.");

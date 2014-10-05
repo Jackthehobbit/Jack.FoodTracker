@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CategoryChecker.cs" />
     <Compile Include="FoodDTO.cs" />
     <Compile Include="FoodDTOParser.cs" />
     <Compile Include="FoodTracker.cs" />

@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace Jack.FoodTracker
 {
-    partial class FoodPanel
+    partial class FoodView
     {
         private void InitializeComponent()
         {
