@@ -11,6 +11,7 @@ namespace Jack.FoodTracker
     public partial class FoodLookupView : UserControl
     {
         public ListBox lbFood { get; private set; }
+        public TextBox tbSearch { get; private set; }
 
         public Food SelectedFood
         {
@@ -71,6 +72,7 @@ namespace Jack.FoodTracker
 
             if (selectedCategory != null)
             {
+               
                 IList<Food> fList = fTracker.GetFoodByCategory(selectedCategory);
 
                 fList = fList.OrderBy(o => o.Name).ToList();
@@ -116,5 +118,38 @@ namespace Jack.FoodTracker
                 }
             }
         }
+
+            public void SetFoodList(IList<Food> searchResults)
+        {
+            FoodCategory selectedCategory = (FoodCategory)lbCategory.SelectedValue;
+
+            if (selectedCategory != null)
+            {
+                IList<Food> fList = fTracker.GetFoodByCategory(selectedCategory,searchResults);
+
+                fList = fList.OrderBy(o => o.Name).ToList();
+
+                Food currentFood = (Food)lbFood.SelectedItem;
+
+                if (fList.Count == 0)
+                {
+                    lbFood.SelectedIndex = -1;
+                }
+
+                lbFood.DataSource = fList;
+                lbFood.DisplayMember = "Name";
+
+                if (fList.Contains(currentFood))
+                {
+                    lbFood.SelectedItem = currentFood;
+                }
+            }
+        }
+
+            internal void setCatList(IList<FoodCategory> fCatList)
+            {
+                lbCategory.DataSource = fCatList;
+            }
     }
-}
+    }
+

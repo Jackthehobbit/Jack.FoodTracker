@@ -169,5 +169,38 @@ namespace Jack.FoodTracker
                 btnEditFood.Enabled = false;
             }
         }
+
+        private void SearchBarTextChanged(object sender, EventArgs e)
+        {
+            IList<FoodCategory> fCatList = fTracker.GetAllFoodCategories(true);
+            if (tbSearch.Text == "")
+            {
+                pnlFoodLookup.setCatList(fCatList);
+               // pnlFoodLookup.SetFoodList();
+            }
+            else
+            {
+                IList<Food> searchResults = fTracker.SearchFoodByName(tbSearch.Text);
+                IList<FoodCategory> cats = fTracker.GetAllFoodCategories(false);
+                 foreach (FoodCategory item in fCatList)
+                 {
+                     
+                     try
+                     {
+                         Food findCat = searchResults.Where(x => x.Category.Id.Equals(item.Id)).First();
+                     }
+                     catch(InvalidOperationException)
+                     {
+                         cats.Remove(item);
+                     }
+                    
+                       
+                 }
+                 pnlFoodLookup.setCatList(cats);
+                 pnlFoodLookup.SetFoodList(searchResults);
+             }
+             
+            
+        }
     }
 }

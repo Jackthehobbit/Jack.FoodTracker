@@ -88,6 +88,7 @@ namespace Jack.FoodTracker
             this.tbSearch.Name = "tbSearch";
             this.tbSearch.Size = new System.Drawing.Size(393, 20);
             this.tbSearch.TabIndex = 10;
+            this.tbSearch.TextChanged += new System.EventHandler(this.SearchBarTextChanged);
 
             //lFoodItem
             lFoodItem.AutoSize = true;
