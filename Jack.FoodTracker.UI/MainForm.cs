@@ -26,7 +26,9 @@ namespace Jack.FoodTracker
             FoodRepository fRepository = new FoodRepository(context);
             FoodCategoryRepository fCatRepository = new FoodCategoryRepository(context);
 
-            FoodTracker fTracker = new FoodTracker(fRepository, fCatRepository);
+            UnitOfWork UnitOfWork = new UnitOfWork(context, fRepository, fCatRepository);
+
+            FoodTracker fTracker = new FoodTracker(UnitOfWork);
 
             fPanel = new FoodView(fTracker);
             CategoriesView cPanel = new CategoriesView(fTracker);

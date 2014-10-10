@@ -9,7 +9,7 @@ namespace Jack.FoodTracker.Tests
     [TestClass]
     public class DeleteFoodTest
     {
-        [TestMethod]
+        /*[TestMethod]
         public void SuccessfulRemove()
         {
             Exception ex = null;
@@ -84,6 +84,6 @@ namespace Jack.FoodTracker.Tests
 
             Assert.IsNotNull(ex);
             Assert.AreEqual(ex.Message, "This food does not exist, hence can't be deleted.");
-        }
+        }*/
     }
 }

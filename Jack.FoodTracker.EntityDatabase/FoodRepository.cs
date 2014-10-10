@@ -19,19 +19,16 @@ namespace Jack.FoodTracker.EntityDatabase
         public void Add(Food newFood)
         {
             context.Foods.Add(newFood);
-            context.SaveChanges();
         }
 
         public void Delete(Food food)
         {
             context.Foods.Remove(food);
-            context.SaveChanges();
         }
 
         public void Edit(Food changedFood)
         {
             context.Entry(changedFood).State = System.Data.Entity.EntityState.Modified;
-            context.SaveChanges();
         }
 
         public IList<Food> GetAll()

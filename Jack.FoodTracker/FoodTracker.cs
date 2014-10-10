@@ -10,20 +10,19 @@ namespace Jack.FoodTracker
 {
     public class FoodTracker
     {
-        private readonly IFoodRepository foodRepository;
-        private readonly IFoodCategoryRepository foodCatRepository;
+        private readonly UnitOfWork UnitOfWork;
 
-        public FoodTracker(IFoodRepository foodRepository, IFoodCategoryRepository foodCatRepository)
+        public FoodTracker(UnitOfWork unitOfWork)
         {
-            this.foodRepository = foodRepository;
-            this.foodCatRepository = foodCatRepository;
+            this.UnitOfWork = unitOfWork;
 
             //Check Uncategorised Category exists, else initiate it
-            List<FoodCategory> cats = foodCatRepository.GetAll();
+            List<FoodCategory> cats = UnitOfWork.FoodCategoryRepository.GetAll();
 
             if(!cats.Where(x => x.Name.Equals("Uncategorised")).Any())
             {
-                foodCatRepository.Add(new FoodCategory() { Name = "Uncategorised" , Order = int.MaxValue });
+                UnitOfWork.FoodCategoryRepository.Add(new FoodCategory() { Name = "Uncategorised", Order = int.MaxValue });
+                UnitOfWork.Save();
             }
         }
 
@@ -35,13 +34,14 @@ namespace Jack.FoodTracker
             Food newFood = parser.Parse(dto);
 
             //Check the food doesn't already exist in the database
-            if (foodRepository.GetAll().Where(x => x.Name.ToLower().Equals(newFood.Name.ToLower())).Any())
+            if (UnitOfWork.FoodRepository.GetAll().Where(x => x.Name.ToLower().Equals(newFood.Name.ToLower())).Any())
             {
                 throw new ArgumentException("This food already exists.");
             }
 
             //Add the food to the database
-            foodRepository.Add(newFood);
+            UnitOfWork.FoodRepository.Add(newFood);
+            UnitOfWork.Save();
         }
 
         public void EditFood(FoodDTO dto, Food food)
@@ -52,7 +52,7 @@ namespace Jack.FoodTracker
             //if the name has changed check that there isn't an existing food with the new name
             if(dto.Name != food.Name)
             {
-                if (foodRepository.GetAll().Where(x => x.Name.ToLower().Equals(dto.Name.ToLower())).Any())
+                if (UnitOfWork.FoodRepository.GetAll().Where(x => x.Name.ToLower().Equals(dto.Name.ToLower())).Any())
                 {
                     throw new ArgumentException("A food with this name already exists.");
                 }
@@ -61,14 +61,16 @@ namespace Jack.FoodTracker
             Food newFood = parser.ParseIntoExisting(dto, food);
             
             //Add the food to the database
-            foodRepository.Edit(newFood);
+            UnitOfWork.FoodRepository.Edit(newFood);
+            UnitOfWork.Save();
         }
 
         public void DeleteFood(Food food)
         {
             try
             {
-                foodRepository.Delete(food);
+                UnitOfWork.FoodRepository.Delete(food);
+                UnitOfWork.Save();
             }
             catch(InvalidOperationException)
             {
@@ -84,12 +86,13 @@ namespace Jack.FoodTracker
 
             checker.Check(categoryName);
 
-            if (foodCatRepository.GetAll().Where(o => o.Name.ToLower().Equals(categoryName.ToLower())).Any())
+            if (UnitOfWork.FoodCategoryRepository.GetAll().Where(o => o.Name.ToLower().Equals(categoryName.ToLower())).Any())
             {
                 throw new ArgumentException("A category with this name already exists.");
             }
 
-            foodCatRepository.Add(new FoodCategory() { Name = categoryName });
+            UnitOfWork.FoodCategoryRepository.Add(new FoodCategory() { Name = categoryName });
+            UnitOfWork.Save();
         }
 
         public void EditFoodCategory(string newCategoryName, FoodCategory foodCategory)
@@ -102,7 +105,7 @@ namespace Jack.FoodTracker
 
             if(newCategoryName != foodCategory.Name)
             {
-                if (foodCatRepository.GetAll().Where(o => o.Name.ToLower().Equals(newCategoryName.ToLower())).Any())
+                if (UnitOfWork.FoodCategoryRepository.GetAll().Where(o => o.Name.ToLower().Equals(newCategoryName.ToLower())).Any())
                 {
                     throw new ArgumentException("A category with this name already exists.");
                 }
@@ -110,12 +113,12 @@ namespace Jack.FoodTracker
                 foodCategory.Name = newCategoryName;
             }
 
-            foodCatRepository.Edit(foodCategory);
+            UnitOfWork.FoodCategoryRepository.Edit(foodCategory);
         }
 
         public IList<FoodCategory> GetAllFoodCategories(bool showUncategorised)
         {
-            IList<FoodCategory> foodCategories = foodCatRepository.GetAll();
+            IList<FoodCategory> foodCategories = UnitOfWork.FoodCategoryRepository.GetAll();
 
             foodCategories = foodCategories.OrderBy(o => o.Order).ToList();
 
@@ -132,7 +135,7 @@ namespace Jack.FoodTracker
 
         public IList<Food> GetFoodByCategory(FoodCategory category)
         {
-            return foodRepository.GetByCategory(category);
+            return UnitOfWork.FoodRepository.GetByCategory(category);
         }
 
         public void DeleteCategory(FoodCategory foodCategory)
@@ -144,17 +147,18 @@ namespace Jack.FoodTracker
 
             IList<Food> foodsInCat = GetFoodByCategory(foodCategory);
 
-            FoodCategory uncategorised = foodCatRepository.GetAll().Where(o => o.Name == "Uncategorised").First();
+            FoodCategory uncategorised = UnitOfWork.FoodCategoryRepository.GetAll().Where(o => o.Name == "Uncategorised").First();
 
             foreach (Food food in foodsInCat)
             {
                 food.Category = uncategorised;
-                foodRepository.Edit(food);
+                UnitOfWork.FoodRepository.Edit(food);
             }
 
             try
             {
-                foodCatRepository.Delete(foodCategory);
+                UnitOfWork.FoodCategoryRepository.Delete(foodCategory);
+                UnitOfWork.Save();
             }
             catch (InvalidOperationException)
             {
@@ -168,13 +172,14 @@ namespace Jack.FoodTracker
             foodCategory1.Order = foodCategory2.Order;
             foodCategory2.Order = tempOrder;
 
-            foodCatRepository.Edit(foodCategory1);
-            foodCatRepository.Edit(foodCategory2);
+            UnitOfWork.FoodCategoryRepository.Edit(foodCategory1);
+            UnitOfWork.FoodCategoryRepository.Edit(foodCategory2);
+            UnitOfWork.Save();
         }
 
         public IList<Food> SearchFoodByName(String searchText)
         {
-            return foodRepository.SearchByName(searchText);
+            return UnitOfWork.FoodRepository.SearchByName(searchText);
         }
     }
 }

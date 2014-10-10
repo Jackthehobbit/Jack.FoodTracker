@@ -6,7 +6,7 @@ namespace Jack.FoodTracker.Tests
     [TestClass]
     public class AddFoodTest
     {
-        [TestMethod]
+        /*[TestMethod]
         public void SuccessfulAdd()
         {
             Exception ex = null;
@@ -302,6 +302,6 @@ namespace Jack.FoodTracker.Tests
             dto.Salt = salt;
 
             return dto;
-        }
+        }*/
     }
 }

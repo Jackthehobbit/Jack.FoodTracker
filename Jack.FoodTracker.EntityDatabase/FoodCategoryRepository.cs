@@ -38,13 +38,11 @@ namespace Jack.FoodTracker.EntityDatabase
         public void Edit(FoodCategory foodCategory)
         {
             context.Entry(foodCategory).State = System.Data.Entity.EntityState.Modified;
-            context.SaveChanges();
         }
 
         public void Delete(FoodCategory foodCategory)
         {
             context.Categories.Remove(foodCategory);
-            context.SaveChanges();
         }
     }
 }
