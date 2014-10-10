@@ -13,6 +13,7 @@ namespace Jack.FoodTracker
     {
         private FoodTracker fTracker;
         private readonly FoodItemPresenter FoodItemPresenter;
+        private readonly FoodLookupPresenter FoodLookupPresenter;
 
         private bool inEditMode;
 
@@ -33,12 +34,13 @@ namespace Jack.FoodTracker
             foodItemView.Enabled = false;
             FoodItemPresenter = new FoodItemPresenter(foodItemView, fCatList2);
 
-            foodLookupView = new FoodLookupView(fTracker, fCatList);
+            foodLookupView = new FoodLookupView();
             foodLookupView.AutoSize = true;
             foodLookupView.Location = new System.Drawing.Point(46, 143);
-            foodLookupView.lbFood.SelectedIndexChanged += new System.EventHandler(this.FoodListItemChanged);
+            foodLookupView.FoodSelectedChanged += new System.EventHandler(this.FoodListItemChanged);
+            FoodLookupPresenter = new FoodLookupPresenter(foodLookupView, fTracker, fCatList);
 
-            FoodSearchPresenter foodSearchPresenter = new FoodSearchPresenter(foodSearchView, fTracker, foodLookupView);
+            FoodSearchPresenter foodSearchPresenter = new FoodSearchPresenter(foodSearchView, fTracker, FoodLookupPresenter);
 
             Controls.Add(foodItemView);
             Controls.Add(foodLookupView);
@@ -107,9 +109,9 @@ namespace Jack.FoodTracker
 
                     fTracker.DeleteFood(selectedFood);
 
-                    int foodIndex = foodLookupView.SelectedFoodindex;
+                    int foodIndex = foodLookupView.SelectedFoodIndex;
 
-                    foodLookupView.SetFoodList(foodIndex > 0 ? foodIndex - 1 : 0);
+                    FoodLookupPresenter.SetFoodList(foodIndex > 0 ? foodIndex - 1 : 0);
                 }
                 
             }
@@ -123,7 +125,7 @@ namespace Jack.FoodTracker
 
                 if (result == DialogResult.OK && addFood.GetFoodCategorySelected().Equals(foodLookupView.SelectedCategory))
                 {
-                    foodLookupView.SetFoodList();
+                    FoodLookupPresenter.SetFoodList();
                 }
             }
         }

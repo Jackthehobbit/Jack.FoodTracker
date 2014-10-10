@@ -11,13 +11,13 @@ namespace Jack.FoodTracker
     {
         private readonly IFoodSearchView FoodSearchView;
         private readonly FoodTracker FoodTracker;
-        private readonly FoodLookupView FoodLookupView;
+        private readonly FoodLookupPresenter FoodLookupPresenter;
 
-        public FoodSearchPresenter(IFoodSearchView foodSearchView, FoodTracker foodTracker, FoodLookupView foodLookupView)
+        public FoodSearchPresenter(IFoodSearchView foodSearchView, FoodTracker foodTracker, FoodLookupPresenter foodLookupPresenter)
         {
             FoodSearchView = foodSearchView;
             FoodTracker = foodTracker;
-            FoodLookupView = foodLookupView;
+            FoodLookupPresenter = foodLookupPresenter;
 
             FoodSearchView.SearchBarTextChanged += new EventHandler(GetSearchResults);
         }
@@ -28,7 +28,7 @@ namespace Jack.FoodTracker
 
             if(FoodSearchView.SearchText == "")
             {
-                FoodLookupView.SetCatList(fCatList);
+                FoodLookupPresenter.SetCatList(fCatList);
             }
             else
             {
@@ -45,8 +45,8 @@ namespace Jack.FoodTracker
                     }
                 }
 
-                FoodLookupView.SetCatList(finalCatList);
-                FoodLookupView.SetFoodList(searchResults);
+                FoodLookupPresenter.SetCatList(finalCatList);
+                FoodLookupPresenter.SetFoodList(searchResults);
             }
         }
     }

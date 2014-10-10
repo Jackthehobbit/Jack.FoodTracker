@@ -8,10 +8,20 @@ using System.Windows.Forms;
 
 namespace Jack.FoodTracker
 {
-    public partial class FoodLookupView : UserControl
+    public partial class FoodLookupView : UserControl, IFoodLookupView
     {
-        public ListBox lbFood { get; private set; }
-        public TextBox tbSearch { get; private set; }
+        private ListBox lbFood;
+        private ListBox lbCategory;
+
+        public FoodLookupView()
+        {
+            InitializeComponent();
+        }
+
+        public IList<Food> Foods
+        {
+            set { lbFood.DataSource = value; }
+        }
 
         public Food SelectedFood
         {
@@ -26,17 +36,15 @@ namespace Jack.FoodTracker
             }
         }
 
-        public int SelectedFoodindex
+        public int SelectedFoodIndex
         {
-            get
-            {
-                return lbFood.SelectedIndex;
-            }
+            get { return lbFood.SelectedIndex; }
+            set { lbFood.SelectedIndex = value; }
+        }
 
-            set
-            {
-                lbFood.SelectedIndex = value;
-            }
+        public IList<FoodCategory> Categories
+        {
+            set { lbCategory.DataSource = value; }
         }
 
         public FoodCategory SelectedCategory
@@ -52,107 +60,16 @@ namespace Jack.FoodTracker
             }
         }
 
-        private ListBox lbCategory;
-        private readonly FoodTracker fTracker;
-
-        public FoodLookupView(FoodTracker fTracker, IList<FoodCategory> cats)
+        public event EventHandler CategorySelectedChanged
         {
-            InitializeComponent(cats);
-            this.fTracker = fTracker;
+            add { lbCategory.SelectedIndexChanged += value; }
+            remove { lbCategory.SelectedIndexChanged -= value; }
         }
 
-        private void OnCategoriesSelectedIndexChanged(object sender, EventArgs e)
+        public event EventHandler FoodSelectedChanged
         {
-            SetFoodList(0);
-        }
-
-        public void SetFoodList()
-        {
-            FoodCategory selectedCategory = (FoodCategory)lbCategory.SelectedValue;
-
-            if (selectedCategory != null)
-            {
-               
-                IList<Food> fList = fTracker.GetFoodByCategory(selectedCategory);
-
-                fList = fList.OrderBy(o => o.Name).ToList();
-
-                Food currentFood = (Food)lbFood.SelectedItem;
-
-                if (fList.Count == 0)
-                {
-                    lbFood.SelectedIndex = -1;
-                }
-
-                lbFood.DataSource = fList;
-                lbFood.DisplayMember = "Name";
-
-                if (fList.Contains(currentFood))
-                {
-                    lbFood.SelectedItem = currentFood;
-                }
-            }
-        }
-
-        public void SetFoodList(int foodIndex)
-        {
-            FoodCategory selectedCategory = (FoodCategory)lbCategory.SelectedValue;
-
-            if (selectedCategory != null)
-            {
-                IList<Food> fList = fTracker.GetFoodByCategory(selectedCategory);
-
-                fList = fList.OrderBy(o => o.Name).ToList();
-
-                if (fList.Count == 0)
-                {
-                    lbFood.SelectedIndex = -1;
-                }
-
-                lbFood.DataSource = fList;
-                lbFood.DisplayMember = "Name";
-
-                if (fList.Count > 0)
-                {
-                    lbFood.SelectedIndex = foodIndex;
-                }
-            }
-        }
-
-        public void SetFoodList(IList<Food> searchResults)
-        {
-            if (searchResults.Count == 0)
-            {
-                lbFood.DataSource = null;
-            }
-            FoodCategory selectedCategory = (FoodCategory)lbCategory.SelectedValue;
-
-            if (selectedCategory != null)
-            {
-                IList<Food> fList = searchResults.Where(x => x.Category.Id == selectedCategory.Id).ToList();
-
-                fList = fList.OrderBy(o => o.Name).ToList();
-
-                Food currentFood = (Food)lbFood.SelectedItem;
-
-                if (fList.Count == 0)
-                {
-                    lbFood.SelectedIndex = -1;
-                }
-
-                lbFood.DataSource = fList;
-                lbFood.DisplayMember = "Name";
-
-                if (fList.Contains(currentFood))
-                {
-                    lbFood.SelectedItem = currentFood;
-                }
-            }
-        }
-
-        internal void SetCatList(IList<FoodCategory> fCatList)
-        {
-            lbCategory.DataSource = fCatList;
+            add { lbFood.SelectedIndexChanged += value; }
+            remove { lbFood.SelectedIndexChanged -= value; }
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Jack.FoodTracker
     partial class FoodLookupView
     {
 
-        private void InitializeComponent(IList<FoodCategory> cats)
+        private void InitializeComponent()
         {
             Label lCategory = new System.Windows.Forms.Label();
             Label lFood = new System.Windows.Forms.Label();
@@ -45,9 +45,7 @@ namespace Jack.FoodTracker
             this.lbCategory.Name = "lbCategory";
             this.lbCategory.Size = new System.Drawing.Size(120, 212);
             this.lbCategory.TabIndex = 0;
-            this.lbCategory.DataSource = cats;
             this.lbCategory.DisplayMember = "Name";
-            this.lbCategory.SelectedValueChanged += new System.EventHandler(this.OnCategoriesSelectedIndexChanged);
 
             //lbFood
             this.lbFood.FormattingEnabled = true;
@@ -55,6 +53,7 @@ namespace Jack.FoodTracker
             this.lbFood.Name = "lbFood";
             this.lbFood.Size = new System.Drawing.Size(120, 212);
             this.lbFood.TabIndex = 1;
+            this.lbFood.DisplayMember = "Name";
 
             this.Controls.Add(lCategory);
             this.Controls.Add(lFood);

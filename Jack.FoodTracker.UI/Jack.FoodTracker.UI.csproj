@@ -70,6 +70,7 @@
     <Compile Include="FoodItemView.Designer.cs">
       <DependentUpon>FoodItemView.cs</DependentUpon>
     </Compile>
+    <Compile Include="FoodLookupPresenter.cs" />
     <Compile Include="FoodLookupView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -90,6 +91,7 @@
       <DependentUpon>FoodView.cs</DependentUpon>
     </Compile>
     <Compile Include="IFoodItemView.cs" />
+    <Compile Include="IFoodLookupView.cs" />
     <Compile Include="IFoodSearchView.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
