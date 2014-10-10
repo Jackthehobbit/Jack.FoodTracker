@@ -176,36 +176,15 @@ namespace Jack.FoodTracker
             if (tbSearch.Text == "")
             {
                 pnlFoodLookup.setCatList(fCatList);
-               // pnlFoodLookup.SetFoodList();
+                pnlFoodLookup.SetFoodList();
             }
             else
             {
-                IList<Food> searchResults = fTracker.SearchFoodByName(tbSearch.Text);
-                if( searchResults.Count != 0)
-                {
-                    IList<FoodCategory> cats = fTracker.GetAllFoodCategories(false);
-                    foreach (FoodCategory item in fCatList)
-                    {
-
-                        try
-                        {
-                            Food findCat = searchResults.Where(x => x.Category.Id.Equals(item.Id)).First();
-                        }
-                        catch (InvalidOperationException)
-                        {
-                            cats.Remove(item);
-                        }
-
-
-                    }
-                    pnlFoodLookup.setCatList(cats);
-                    pnlFoodLookup.SetFoodList(searchResults);
-                }
-                else
-                {
-                    
-                    pnlFoodLookup.SetFoodList(searchResults);
-                }
+                IList <Food> searchResults;
+                IList<FoodCategory> cats;
+                pnlFoodLookup.getSearchResults(tbSearch.Text,out searchResults,out cats);
+                pnlFoodLookup.setCatList(cats);
+                pnlFoodLookup.SetFoodList(searchResults);
                
                 
              }

@@ -121,6 +121,10 @@ namespace Jack.FoodTracker
 
             public void SetFoodList(IList<Food> searchResults)
         {
+            if (searchResults.Count == 0)
+            {
+                lbFood.DataSource = null;
+            }
             FoodCategory selectedCategory = (FoodCategory)lbCategory.SelectedValue;
 
             if (selectedCategory != null)
@@ -149,6 +153,22 @@ namespace Jack.FoodTracker
             internal void setCatList(IList<FoodCategory> fCatList)
             {
                 lbCategory.DataSource = fCatList;
+            }
+
+            public void getSearchResults(string searchText, out IList<Food> searchResults, out IList<FoodCategory> cats)
+            {
+                IList<FoodCategory> fCatList = fTracker.GetAllFoodCategories(true);
+                searchResults = fTracker.SearchFoodByName(searchText);
+                cats = fTracker.GetAllFoodCategories(true);
+                foreach (FoodCategory item in fCatList)
+                {
+                    Food findCat = searchResults.Where(x => x.Category.Id.Equals(item.Id)).FirstOrDefault();
+
+                    if (findCat == null)
+                    {
+                        cats.Remove(item);
+                    }
+                }
             }
     }
     }
