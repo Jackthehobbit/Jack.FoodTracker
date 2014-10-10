@@ -12,6 +12,7 @@ namespace Jack.FoodTracker
     public partial class FoodView : RightView
     {
         private FoodTracker fTracker;
+        private readonly FoodItemPresenter FoodItemPresenter;
 
         private bool inEditMode;
 
@@ -26,10 +27,11 @@ namespace Jack.FoodTracker
 
             IList<FoodCategory> fCatList2 = new List<FoodCategory>(fCatList);
 
-            foodItemView = new FoodItemView(fCatList2);
+            foodItemView = new FoodItemView();
             foodItemView.AutoSize = true;
             foodItemView.Location = new System.Drawing.Point(425, 177); 
             foodItemView.Enabled = false;
+            FoodItemPresenter = new FoodItemPresenter(foodItemView, fCatList2);
 
             foodLookupView = new FoodLookupView(fTracker, fCatList);
             foodLookupView.AutoSize = true;
@@ -56,7 +58,7 @@ namespace Jack.FoodTracker
             if(inEditMode)
             {
                 //Save the edited changes to the database
-                FoodDTO dto = foodItemView.GetInputs();
+                FoodDTO dto = FoodItemPresenter.GetInputs();
 
                 Food selectedFood = foodLookupView.SelectedFood;
 
@@ -97,7 +99,7 @@ namespace Jack.FoodTracker
             else
             {
 
-                DialogResult delete = MessageBox.Show("Are you sure you want to delete " + foodItemView.GetName() + "?", "Delete Food?", MessageBoxButtons.YesNo);
+                DialogResult delete = MessageBox.Show("Are you sure you want to delete " + FoodItemPresenter.GetName() + "?", "Delete Food?", MessageBoxButtons.YesNo);
 
                 if(delete == DialogResult.Yes)
                 {
@@ -158,14 +160,14 @@ namespace Jack.FoodTracker
 
             if(selectedFood != null)
             {
-                foodItemView.SetInputs(selectedFood);
+                FoodItemPresenter.SetInputs(selectedFood);
 
                 btnDeleteFood.Enabled = true;
                 btnEditFood.Enabled = true;
             }
             else
             {
-                foodItemView.ClearInputs();
+                FoodItemPresenter.ClearInputs();
 
                 btnDeleteFood.Enabled = false;
                 btnEditFood.Enabled = false;

@@ -90,7 +90,7 @@
 
         private System.Windows.Forms.Label lAddFood;
         private System.Windows.Forms.Button btnAddFood;
-        private FoodItemView pnlFoodItem;
+        private FoodItemView foodItemView;
         private System.Windows.Forms.Button btnCancel;
     }
 }

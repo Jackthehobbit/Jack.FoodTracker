@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace Jack.FoodTracker
 {
-    public partial class FoodItemView : UserControl
+    public partial class FoodItemView : UserControl, IFoodItemView
     {
         private TextBox tbName;
         private TextBox tbDesc;
@@ -19,63 +19,68 @@ namespace Jack.FoodTracker
         private TextBox tbSatFat;
         private TextBox tbSalt;
 
-        public FoodItemView(IList<FoodCategory> cats)
-        {
-            InitializeComponent(cats);
-        }
-
         public FoodItemView()
         {
-
+            InitializeComponent();
         }
 
-        public FoodDTO GetInputs()
+        public string FoodName
         {
-            return new FoodDTO()
-            {
-                Name = tbName.Text,
-                Category = (FoodCategory)cbCategory.SelectedItem,
-                Description = tbDesc.Text,
-                Calories = tbCalories.Text,
-                Sugar = tbSugar.Text,
-                Fat = tbFat.Text,
-                Saturates = tbSatFat.Text,
-                Salt = tbSalt.Text
-            };
+            get { return tbName.Text; }
+            set { tbName.Text = value; }
         }
 
-        public void SetInputs(Food food)
+        public string Description
         {
-            tbName.Text = food.Name;
-            tbDesc.Text = food.Description;
-            cbCategory.SelectedItem = food.Category;
-            tbCalories.Text = "" + food.Calories;
-            tbSugar.Text = "" + food.Sugars;
-            tbFat.Text = "" + food.Fat;
-            tbSatFat.Text = "" + food.Saturates;
-            tbSalt.Text = "" + food.Salt;
+            get { return tbDesc.Text; }
+            set { tbDesc.Text = value; }
         }
 
-        public void ClearInputs()
+        public IList<FoodCategory> Categories
         {
-            tbName.Text = "";
-            cbCategory.SelectedIndex = -1;
-            tbDesc.Text = "";
-            tbCalories.Text = "";
-            tbSugar.Text = "";
-            tbFat.Text = "";
-            tbSatFat.Text = "";
-            tbSalt.Text = "";
+            set { cbCategory.DataSource = value; }
         }
 
-        public string GetName()
+        public FoodCategory Category
         {
-            return tbName.Text;
+            get { return (FoodCategory)cbCategory.SelectedItem; }
+            set { cbCategory.SelectedItem = value; }
         }
 
-        public FoodCategory GetSelectedCategory()
+        public int CategoryIndex
         {
-            return (FoodCategory)cbCategory.SelectedItem;
+            get { return cbCategory.SelectedIndex; }
+            set { cbCategory.SelectedIndex = value; }
+        }
+
+        public string Calories
+        {
+            get { return tbCalories.Text; }
+            set { tbCalories.Text = value; }
+        }
+
+        public string Sugar
+        {
+            get { return tbSugar.Text; }
+            set { tbSugar.Text = value; }
+        }
+
+        public string Fat
+        {
+            get { return tbFat.Text; }
+            set { tbFat.Text = value; }
+        }
+
+        public string SatFat
+        {
+            get { return tbSatFat.Text; }
+            set { tbSatFat.Text = value; }
+        }
+
+        public string Salt
+        {
+            get { return tbSalt.Text; }
+            set { tbSalt.Text = value; }
         }
     }
 }

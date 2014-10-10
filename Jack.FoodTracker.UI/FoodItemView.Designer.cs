@@ -10,7 +10,7 @@ namespace Jack.FoodTracker
 {
     partial class FoodItemView
     {
-        private void InitializeComponent(IList<FoodCategory> cats)
+        private void InitializeComponent()
         {
             //Create Labels
             Label lName = new System.Windows.Forms.Label();
@@ -141,7 +141,6 @@ namespace Jack.FoodTracker
             this.cbCategory.FormattingEnabled = true;
             this.cbCategory.Location = new System.Drawing.Point(topLeftX + 102, topLeftY + 25);
             this.cbCategory.Name = "cbCategoryEdit";
-            this.cbCategory.DataSource = cats;
             this.cbCategory.DisplayMember = "Name";
             this.cbCategory.Size = new System.Drawing.Size(150, 21);
             this.cbCategory.TabIndex = 2;
@@ -175,8 +174,6 @@ namespace Jack.FoodTracker
             this.tbSalt.Name = "tbSalt";
             this.tbSalt.Size = new System.Drawing.Size(150, 20);
             this.tbSalt.TabIndex = 7;
-
-            this.Name = "pnlFoodItem";
 
             this.ResumeLayout(false);
             this.PerformLayout();
