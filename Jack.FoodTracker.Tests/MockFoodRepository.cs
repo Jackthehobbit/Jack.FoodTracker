@@ -47,11 +47,6 @@ namespace Jack.FoodTracker.Tests
             throw new NotImplementedException();
         }
 
-        public IList<Food> GetByCategory(FoodCategory fCat,IList<Food> searchResults)
-        {
-            throw new NotImplementedException();
-        }
-
         public IList<Food> SearchByName(String searchText)
         {
             throw new NotImplementedException();

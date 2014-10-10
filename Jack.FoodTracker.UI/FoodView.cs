@@ -26,20 +26,22 @@ namespace Jack.FoodTracker
 
             IList<FoodCategory> fCatList2 = new List<FoodCategory>(fCatList);
 
-            pnlFoodItem = new FoodItemView(fCatList2);
-            pnlFoodItem.AutoSize = true;
-            pnlFoodItem.Location = new System.Drawing.Point(425, 177); 
-            pnlFoodItem.Enabled = false;
+            foodItemView = new FoodItemView(fCatList2);
+            foodItemView.AutoSize = true;
+            foodItemView.Location = new System.Drawing.Point(425, 177); 
+            foodItemView.Enabled = false;
 
-            pnlFoodLookup = new FoodLookupView(fTracker, fCatList);
-            pnlFoodLookup.AutoSize = true;
-            pnlFoodLookup.Location = new System.Drawing.Point(46, 143);
-            pnlFoodLookup.lbFood.SelectedIndexChanged += new System.EventHandler(this.FoodListItemChanged);
+            foodLookupView = new FoodLookupView(fTracker, fCatList);
+            foodLookupView.AutoSize = true;
+            foodLookupView.Location = new System.Drawing.Point(46, 143);
+            foodLookupView.lbFood.SelectedIndexChanged += new System.EventHandler(this.FoodListItemChanged);
 
-            Controls.Add(pnlFoodItem);
-            Controls.Add(pnlFoodLookup);
+            FoodSearchPresenter foodSearchPresenter = new FoodSearchPresenter(foodSearchView, fTracker, foodLookupView);
 
-            pnlFoodLookup.BringToFront();
+            Controls.Add(foodItemView);
+            Controls.Add(foodLookupView);
+
+            foodLookupView.BringToFront();
 
             inEditMode = false;
 
@@ -54,18 +56,18 @@ namespace Jack.FoodTracker
             if(inEditMode)
             {
                 //Save the edited changes to the database
-                FoodDTO dto = pnlFoodItem.GetInputs();
+                FoodDTO dto = foodItemView.GetInputs();
 
-                Food selectedFood = pnlFoodLookup.SelectedFood;
+                Food selectedFood = foodLookupView.SelectedFood;
 
                 try
                 {
                     fTracker.EditFood(dto, selectedFood);
 
-                    if(!dto.Category.Equals(pnlFoodLookup.SelectedCategory))
+                    if(!dto.Category.Equals(foodLookupView.SelectedCategory))
                     {
-                        pnlFoodLookup.SelectedCategory = dto.Category;
-                        pnlFoodLookup.SelectedFood = selectedFood;
+                        foodLookupView.SelectedCategory = dto.Category;
+                        foodLookupView.SelectedFood = selectedFood;
                     }
 
                     switchEditMode();
@@ -95,17 +97,17 @@ namespace Jack.FoodTracker
             else
             {
 
-                DialogResult delete = MessageBox.Show("Are you sure you want to delete " + pnlFoodItem.GetName() + "?", "Delete Food?", MessageBoxButtons.YesNo);
+                DialogResult delete = MessageBox.Show("Are you sure you want to delete " + foodItemView.GetName() + "?", "Delete Food?", MessageBoxButtons.YesNo);
 
                 if(delete == DialogResult.Yes)
                 {
-                    Food selectedFood = pnlFoodLookup.SelectedFood;
+                    Food selectedFood = foodLookupView.SelectedFood;
 
                     fTracker.DeleteFood(selectedFood);
 
-                    int foodIndex = pnlFoodLookup.SelectedFoodindex;
+                    int foodIndex = foodLookupView.SelectedFoodindex;
 
-                    pnlFoodLookup.SetFoodList(foodIndex > 0 ? foodIndex - 1 : 0);
+                    foodLookupView.SetFoodList(foodIndex > 0 ? foodIndex - 1 : 0);
                 }
                 
             }
@@ -117,9 +119,9 @@ namespace Jack.FoodTracker
             {
                 DialogResult result = addFood.ShowDialog();
 
-                if (result == DialogResult.OK && addFood.GetFoodCategorySelected().Equals(pnlFoodLookup.SelectedCategory))
+                if (result == DialogResult.OK && addFood.GetFoodCategorySelected().Equals(foodLookupView.SelectedCategory))
                 {
-                    pnlFoodLookup.SetFoodList();
+                    foodLookupView.SetFoodList();
                 }
             }
         }
@@ -144,52 +146,30 @@ namespace Jack.FoodTracker
                 btnDeleteFood.Text = "Delete";
             }
 
-            pnlFoodLookup.Enabled = !inEditMode;
+            foodLookupView.Enabled = !inEditMode;
             btnAddFood.Enabled = !inEditMode;
 
-            pnlFoodItem.Enabled = inEditMode;
+            foodItemView.Enabled = inEditMode;
         }
 
         private void setFood()
         {
-            Food selectedFood = pnlFoodLookup.SelectedFood;
+            Food selectedFood = foodLookupView.SelectedFood;
 
             if(selectedFood != null)
             {
-                pnlFoodItem.SetInputs(selectedFood);
+                foodItemView.SetInputs(selectedFood);
 
                 btnDeleteFood.Enabled = true;
                 btnEditFood.Enabled = true;
             }
             else
             {
-                pnlFoodItem.ClearInputs();
+                foodItemView.ClearInputs();
 
                 btnDeleteFood.Enabled = false;
                 btnEditFood.Enabled = false;
             }
-        }
-
-        private void SearchBarTextChanged(object sender, EventArgs e)
-        {
-            IList<FoodCategory> fCatList = fTracker.GetAllFoodCategories(true);
-            if (tbSearch.Text == "")
-            {
-                pnlFoodLookup.setCatList(fCatList);
-                pnlFoodLookup.SetFoodList();
-            }
-            else
-            {
-                IList <Food> searchResults;
-                IList<FoodCategory> cats;
-                pnlFoodLookup.getSearchResults(tbSearch.Text,out searchResults,out cats);
-                pnlFoodLookup.setCatList(cats);
-                pnlFoodLookup.SetFoodList(searchResults);
-               
-                
-             }
-             
-            
         }
     }
 }

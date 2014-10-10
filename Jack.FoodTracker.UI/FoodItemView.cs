@@ -23,7 +23,12 @@ namespace Jack.FoodTracker
         {
             InitializeComponent(cats);
         }
-        
+
+        public FoodItemView()
+        {
+
+        }
+
         public FoodDTO GetInputs()
         {
             return new FoodDTO()

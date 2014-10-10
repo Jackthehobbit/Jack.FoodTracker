@@ -75,12 +75,20 @@
     <Compile Include="FoodLookupView.Designer.cs">
       <DependentUpon>FoodLookupView.cs</DependentUpon>
     </Compile>
+    <Compile Include="FoodSearchPresenter.cs" />
+    <Compile Include="FoodSearchView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FoodSearchView.Designer.cs">
+      <DependentUpon>FoodSearchView.cs</DependentUpon>
+    </Compile>
     <Compile Include="FoodView.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="FoodView.Designer.cs">
       <DependentUpon>FoodView.cs</DependentUpon>
     </Compile>
+    <Compile Include="IFoodSearchView.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -97,6 +105,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CategoriesView.resx">
       <DependentUpon>CategoriesView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FoodSearchView.resx">
+      <DependentUpon>FoodSearchView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FoodView.resx">
       <DependentUpon>FoodView.cs</DependentUpon>

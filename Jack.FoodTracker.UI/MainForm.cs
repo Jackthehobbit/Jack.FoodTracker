@@ -31,7 +31,6 @@ namespace Jack.FoodTracker
             fPanel = new FoodView(fTracker);
             CategoriesView cPanel = new CategoriesView(fTracker);
             Controls.Add(fPanel);
-
         }
     }
 }

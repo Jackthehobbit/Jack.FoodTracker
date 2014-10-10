@@ -135,11 +135,6 @@ namespace Jack.FoodTracker
             return foodRepository.GetByCategory(category);
         }
 
-        public IList<Food> GetFoodByCategory(FoodCategory category,IList<Food> searchResults)
-        {
-            return foodRepository.GetByCategory(category,searchResults);
-        }
-
         public void DeleteCategory(FoodCategory foodCategory)
         {
             if (foodCategory.Name == "Uncategorised")

@@ -119,7 +119,7 @@ namespace Jack.FoodTracker
             }
         }
 
-            public void SetFoodList(IList<Food> searchResults)
+        public void SetFoodList(IList<Food> searchResults)
         {
             if (searchResults.Count == 0)
             {
@@ -129,7 +129,7 @@ namespace Jack.FoodTracker
 
             if (selectedCategory != null)
             {
-                IList<Food> fList = fTracker.GetFoodByCategory(selectedCategory,searchResults);
+                IList<Food> fList = searchResults.Where(x => x.Category.Id == selectedCategory.Id).ToList();
 
                 fList = fList.OrderBy(o => o.Name).ToList();
 
@@ -150,26 +150,10 @@ namespace Jack.FoodTracker
             }
         }
 
-            internal void setCatList(IList<FoodCategory> fCatList)
-            {
-                lbCategory.DataSource = fCatList;
-            }
-
-            public void getSearchResults(string searchText, out IList<Food> searchResults, out IList<FoodCategory> cats)
-            {
-                IList<FoodCategory> fCatList = fTracker.GetAllFoodCategories(true);
-                searchResults = fTracker.SearchFoodByName(searchText);
-                cats = fTracker.GetAllFoodCategories(true);
-                foreach (FoodCategory item in fCatList)
-                {
-                    Food findCat = searchResults.Where(x => x.Category.Id.Equals(item.Id)).FirstOrDefault();
-
-                    if (findCat == null)
-                    {
-                        cats.Remove(item);
-                    }
-                }
-            }
+        internal void SetCatList(IList<FoodCategory> fCatList)
+        {
+            lbCategory.DataSource = fCatList;
+        }
     }
-    }
+}
 
