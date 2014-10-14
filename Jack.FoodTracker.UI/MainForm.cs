@@ -30,7 +30,8 @@ namespace Jack.FoodTracker
 
             FoodTracker fTracker = new FoodTracker(UnitOfWork);
 
-            fPanel = new FoodView(fTracker);
+            fPanel = new FoodView();
+            FoodPresenter FoodPresenter = new FoodPresenter(fPanel, fTracker);
             CategoriesView cPanel = new CategoriesView(fTracker);
             Controls.Add(fPanel);
         }

@@ -78,6 +78,7 @@
     <Compile Include="FoodLookupView.Designer.cs">
       <DependentUpon>FoodLookupView.cs</DependentUpon>
     </Compile>
+    <Compile Include="FoodPresenter.cs" />
     <Compile Include="FoodSearchPresenter.cs" />
     <Compile Include="FoodSearchView.cs">
       <SubType>UserControl</SubType>
@@ -95,6 +96,7 @@
     <Compile Include="IFoodItemView.cs" />
     <Compile Include="IFoodLookupView.cs" />
     <Compile Include="IFoodSearchView.cs" />
+    <Compile Include="IFoodView.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

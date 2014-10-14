@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Jack.FoodTracker
 {
-    interface IFoodLookupView
+    public interface IFoodLookupView
     {
         IList<Food> Foods { set; }
         Food SelectedFood { get; set; }
@@ -15,6 +15,8 @@ namespace Jack.FoodTracker
 
         IList<FoodCategory> Categories { set; }
         FoodCategory SelectedCategory { get; set; }
+
+        bool Enabled { get; set; }
         
         event EventHandler CategorySelectedChanged;
         event EventHandler FoodSelectedChanged;

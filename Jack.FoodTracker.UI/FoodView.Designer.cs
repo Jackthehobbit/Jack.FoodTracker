@@ -28,7 +28,6 @@ namespace Jack.FoodTracker
             this.btnAddFood.TabIndex = 22;
             this.btnAddFood.Text = "Add Food";
             this.btnAddFood.UseVisualStyleBackColor = true;
-            this.btnAddFood.Click += new System.EventHandler(this.OnAddFoodButtonClick);
             // 
             // btnDeleteFood
             // 
@@ -40,7 +39,6 @@ namespace Jack.FoodTracker
             this.btnDeleteFood.TabIndex = 15;
             this.btnDeleteFood.Text = "Delete";
             this.btnDeleteFood.UseVisualStyleBackColor = true;
-            this.btnDeleteFood.Click += new System.EventHandler(this.OnDeleteFoodButtonClick);
             // 
             // lTitle
             // 
@@ -72,7 +70,6 @@ namespace Jack.FoodTracker
             this.btnEditFood.TabIndex = 8;
             this.btnEditFood.Text = "Edit";
             this.btnEditFood.UseVisualStyleBackColor = true;
-            this.btnEditFood.Click += new System.EventHandler(this.OnEditFoodButtonClick);
             // 
             // foodSearchView
             // 

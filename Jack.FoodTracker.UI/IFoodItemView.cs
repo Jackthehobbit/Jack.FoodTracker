@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace Jack.FoodTracker
 {
-    interface IFoodItemView
+    public interface IFoodItemView
     {
+        bool Enabled { get; set; }
         string FoodName { get; set; }
         string Description { get; set; }
         IList<FoodCategory> Categories { set; }

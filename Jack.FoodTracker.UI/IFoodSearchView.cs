@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Jack.FoodTracker
 {
-    interface IFoodSearchView
+    public interface IFoodSearchView
     {
         string SearchText { get; }
 

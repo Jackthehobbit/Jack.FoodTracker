@@ -109,6 +109,36 @@ namespace Jack.FoodTracker
             }
         }
 
+        public event EventHandler FoodSelectedChanged
+        {
+            add { FoodLookupView.FoodSelectedChanged += value; }
+            remove { FoodLookupView.FoodSelectedChanged -= value; }
+        }
+
+        public Food SelectedFood
+        {
+            get { return FoodLookupView.SelectedFood; }
+            set { FoodLookupView.SelectedFood = value; }
+        }
+
+        public int SelectedFoodIndex
+        {
+            get { return FoodLookupView.SelectedFoodIndex; }
+            set { FoodLookupView.SelectedFoodIndex = value; }
+        }
+
+        public FoodCategory SelectedCategory
+        {
+            get { return FoodLookupView.SelectedCategory; }
+            set { FoodLookupView.SelectedCategory = value; }
+        }
+
+        public bool ViewEnabled
+        {
+            get { return FoodLookupView.Enabled; }
+            set { FoodLookupView.Enabled = value; }
+        }
+
         internal void SetCatList(IList<FoodCategory> fCatList)
         {
             FoodLookupView.Categories = fCatList;

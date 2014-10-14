@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace Jack.FoodTracker
 {
-    interface IAddFoodView
+    public interface IAddFoodView
     {
         FoodItemView FoodItemView { get; }
         DialogResult DialogResult { get; set; }

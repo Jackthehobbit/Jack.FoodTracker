@@ -65,5 +65,11 @@ namespace Jack.FoodTracker
         {
             return FoodItemView.Category;
         }
+
+        public bool ViewEnabled
+        {
+            get { return FoodItemView.Enabled; }
+            set { FoodItemView.Enabled = value; }
+        }
     }
 }
