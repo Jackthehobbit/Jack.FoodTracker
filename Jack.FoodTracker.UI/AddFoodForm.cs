@@ -10,52 +10,33 @@ using System.Windows.Forms;
 
 namespace Jack.FoodTracker
 {
-    public partial class AddFoodForm : Form
+    public partial class AddFoodForm : Form, IAddFoodView
     {
-        private readonly FoodTracker fTracker;
-        private readonly FoodItemPresenter FoodItemPresenter;
-
-        public AddFoodForm(FoodTracker fTracker)
+        public AddFoodForm()
         {
             InitializeComponent();
 
-            this.fTracker = fTracker;
-
             // Create Food Item Panel
-            foodItemView = new FoodItemView();
-            foodItemView.AutoSize = true;
-            foodItemView.Location = new System.Drawing.Point(1, 69);
-            foodItemView.TabIndex = 0;
+            FoodItemView = new FoodItemView();
+            FoodItemView.AutoSize = true;
+            FoodItemView.Location = new System.Drawing.Point(1, 69);
+            FoodItemView.TabIndex = 0;
 
-            FoodItemPresenter = new FoodItemPresenter(foodItemView, fTracker.GetAllFoodCategories(true));
-
-            Controls.Add(this.foodItemView);
+            Controls.Add(this.FoodItemView);
         }
 
-        private void OnAddFoodButtonClick(object sender, EventArgs e)
+        public FoodItemView FoodItemView { get; private set; }
+
+        public event EventHandler AddFoodClick
         {
-            try
-            {
-                FoodDTO dto = FoodItemPresenter.GetInputs();
-
-                fTracker.AddFood(dto);
-
-                DialogResult = DialogResult.OK;
-            }
-            catch (ArgumentException ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            add { btnAddFood.Click += value; }
+            remove { btnAddFood.Click -= value; }
         }
 
-        public FoodCategory GetFoodCategorySelected()
+        public event EventHandler CancelClick
         {
-            return FoodItemPresenter.GetSelectedCategory();
-        }
-
-        private void OnCancelButtonClick(object sender, EventArgs e)
-        {
-            DialogResult = DialogResult.Cancel;
+            add { btnCancel.Click += value; }
+            remove { btnCancel.Click -= value; }
         }
     }
 }

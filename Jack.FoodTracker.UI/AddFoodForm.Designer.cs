@@ -51,7 +51,6 @@
             this.btnAddFood.TabIndex = 1;
             this.btnAddFood.Text = "Add Food";
             this.btnAddFood.UseVisualStyleBackColor = true;
-            this.btnAddFood.Click += new System.EventHandler(this.OnAddFoodButtonClick);
             // 
             // btnCancel
             // 
@@ -62,7 +61,6 @@
             this.btnCancel.TabIndex = 2;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.OnCancelButtonClick);
             // 
             // AddFoodForm
             // 
@@ -90,7 +88,6 @@
 
         private System.Windows.Forms.Label lAddFood;
         private System.Windows.Forms.Button btnAddFood;
-        private FoodItemView foodItemView;
         private System.Windows.Forms.Button btnCancel;
     }
 }

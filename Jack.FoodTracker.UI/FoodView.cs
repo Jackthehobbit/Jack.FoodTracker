@@ -119,11 +119,12 @@ namespace Jack.FoodTracker
 
         private void OnAddFoodButtonClick(object sender, EventArgs e)
         {
-            using(AddFoodForm addFood = new AddFoodForm(fTracker))
+            using(AddFoodForm addFood = new AddFoodForm())
             {
+                AddFoodPresenter addFoodPresenter = new AddFoodPresenter(addFood, fTracker);
                 DialogResult result = addFood.ShowDialog();
 
-                if (result == DialogResult.OK && addFood.GetFoodCategorySelected().Equals(foodLookupView.SelectedCategory))
+                if (result == DialogResult.OK && addFoodPresenter.GetFoodCategorySelected().Equals(foodLookupView.SelectedCategory))
                 {
                     FoodLookupPresenter.SetFoodList();
                 }
