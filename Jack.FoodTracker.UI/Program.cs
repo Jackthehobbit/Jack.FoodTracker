@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Jack.FoodTracker.EntityDatabase;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +17,21 @@ namespace Jack.FoodTracker
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+
+            //Create Data Access Layer
+            FoodContext context = new FoodContext();
+            FoodRepository fRepository = new FoodRepository(context);
+            FoodCategoryRepository fCatRepository = new FoodCategoryRepository(context);
+            UnitOfWork UnitOfWork = new UnitOfWork(context, fRepository, fCatRepository);
+
+            //Create Business Layer
+            FoodTracker FoodTracker = new FoodTracker(UnitOfWork);
+
+            //Create UI Layer
+            MainForm MainForm = new MainForm(FoodTracker);
+            MainPresenter MainPresenter = new MainPresenter(MainForm, FoodTracker);
+
+            Application.Run(MainForm);
         }
     }
 }

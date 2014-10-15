@@ -13,27 +13,32 @@ using System.Windows.Forms;
 
 namespace Jack.FoodTracker
 {
-    public partial class MainForm : Form
+    public partial class MainForm : Form, IMainView
     {
-        private FoodView fPanel;
+        public FoodView FoodView { get; private set; }
 
-        public MainForm()
+        public MainForm(FoodTracker FoodTracker)
         {
             InitializeComponent();
+            FoodView = new FoodView();
+            CategoriesView CategoriesView = new CategoriesView(FoodTracker);
 
-            //Create Repositories
-            FoodContext context = new FoodContext();
-            FoodRepository fRepository = new FoodRepository(context);
-            FoodCategoryRepository fCatRepository = new FoodCategoryRepository(context);
+            _CurrentView = FoodView;
+            Controls.Add(_CurrentView);
+        }
 
-            UnitOfWork UnitOfWork = new UnitOfWork(context, fRepository, fCatRepository);
 
-            FoodTracker fTracker = new FoodTracker(UnitOfWork);
+        private RightView _CurrentView;
+        public RightView CurrentView
+        {
+            get { return _CurrentView; }
 
-            fPanel = new FoodView();
-            FoodPresenter FoodPresenter = new FoodPresenter(fPanel, fTracker);
-            CategoriesView cPanel = new CategoriesView(fTracker);
-            Controls.Add(fPanel);
+            set
+            {
+                Controls.Remove(_CurrentView);
+                Controls.Add(value);
+                _CurrentView = value;
+            }
         }
     }
 }
