@@ -26,28 +26,68 @@ namespace Jack.FoodTracker
         {
             IList<FoodCategory> fCatList = FoodTracker.GetAllFoodCategories(true);
 
-            if(FoodSearchView.SearchText == "")
+            if (FoodSearchView.SearchText == "")
             {
                 FoodLookupPresenter.SetCatList(fCatList);
             }
             else
             {
-                IList<Food> searchResults = FoodTracker.SearchFoodByName(FoodSearchView.SearchText);
-                IList<FoodCategory> finalCatList = new List<FoodCategory>(fCatList);
-
-                foreach (FoodCategory item in fCatList)
+                if (FoodSearchView.SearchText.Contains(";"))
                 {
-                    Food findCat = searchResults.Where(x => x.Category.Id.Equals(item.Id)).FirstOrDefault();
-
-                    if (findCat == null)
+                    String[] splitString;
+                    String[] splitString2;
+                    string name;
+                    string desc;
+                    string calories;
+                    string caloriesSearchType;
+                    
+                    String[] searchstrings = FoodSearchView.SearchText.ToLower().Split(new char[] { ';' });
+                    foreach (string s in searchstrings)
                     {
-                        finalCatList.Remove(item);
+                       if(s.Contains("name"))
+                       {
+                           splitString = s.Split(new char[]{'='});
+                           name = splitString[1]; 
+                           splitString = null;
+                       }
+                       if(s.Contains("desc"))
+                       {
+                           splitString = s.Split(new char[]{'='});
+                           desc = splitString[1];
+                           splitString=null;
+                       }
+                       if(s.Contains("calories"))
+                       {
+                           splitString = s.Split(new char[] { '=' });
+                           calories = splitString[1];
+                           splitString2 = splitString[0].Split(new char[]{'s'});
+                           caloriesSearchType = splitString2[1];
+                       }
                     }
                 }
+                    
+                 else
+                 {
+                        IList<Food> searchResults = FoodTracker.SearchFoodByName(FoodSearchView.SearchText);
+                        IList<FoodCategory> finalCatList = new List<FoodCategory>(fCatList);
 
-                FoodLookupPresenter.SetCatList(finalCatList);
-                FoodLookupPresenter.SetFoodList(searchResults);
+                        foreach (FoodCategory item in fCatList)
+                        {
+                            Food findCat = searchResults.Where(x => x.Category.Id.Equals(item.Id)).FirstOrDefault();
+
+                            if (findCat == null)
+                            {
+                                finalCatList.Remove(item);
+                            }
+                   }
+
+
+
+                        FoodLookupPresenter.SetCatList(finalCatList);
+                        FoodLookupPresenter.SetFoodList(searchResults);
+                    }
+               }
             }
         }
     }
-}
+
