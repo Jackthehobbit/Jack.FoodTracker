@@ -181,5 +181,11 @@ namespace Jack.FoodTracker
         {
             return UnitOfWork.FoodRepository.SearchByName(searchText);
         }
+
+        public IList<Food> GetAllFood()
+        {
+            return UnitOfWork.FoodRepository.GetAll();
+        }
+        
     }
 }
