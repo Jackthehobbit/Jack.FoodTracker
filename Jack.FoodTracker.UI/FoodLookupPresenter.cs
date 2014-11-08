@@ -11,7 +11,6 @@ namespace Jack.FoodTracker
     {
         private readonly IFoodLookupView FoodLookupView;
         private readonly FoodTracker FoodTracker;
-
         public FoodLookupPresenter(IFoodLookupView foodLookupView, FoodTracker foodTracker, IList<FoodCategory> foodCategories)
         {
             FoodLookupView = foodLookupView;
@@ -24,7 +23,15 @@ namespace Jack.FoodTracker
 
         private void OnCategoriesSelectedIndexChanged(object sender, EventArgs e)
         {
-            SetFoodList(0);
+            if(FoodSearchPresenter.searchResults != null)
+            {
+                SetFoodList(FoodSearchPresenter.searchResults);
+            }
+            else
+            {
+                SetFoodList(0);
+            }
+            
         }
 
         public void SetFoodList()

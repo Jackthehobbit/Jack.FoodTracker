@@ -14,7 +14,7 @@ namespace Jack.FoodTracker
         private readonly FoodTracker FoodTracker;
         private readonly FoodLookupPresenter FoodLookupPresenter;
         private readonly Regex keyVal = new Regex("(.*?)(<=|>=|=>|=<|!=|=|<|>)(.*)");
-
+        public static IList<Food> searchResults;
         public FoodSearchPresenter(IFoodSearchView foodSearchView, FoodTracker foodTracker, FoodLookupPresenter foodLookupPresenter)
         {
             FoodSearchView = foodSearchView;
@@ -30,7 +30,9 @@ namespace Jack.FoodTracker
             if (FoodSearchView.SearchText == "")
             {
                 IList<FoodCategory> fCatList = FoodTracker.GetAllFoodCategories(true);
+                searchResults = null;
                 FoodLookupPresenter.SetCatList(fCatList);
+         
             }                      
         }
 
@@ -38,6 +40,7 @@ namespace Jack.FoodTracker
        {
             if(e.KeyChar == (char)13)
             {
+                searchResults = null;
                 GetSearchResults();
             }
         } 
@@ -45,7 +48,7 @@ namespace Jack.FoodTracker
         public void GetSearchResults()
         {
           String searchText = FoodSearchView.SearchText.ToLower();
-          IList<Food> searchResults = FoodTracker.GetAllFood();
+          searchResults = FoodTracker.GetAllFood();
           IList<FoodCategory> fCatList = FoodTracker.GetAllFoodCategories(true);
           IList<FoodCategory> finalCatList = new List<FoodCategory>(fCatList);
 
