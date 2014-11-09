@@ -187,5 +187,25 @@ namespace Jack.FoodTracker
             return UnitOfWork.FoodRepository.GetAll();
         }
         
+        public IList<FoodCategory> GetNonEmptyFoodCategories(IList<Food> foods)
+        {
+            IList<FoodCategory> fCatList = GetAllFoodCategories(true);
+            IList<FoodCategory> fCatListResult = new List<FoodCategory>(fCatList);
+
+            foreach (FoodCategory item in fCatList)
+            {
+                Food findCat = foods.Where(x => x.Category.Id.Equals(item.Id)).FirstOrDefault();
+
+                if (findCat == null)
+                {
+                    fCatListResult.Remove(item);
+                }
+            }
+
+            return fCatListResult;
+        }
+
+        
+
     }
 }

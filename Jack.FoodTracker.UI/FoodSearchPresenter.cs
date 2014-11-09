@@ -49,8 +49,6 @@ namespace Jack.FoodTracker
                 IList<Food> searchResults = new List<Food>();
 
                 searchResults = FoodTracker.GetAllFood();
-                IList<FoodCategory> fCatList = FoodTracker.GetAllFoodCategories(true);
-                IList<FoodCategory> finalCatList = new List<FoodCategory>(fCatList);
 
                 String[] searchstrings = searchText.Split(new char[] { ' ' });
 
@@ -76,15 +74,7 @@ namespace Jack.FoodTracker
                     searchResults = SearchForFood(SearchService, searchResults, key, exp, val);
                 }
 
-                foreach (FoodCategory item in fCatList)
-                {
-                    Food findCat = searchResults.Where(x => x.Category.Id.Equals(item.Id)).FirstOrDefault();
-
-                    if (findCat == null)
-                    {
-                        finalCatList.Remove(item);
-                    }
-                }
+                IList<FoodCategory> finalCatList = FoodTracker.GetNonEmptyFoodCategories(searchResults);
 
                 FoodLookupPresenter.SetCatList(finalCatList);
                 FoodLookupPresenter.SetFoodList(searchResults);

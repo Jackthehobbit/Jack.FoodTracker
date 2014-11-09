@@ -51,10 +51,10 @@ namespace Jack.FoodTracker
             FoodTracker = foodTracker;
 
             IList<FoodCategory> fCatList = FoodTracker.GetAllFoodCategories(true);
-            IList<FoodCategory> fCatList2 = new List<FoodCategory>(fCatList);
+            IList<FoodCategory> fCatList2 = FoodTracker.GetNonEmptyFoodCategories(FoodTracker.GetAllFood());
 
-            FoodItemPresenter = new FoodItemPresenter(FoodView.FoodItemView, fCatList2);
-            FoodLookupPresenter = new FoodLookupPresenter(FoodView.FoodLookupView, FoodTracker, fCatList);
+            FoodItemPresenter = new FoodItemPresenter(FoodView.FoodItemView, fCatList);
+            FoodLookupPresenter = new FoodLookupPresenter(FoodView.FoodLookupView, FoodTracker, fCatList2);
             FoodSearchPresenter = new FoodSearchPresenter(FoodView.FoodSearchView, FoodTracker, FoodLookupPresenter);
 
             FoodView.AddFoodClick += new EventHandler(OnAddFoodButtonClick);
