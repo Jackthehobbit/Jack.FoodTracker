@@ -44,6 +44,7 @@
     <Compile Include="FoodDTOParser.cs" />
     <Compile Include="FoodTracker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SearchService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Jack.FoodTracker.Entities\Jack.FoodTracker.Entities.csproj">
