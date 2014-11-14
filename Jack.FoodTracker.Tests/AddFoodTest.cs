@@ -6,12 +6,13 @@ namespace Jack.FoodTracker.Tests
     [TestClass]
     public class AddFoodTest
     {
-        /*[TestMethod]
+        /*
+        [TestMethod]
         public void SuccessfulAdd()
         {
             Exception ex = null;
 
-            FoodTracker ftracker = new FoodTracker(new MockFoodRepository(), new MockFoodCategoryRepository());
+            FoodTracker ftracker = new FoodTracker();
 
             FoodDTO dto = helper("Bacon", "Filthy Pig", "200", "100", "99", "12", "6");
 

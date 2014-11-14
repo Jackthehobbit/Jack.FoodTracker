@@ -52,6 +52,7 @@
     <Compile Include="IFoodCategoryRepository.cs" />
     <Compile Include="IFoodRepository.cs" />
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="PresetMealRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitOfWork.cs" />
   </ItemGroup>
