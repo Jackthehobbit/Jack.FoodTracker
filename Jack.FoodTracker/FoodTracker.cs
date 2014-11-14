@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Jack.FoodTracker
 {
@@ -82,15 +83,17 @@ namespace Jack.FoodTracker
         {
             categoryName = categoryName.Trim();
 
-            CategoryChecker checker = new CategoryChecker();
-
-            checker.Check(categoryName);
-
-            if (UnitOfWork.FoodCategoryRepository.GetAll().Where(o => o.Name.ToLower().Equals(categoryName.ToLower())).Any())
+            CheckerService checker = new CheckerService();
+            try
             {
-                throw new ArgumentException("A category with this name already exists.");
+                checker.notBlankCheck("Name",categoryName);
+                checker.checkRecordExists<FoodCategory>(UnitOfWork.FoodCategoryRepository.GetAll(), "Name", categoryName);
             }
-
+            catch(ArgumentException aex)
+            {
+                throw new ArgumentException(""+aex.Message);
+                
+            }       
             UnitOfWork.FoodCategoryRepository.Add(new FoodCategory() { Name = categoryName });
             UnitOfWork.Save();
         }
