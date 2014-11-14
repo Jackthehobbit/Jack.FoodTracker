@@ -98,6 +98,7 @@
     <Compile Include="IFoodSearchView.cs" />
     <Compile Include="IFoodView.cs" />
     <Compile Include="IMainView.cs" />
+    <Compile Include="IPresetMealView.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -105,6 +106,13 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MainPresenter.cs" />
+    <Compile Include="PresetMealPresenter.cs" />
+    <Compile Include="PresetMealView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresetMealView.Designer.cs">
+      <DependentUpon>PresetMealView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RightView.cs">
@@ -124,6 +132,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresetMealView.resx">
+      <DependentUpon>PresetMealView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

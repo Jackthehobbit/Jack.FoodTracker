@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Jack.FoodTracker.EntityDatabase
 {
-    class PresetMealRepository
+    public class PresetMealRepository : IPresetMealRepository
     {
         private readonly FoodContext context;
 
@@ -16,7 +16,7 @@ namespace Jack.FoodTracker.EntityDatabase
             this.context = context;
         }
        
-        public List<PresetMeal> GetAll()
+        public IList<PresetMeal> GetAll()
         {
             return context.PresetMeals.Include("Foods").ToList();
         }

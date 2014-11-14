@@ -22,8 +22,9 @@ namespace Jack.FoodTracker
             InitializeComponent();
             FoodView = new FoodView();
             CategoriesView CategoriesView = new CategoriesView(FoodTracker);
+            PresetMealView presetMealView = new PresetMealView();
 
-            _CurrentView = CategoriesView;
+            _CurrentView = presetMealView;
             Controls.Add(_CurrentView);
         }
 

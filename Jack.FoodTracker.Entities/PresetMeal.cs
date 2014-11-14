@@ -19,6 +19,8 @@ namespace Jack.FoodTracker.Entities
 
         public string Description { get; set; }
 
+        public int Calories { get; set; }
+
         public List<Food> Foods { get; set; }
     }
 }

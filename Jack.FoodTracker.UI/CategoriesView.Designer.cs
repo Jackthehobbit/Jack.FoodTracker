@@ -104,7 +104,7 @@
             // 
             // btnCategoryMoveUp
             // 
-            this.btnCategoryMoveUp.Location = new System.Drawing.Point(323, 243);
+            this.btnCategoryMoveUp.Location = new System.Drawing.Point(323, 218);
             this.btnCategoryMoveUp.Name = "btnCategoryMoveUp";
             this.btnCategoryMoveUp.Size = new System.Drawing.Size(30, 30);
             this.btnCategoryMoveUp.TabIndex = 7;
