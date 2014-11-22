@@ -26,7 +26,22 @@ namespace Jack.FoodTracker
             }
         }
 
-        public IList<T> ApplySearchNumerical<T, TNumeric>(IList<T> searchList, string propertyName, string expression, TNumeric value)
+        public IList<T> ApplySearchNumerical<T>(IList<T> searchList, string propertyName, string expression, int value)
+        {
+            return ApplySearchNumerical<T, int>(searchList, propertyName, expression, value);
+        }
+
+        public IList<T> ApplySearchNumerical<T>(IList<T> searchList, string propertyName, string expression, double value)
+        {
+            return ApplySearchNumerical<T, double>(searchList, propertyName, expression, value);
+        }
+
+        public IList<T> ApplySearchNumerical<T>(IList<T> searchList, string propertyName, string expression, decimal value)
+        {
+            return ApplySearchNumerical<T, decimal>(searchList, propertyName, expression, value);
+        }
+
+        private IList<T> ApplySearchNumerical<T, TNumeric>(IList<T> searchList, string propertyName, string expression, TNumeric value)
         {
             ParameterExpression parameter = Expression.Parameter(typeof(T), "x");
             Expression prop = Expression.PropertyOrField(parameter, propertyName);

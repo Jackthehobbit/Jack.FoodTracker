@@ -117,7 +117,7 @@ namespace Jack.FoodTracker
                     }
                     else
                     {
-                        return SearchService.ApplySearchNumerical<Food, int>(searchResults, "Calories", Exp, numericValue);
+                        return SearchService.ApplySearchNumerical<Food>(searchResults, "Calories", Exp, numericValue);
                     }
                 case "sugar":
                 case "sugars":
@@ -127,7 +127,7 @@ namespace Jack.FoodTracker
                     }
                     else
                     {
-                        return SearchService.ApplySearchNumerical<Food, double>(searchResults, "Sugars", Exp, dNumericValue);
+                        return SearchService.ApplySearchNumerical<Food>(searchResults, "Sugars", Exp, dNumericValue);
                     }
                 case "fat":
                 case "fats":
@@ -137,7 +137,7 @@ namespace Jack.FoodTracker
                     }
                     else
                     {
-                        return SearchService.ApplySearchNumerical<Food, double>(searchResults, "Fat", Exp, dNumericValue);
+                        return SearchService.ApplySearchNumerical<Food>(searchResults, "Fat", Exp, dNumericValue);
                     }
                 case "satfat":
                 case "satfats":
@@ -148,7 +148,7 @@ namespace Jack.FoodTracker
                     }
                     else
                     {
-                        return SearchService.ApplySearchNumerical<Food, double>(searchResults, "Saturates", Exp, dNumericValue);
+                        return SearchService.ApplySearchNumerical<Food>(searchResults, "Saturates", Exp, dNumericValue);
                     }
                 case "salt":
                     if (!double.TryParse(Value, out dNumericValue))
@@ -157,7 +157,7 @@ namespace Jack.FoodTracker
                     }
                     else
                     {
-                        return SearchService.ApplySearchNumerical<Food, double>(searchResults, "Salt", Exp, dNumericValue);
+                        return SearchService.ApplySearchNumerical<Food>(searchResults, "Salt", Exp, dNumericValue);
                     }
                 default:
                     throw new ArgumentException(Key.Trim() + "is not a valid search key");
