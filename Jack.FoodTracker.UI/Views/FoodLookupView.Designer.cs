@@ -13,55 +13,64 @@ namespace Jack.FoodTracker
 
         private void InitializeComponent()
         {
-            Label lCategory = new System.Windows.Forms.Label();
-            Label lFood = new System.Windows.Forms.Label();
+            this.lCategory = new System.Windows.Forms.Label();
+            this.lFood = new System.Windows.Forms.Label();
             this.lbCategory = new System.Windows.Forms.ListBox();
             this.lbFood = new System.Windows.Forms.ListBox();
-
-            int topLeftX = 0;
-            int topLeftY = 0;
-
             this.SuspendLayout();
-
-            //lCategory
-            lCategory.AutoSize = true;
-            lCategory.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            lCategory.Location = new System.Drawing.Point(topLeftX + 61, topLeftY);
-            lCategory.Name = "lCategory";
-            lCategory.Size = new System.Drawing.Size(39, 24);
-            lCategory.Text = "Category";
-
-            //lFood
-            lFood.AutoSize = true;
-            lFood.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            lFood.Location = new System.Drawing.Point(topLeftX + 235, topLeftY);
-            lFood.Name = "lFood";
-            lFood.Size = new System.Drawing.Size(55, 24);
-            lFood.Text = "Food";
-
-            //lbCategory
+            // 
+            // lCategory
+            // 
+            this.lCategory.AutoSize = true;
+            this.lCategory.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lCategory.Location = new System.Drawing.Point(21, 3);
+            this.lCategory.Name = "lCategory";
+            this.lCategory.Size = new System.Drawing.Size(85, 24);
+            this.lCategory.TabIndex = 0;
+            this.lCategory.Text = "Category";
+            // 
+            // lFood
+            // 
+            this.lFood.AutoSize = true;
+            this.lFood.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lFood.Location = new System.Drawing.Point(162, 3);
+            this.lFood.Name = "lFood";
+            this.lFood.Size = new System.Drawing.Size(55, 24);
+            this.lFood.TabIndex = 1;
+            this.lFood.Text = "Food";
+            // 
+            // lbCategory
+            // 
+            this.lbCategory.DisplayMember = "Name";
             this.lbCategory.FormattingEnabled = true;
-            this.lbCategory.Location = new System.Drawing.Point(topLeftX, topLeftY + 34);
+            this.lbCategory.Location = new System.Drawing.Point(3, 36);
             this.lbCategory.Name = "lbCategory";
             this.lbCategory.Size = new System.Drawing.Size(120, 212);
             this.lbCategory.TabIndex = 0;
-            this.lbCategory.DisplayMember = "Name";
-
-            //lbFood
+            // 
+            // lbFood
+            // 
+            this.lbFood.DisplayMember = "Name";
             this.lbFood.FormattingEnabled = true;
-            this.lbFood.Location = new System.Drawing.Point(topLeftX + 202, topLeftY + 34);
+            this.lbFood.Location = new System.Drawing.Point(129, 36);
             this.lbFood.Name = "lbFood";
             this.lbFood.Size = new System.Drawing.Size(120, 212);
             this.lbFood.TabIndex = 1;
-            this.lbFood.DisplayMember = "Name";
-
-            this.Controls.Add(lCategory);
-            this.Controls.Add(lFood);
-            this.Controls.Add(lbCategory);
-            this.Controls.Add(lbFood);
-
+            // 
+            // FoodLookupView
+            // 
+            this.Controls.Add(this.lCategory);
+            this.Controls.Add(this.lFood);
+            this.Controls.Add(this.lbCategory);
+            this.Controls.Add(this.lbFood);
+            this.Name = "FoodLookupView";
+            this.Size = new System.Drawing.Size(253, 252);
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
+
+        private Label lCategory;
+        private Label lFood;
     }
 }

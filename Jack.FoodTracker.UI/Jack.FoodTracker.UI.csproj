@@ -161,6 +161,9 @@
     <EmbeddedResource Include="Views\FoodItemView.resx">
       <DependentUpon>FoodItemView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\FoodLookupView.resx">
+      <DependentUpon>FoodLookupView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\FoodSearchView.resx">
       <DependentUpon>FoodSearchView.cs</DependentUpon>
     </EmbeddedResource>
