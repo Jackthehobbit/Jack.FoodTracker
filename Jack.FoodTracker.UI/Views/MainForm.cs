@@ -16,15 +16,15 @@ namespace Jack.FoodTracker
     public partial class MainForm : Form, IMainView
     {
         public FoodView FoodView { get; private set; }
+        public CategoryView CategoryView { get; private set; }
 
         public MainForm(FoodTracker FoodTracker)
         {
             InitializeComponent();
             FoodView = new FoodView();
-            CategoriesView CategoriesView = new CategoriesView(FoodTracker);
-            PresetMealView presetMealView = new PresetMealView();
+            CategoryView = new CategoryView();
 
-            _CurrentView = presetMealView;
+            _CurrentView = FoodView;
             Controls.Add(_CurrentView);
         }
 

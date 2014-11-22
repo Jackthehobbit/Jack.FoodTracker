@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Jack.FoodTracker
 {
-    public partial class PresetMealView : RightView,IPresetMealView
+    public partial class PresetMealView : RightView
     {
         public PresetMealView()
         {

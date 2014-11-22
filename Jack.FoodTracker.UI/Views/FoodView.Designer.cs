@@ -14,9 +14,9 @@ namespace Jack.FoodTracker
             this.btnAddFood = new System.Windows.Forms.Button();
             this.btnDeleteFood = new System.Windows.Forms.Button();
             this.lTitle = new System.Windows.Forms.Label();
-            this.lFoodItem = new System.Windows.Forms.Label();
             this.btnEditFood = new System.Windows.Forms.Button();
             this.foodSearchView = new Jack.FoodTracker.FoodSearchView();
+            this.foodItemView = new Jack.FoodTracker.FoodItemView();
             this.SuspendLayout();
             // 
             // btnAddFood
@@ -50,16 +50,6 @@ namespace Jack.FoodTracker
             this.lTitle.TabIndex = 12;
             this.lTitle.Text = "Food";
             // 
-            // lFoodItem
-            // 
-            this.lFoodItem.AutoSize = true;
-            this.lFoodItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lFoodItem.Location = new System.Drawing.Point(538, 136);
-            this.lFoodItem.Name = "lFoodItem";
-            this.lFoodItem.Size = new System.Drawing.Size(95, 24);
-            this.lFoodItem.TabIndex = 9;
-            this.lFoodItem.Text = "Food Item";
-            // 
             // btnEditFood
             // 
             this.btnEditFood.Enabled = false;
@@ -78,13 +68,29 @@ namespace Jack.FoodTracker
             this.foodSearchView.Size = new System.Drawing.Size(460, 29);
             this.foodSearchView.TabIndex = 23;
             // 
+            // foodItemView1
+            // 
+            this.foodItemView.Calories = "";
+            this.foodItemView.Category = null;
+            this.foodItemView.CategoryIndex = -1;
+            this.foodItemView.Description = "";
+            this.foodItemView.Fat = "";
+            this.foodItemView.FoodName = "";
+            this.foodItemView.Location = new System.Drawing.Point(430, 147);
+            this.foodItemView.Name = "foodItemView";
+            this.foodItemView.Salt = "";
+            this.foodItemView.SatFat = "";
+            this.foodItemView.Size = new System.Drawing.Size(255, 256);
+            this.foodItemView.Sugar = "";
+            this.foodItemView.TabIndex = 24;
+            // 
             // FoodView
             // 
+            this.Controls.Add(this.foodItemView);
             this.Controls.Add(this.foodSearchView);
             this.Controls.Add(this.btnAddFood);
             this.Controls.Add(this.btnDeleteFood);
             this.Controls.Add(this.lTitle);
-            this.Controls.Add(this.lFoodItem);
             this.Controls.Add(this.btnEditFood);
             this.Location = new System.Drawing.Point(0, 0);
             this.Name = "FoodView";
@@ -98,7 +104,6 @@ namespace Jack.FoodTracker
         private FoodItemView foodItemView;
         private FoodLookupView foodLookupView;
         private Label lTitle;
-        private Label lFoodItem;
         private FoodSearchView foodSearchView;
     }
 }
