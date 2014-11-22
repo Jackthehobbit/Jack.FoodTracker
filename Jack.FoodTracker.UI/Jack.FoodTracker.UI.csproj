@@ -51,6 +51,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddCategoryPresenter.cs" />
+    <Compile Include="AddCategoryView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AddCategoryView.Designer.cs">
+      <DependentUpon>AddCategoryView.cs</DependentUpon>
+    </Compile>
     <Compile Include="AddFoodForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -58,11 +65,26 @@
       <DependentUpon>AddFoodForm.cs</DependentUpon>
     </Compile>
     <Compile Include="AddFoodPresenter.cs" />
-    <Compile Include="CategoriesView.cs">
+    <Compile Include="CategoryItemPresenter.cs" />
+    <Compile Include="CategoryItemView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="CategoriesView.Designer.cs">
-      <DependentUpon>CategoriesView.cs</DependentUpon>
+    <Compile Include="CategoryItemView.Designer.cs">
+      <DependentUpon>CategoryItemView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CategoryLookupPresenter.cs" />
+    <Compile Include="CategoryLookupView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CategoryLookupView.Designer.cs">
+      <DependentUpon>CategoryLookupView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CategoryPresenter.cs" />
+    <Compile Include="CategoryView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CategoryView.Designer.cs">
+      <DependentUpon>CategoryView.cs</DependentUpon>
     </Compile>
     <Compile Include="FoodItemPresenter.cs" />
     <Compile Include="FoodItemView.cs">
@@ -92,7 +114,11 @@
     <Compile Include="FoodView.Designer.cs">
       <DependentUpon>FoodView.cs</DependentUpon>
     </Compile>
+    <Compile Include="IAddCategoryView.cs" />
     <Compile Include="IAddFoodView.cs" />
+    <Compile Include="ICategoryItemView.cs" />
+    <Compile Include="ICategoryLookupView.cs" />
+    <Compile Include="ICategoryView.cs" />
     <Compile Include="IFoodItemView.cs" />
     <Compile Include="IFoodLookupView.cs" />
     <Compile Include="IFoodSearchView.cs" />
@@ -110,11 +136,20 @@
     <Compile Include="RightView.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <EmbeddedResource Include="AddCategoryView.resx">
+      <DependentUpon>AddCategoryView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AddFoodForm.resx">
       <DependentUpon>AddFoodForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CategoriesView.resx">
-      <DependentUpon>CategoriesView.cs</DependentUpon>
+    <EmbeddedResource Include="CategoryItemView.resx">
+      <DependentUpon>CategoryItemView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CategoryLookupView.resx">
+      <DependentUpon>CategoryLookupView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CategoryView.resx">
+      <DependentUpon>CategoryView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FoodSearchView.resx">
       <DependentUpon>FoodSearchView.cs</DependentUpon>

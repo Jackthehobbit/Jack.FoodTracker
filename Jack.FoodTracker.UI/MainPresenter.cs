@@ -11,6 +11,7 @@ namespace Jack.FoodTracker
         private readonly IMainView MainView;
 
         private readonly FoodPresenter FoodPresenter;
+        private readonly CategoryPresenter CategoryPresenter;
 
         private readonly FoodTracker FoodTracker;
 
@@ -19,6 +20,7 @@ namespace Jack.FoodTracker
             MainView = mainView;
             FoodTracker = foodTracker;
             FoodPresenter = new FoodPresenter(MainView.FoodView, FoodTracker);
+            CategoryPresenter = new CategoryPresenter((ICategoryView)MainView.CurrentView, FoodTracker);
         }
     }
 }
