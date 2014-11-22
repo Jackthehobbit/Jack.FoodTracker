@@ -22,7 +22,8 @@ namespace Jack.FoodTracker
             FoodContext context = new FoodContext();
             FoodRepository fRepository = new FoodRepository(context);
             FoodCategoryRepository fCatRepository = new FoodCategoryRepository(context);
-            UnitOfWork UnitOfWork = new UnitOfWork(context, fRepository, fCatRepository);
+            PresetMealRepository pMRepository = new PresetMealRepository(context);
+            UnitOfWork UnitOfWork = new UnitOfWork(context, fRepository, fCatRepository,pMRepository);
 
             //Create Business Layer
             FoodTracker FoodTracker = new FoodTracker(UnitOfWork);

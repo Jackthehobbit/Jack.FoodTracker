@@ -2,9 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+using System.Text.RegularExpressions;
+using System.Windows.Forms;
 namespace Jack.FoodTracker
 {
     class FoodSearchPresenter
@@ -12,42 +11,160 @@ namespace Jack.FoodTracker
         private readonly IFoodSearchView FoodSearchView;
         private readonly FoodTracker FoodTracker;
         private readonly FoodLookupPresenter FoodLookupPresenter;
-
         public FoodSearchPresenter(IFoodSearchView foodSearchView, FoodTracker foodTracker, FoodLookupPresenter foodLookupPresenter)
         {
             FoodSearchView = foodSearchView;
             FoodTracker = foodTracker;
             FoodLookupPresenter = foodLookupPresenter;
 
-            FoodSearchView.SearchBarTextChanged += new EventHandler(GetSearchResults);
+            FoodSearchView.SearchBarTextChanged += new EventHandler(ClearSearchResults);
+            FoodSearchView.SearchEntered += new KeyPressEventHandler(SearchHandler);
         }
 
-        public void GetSearchResults(object sender, EventArgs e)
+        public void ClearSearchResults(object sender, EventArgs e)
         {
-            IList<FoodCategory> fCatList = FoodTracker.GetAllFoodCategories(true);
-
-            if(FoodSearchView.SearchText == "")
+            if (FoodSearchView.SearchText == "")
             {
+                IList<FoodCategory> fCatList = FoodTracker.GetAllFoodCategories(true);
+                FoodLookupPresenter.SearchResults = null;
                 FoodLookupPresenter.SetCatList(fCatList);
+
             }
-            else
+        }
+
+        public void SearchHandler(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)13)
             {
-                IList<Food> searchResults = FoodTracker.SearchFoodByName(FoodSearchView.SearchText);
-                IList<FoodCategory> finalCatList = new List<FoodCategory>(fCatList);
+                FoodLookupPresenter.SearchResults = null;
+                GetSearchResults();
+            }
+        }
 
-                foreach (FoodCategory item in fCatList)
+        public void GetSearchResults()
+        {
+            String searchText = FoodSearchView.SearchText;
+            if (searchText.Trim() != "")
+            {
+                IList<Food> searchResults = new List<Food>();
+
+                searchResults = FoodTracker.GetAllFood();
+
+                String[] searchstrings = searchText.Split(new char[] { ' ' });
+
+                foreach (string s in searchstrings)
                 {
-                    Food findCat = searchResults.Where(x => x.Category.Id.Equals(item.Id)).FirstOrDefault();
+                    String key;
+                    String exp;
+                    String val;
 
-                    if (findCat == null)
+                    SearchService SearchService = new SearchService();
+
+                    if (s.Contains("=") || s.Contains(">") || s.Contains("<"))
                     {
-                        finalCatList.Remove(item);
+                        SearchService.ConvertComparison(s, out key, out exp, out val);
                     }
+                    else
+                    {
+                        key = "name";
+                        exp = "=";
+                        val = s;
+                    }
+
+                    searchResults = SearchForFood(SearchService, searchResults, key, exp, val);
                 }
+
+                IList<FoodCategory> finalCatList = FoodTracker.GetNonEmptyFoodCategories(searchResults);
 
                 FoodLookupPresenter.SetCatList(finalCatList);
                 FoodLookupPresenter.SetFoodList(searchResults);
             }
         }
+
+        public IList<Food> SearchForFood(SearchService SearchService, IList<Food> searchResults, String Key, String Exp, String Value)
+        {
+            int numericValue;
+            double dNumericValue;
+            if (searchResults == null)
+            {
+                throw new ArgumentException("Error during search please try again");
+            }
+
+            if (Key == "" || Value == "" || Exp == "")
+            {
+                return searchResults;
+            }
+
+            Key = Key.ToLower();
+
+            switch (Key.Trim())
+            {
+                case "name":
+                    return SearchService.ApplySearchContains<Food>(searchResults, "Name", Exp, Value, true);
+                case "desc":
+                case "description":
+                    return SearchService.ApplySearchContains<Food>(searchResults, "Description", Exp, Value, true);
+                case "category":
+                case "cat":
+                    FoodCategory cat = FoodTracker.GetAllFoodCategories(true).Where(x => x.Name.ToLower() == Value).FirstOrDefault();
+
+                    return SearchService.ApplySearchEquals<Food>(searchResults, "Category", Exp, cat);
+                case "cal":
+                case "calories":
+                    if (!Int32.TryParse(Value, out numericValue))
+                    {
+                        throw new ArgumentException("Calories has to be a number in order to search");
+                    }
+                    else
+                    {
+                        return SearchService.ApplySearchNumerical<Food, int>(searchResults, "Calories", Exp, numericValue);
+                    }
+                case "sugar":
+                case "sugars":
+                    if (!Double.TryParse(Value, out dNumericValue))
+                    {
+                        throw new ArgumentException("Sugar has to be a number in order to search");
+                    }
+                    else
+                    {
+                        return SearchService.ApplySearchNumerical<Food, double>(searchResults, "Sugars", Exp, dNumericValue);
+                    }
+                case "fat":
+                case "fats":
+                    if (!double.TryParse(Value, out dNumericValue))
+                    {
+                        throw new ArgumentException("Fat has to be a number in order to search");
+                    }
+                    else
+                    {
+                        return SearchService.ApplySearchNumerical<Food, double>(searchResults, "Fat", Exp, dNumericValue);
+                    }
+                case "satfat":
+                case "satfats":
+                case "saturates":
+                    if (!double.TryParse(Value, out dNumericValue))
+                    {
+                        throw new ArgumentException("Saturates has to be a number in order to search");
+                    }
+                    else
+                    {
+                        return SearchService.ApplySearchNumerical<Food, double>(searchResults, "Saturates", Exp, dNumericValue);
+                    }
+                case "salt":
+                    if (!double.TryParse(Value, out dNumericValue))
+                    {
+                        throw new ArgumentException("Salt has to be a number in order to search");
+                    }
+                    else
+                    {
+                        return SearchService.ApplySearchNumerical<Food, double>(searchResults, "Salt", Exp, dNumericValue);
+                    }
+                default:
+                    throw new ArgumentException(Key.Trim() + "is not a valid search key");
+            }
+        }
     }
 }
+
+
+

@@ -45,5 +45,6 @@ namespace Jack.FoodTracker.EntityDatabase
         {
             return context.Foods.Where(x => x.Name.Contains(searchText)).ToList();
         }
+      
     }
 }

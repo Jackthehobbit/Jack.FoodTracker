@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Jack.FoodTracker
 {
@@ -11,5 +12,6 @@ namespace Jack.FoodTracker
         string SearchText { get; }
 
         event EventHandler SearchBarTextChanged;
+        event KeyPressEventHandler SearchEntered;
     }
 }

@@ -28,5 +28,13 @@ namespace Jack.FoodTracker
             add { tbSearch.TextChanged += value; }
             remove { tbSearch.TextChanged -= value; }
         }
+        public event KeyPressEventHandler SearchEntered
+        {
+            add { tbSearch.KeyPress += value;}
+            remove { tbSearch.KeyPress -= value; }
+            
+        }
+
+        }
     }
-}
+

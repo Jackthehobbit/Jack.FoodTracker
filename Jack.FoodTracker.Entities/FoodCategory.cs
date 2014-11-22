@@ -19,6 +19,8 @@ namespace Jack.FoodTracker.Entities
         public string Name { get; set; }
 
         public int Order { get; set; }
+
+        public List<Food> Foods { get; set; }
     }
 
 
