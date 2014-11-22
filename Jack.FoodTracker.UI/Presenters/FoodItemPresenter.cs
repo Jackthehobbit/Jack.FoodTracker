@@ -10,16 +10,18 @@ namespace Jack.FoodTracker
     class FoodItemPresenter
     {
         private readonly IFoodItemView FoodItemView;
+        private readonly FoodTracker FoodTracker;
 
-        public FoodItemPresenter(IFoodItemView foodItemView, IList<FoodCategory> foodCategories)
+        public FoodItemPresenter(IFoodItemView foodItemView, FoodTracker foodTracker, IList<FoodCategory> foodCategories)
         {
             FoodItemView = foodItemView;
+            FoodTracker = foodTracker;
             FoodItemView.Categories = foodCategories;
         }
 
         public FoodDTO GetInputs()
         {
-            return new FoodDTO()
+            FoodDTO dto = new FoodDTO()
             {
                 Name = FoodItemView.FoodName,
                 Category = FoodItemView.Category,
@@ -30,6 +32,13 @@ namespace Jack.FoodTracker
                 Saturates = FoodItemView.SatFat,
                 Salt = FoodItemView.Salt
             };
+
+            if(dto.Category == null)
+            {
+                FoodCategory newFoodCategory = FoodTracker.AddCategory(FoodItemView.NewCategoryName);
+            }
+
+            return dto;
         }
 
         public void SetInputs(Food food)

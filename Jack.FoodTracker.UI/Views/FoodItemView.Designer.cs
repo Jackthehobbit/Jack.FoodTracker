@@ -128,7 +128,6 @@ namespace Jack.FoodTracker
             // cbCategory
             // 
             this.cbCategory.DisplayMember = "Name";
-            this.cbCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbCategory.FormattingEnabled = true;
             this.cbCategory.Location = new System.Drawing.Point(96, 93);
             this.cbCategory.Name = "cbCategory";

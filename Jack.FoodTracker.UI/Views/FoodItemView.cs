@@ -82,5 +82,10 @@ namespace Jack.FoodTracker
             get { return tbSalt.Text; }
             set { tbSalt.Text = value; }
         }
+
+        public string NewCategoryName
+        {
+            get { return cbCategory.Text; }
+        }
     }
 }

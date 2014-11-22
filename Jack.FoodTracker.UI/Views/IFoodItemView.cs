@@ -14,6 +14,7 @@ namespace Jack.FoodTracker
         string Description { get; set; }
         IList<FoodCategory> Categories { set; }
         FoodCategory Category { get; set; }
+        string NewCategoryName { get; }
         int CategoryIndex { get; set; }
         string Calories { get; set; }
         string Sugar { get; set; }

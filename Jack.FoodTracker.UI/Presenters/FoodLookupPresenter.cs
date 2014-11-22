@@ -34,7 +34,6 @@ namespace Jack.FoodTracker
             {
                 SetFoodList(0);
             }
-            
         }
 
         public void SetFoodList()

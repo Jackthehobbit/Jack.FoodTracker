@@ -27,7 +27,7 @@ namespace Jack.FoodTracker
             Expression body = Expression.Equal(prop, Expression.Constant(value));
             Expression<Func<T, Boolean>> lambda = Expression.Lambda<Func<T, bool>>(body, parameter);
             if (recordList.AsQueryable().Where(lambda).Any())
-            {
+            {  
                 throw new ArgumentException("A record with that " + propertyName.ToLower() + " already exists");
             }
         }
