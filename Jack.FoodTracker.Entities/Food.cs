@@ -32,6 +32,8 @@ namespace Jack.FoodTracker.Entities
         [Required]
         public FoodCategory Category { get; set; }
 
+        public List<PresetMeal> PresetMeals { get; set; }
+
         public Food()
         {
         }
