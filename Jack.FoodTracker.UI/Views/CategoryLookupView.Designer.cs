@@ -50,7 +50,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lbCategories.DisplayMember = "Name";
             this.lbCategories.FormattingEnabled = true;
-            this.lbCategories.Location = new System.Drawing.Point(3, 41);
+            this.lbCategories.Location = new System.Drawing.Point(3, 36);
             this.lbCategories.Name = "lbCategories";
             this.lbCategories.Size = new System.Drawing.Size(210, 251);
             this.lbCategories.TabIndex = 2;
@@ -62,7 +62,7 @@
             this.Controls.Add(this.lAddFood);
             this.Controls.Add(this.lbCategories);
             this.Name = "CategoryLookupView";
-            this.Size = new System.Drawing.Size(218, 304);
+            this.Size = new System.Drawing.Size(218, 291);
             this.ResumeLayout(false);
 
         }

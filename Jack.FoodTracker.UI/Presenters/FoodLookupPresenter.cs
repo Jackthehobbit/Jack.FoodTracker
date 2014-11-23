@@ -11,6 +11,7 @@ namespace Jack.FoodTracker
     {
         private readonly IFoodLookupView FoodLookupView;
         private readonly FoodTracker FoodTracker;
+        private readonly CategoryLookupPresenter CategoryLookupPresenter;
 
         public IList<Food> SearchResults { get; set; }
 
@@ -18,10 +19,11 @@ namespace Jack.FoodTracker
         {
             FoodLookupView = foodLookupView;
             FoodTracker = foodTracker;
+            CategoryLookupPresenter = new CategoryLookupPresenter(FoodLookupView.CategoryLookupView, FoodTracker, true);
 
-            FoodLookupView.CategorySelectedChanged += new EventHandler(OnCategoriesSelectedIndexChanged);
+            CategoryLookupPresenter.SelectedCategoryChanged += new EventHandler(OnCategoriesSelectedIndexChanged);
 
-            FoodLookupView.Categories = foodCategories;
+            CategoryLookupPresenter.Categories = foodCategories;
         }
 
         private void OnCategoriesSelectedIndexChanged(object sender, EventArgs e)
@@ -38,11 +40,10 @@ namespace Jack.FoodTracker
 
         public void SetFoodList()
         {
-            FoodCategory selectedCategory = FoodLookupView.SelectedCategory;
+            FoodCategory selectedCategory = CategoryLookupPresenter.SelectedCategory;
 
             if (selectedCategory != null)
             {
-
                 IList<Food> fList = FoodTracker.GetFoodByCategory(selectedCategory);
 
                 fList = fList.OrderBy(o => o.Name).ToList();
@@ -65,7 +66,7 @@ namespace Jack.FoodTracker
 
         public void SetFoodList(int foodIndex)
         {
-            FoodCategory selectedCategory = FoodLookupView.SelectedCategory;
+            FoodCategory selectedCategory = CategoryLookupPresenter.SelectedCategory;
 
             if (selectedCategory != null)
             {
@@ -96,7 +97,7 @@ namespace Jack.FoodTracker
                 FoodLookupView.Foods = searchResults;
             }
 
-            FoodCategory selectedCategory = FoodLookupView.SelectedCategory;
+            FoodCategory selectedCategory = CategoryLookupPresenter.SelectedCategory;
 
             if (selectedCategory != null)
             {
@@ -140,8 +141,8 @@ namespace Jack.FoodTracker
 
         public FoodCategory SelectedCategory
         {
-            get { return FoodLookupView.SelectedCategory; }
-            set { FoodLookupView.SelectedCategory = value; }
+            get { return CategoryLookupPresenter.SelectedCategory; }
+            set { CategoryLookupPresenter.SelectedCategory = value; }
         }
 
         public bool ViewEnabled
@@ -150,9 +151,9 @@ namespace Jack.FoodTracker
             set { FoodLookupView.Enabled = value; }
         }
 
-        internal void SetCatList(IList<FoodCategory> fCatList)
+        public void SetCatList(IList<FoodCategory> fCatList)
         {
-            FoodLookupView.Categories = fCatList;
+            CategoryLookupPresenter.Categories = fCatList;
         }
     }
 }

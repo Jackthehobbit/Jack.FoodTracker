@@ -9,16 +9,14 @@ namespace Jack.FoodTracker
 {
     public interface IFoodLookupView
     {
+        ICategoryLookupView CategoryLookupView { get; }
+
         IList<Food> Foods { set; }
         Food SelectedFood { get; set; }
         int SelectedFoodIndex { get; set; }
 
-        IList<FoodCategory> Categories { set; }
-        FoodCategory SelectedCategory { get; set; }
-
         bool Enabled { get; set; }
         
-        event EventHandler CategorySelectedChanged;
         event EventHandler FoodSelectedChanged;
     }
 }

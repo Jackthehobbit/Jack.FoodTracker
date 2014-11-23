@@ -11,11 +11,15 @@ namespace Jack.FoodTracker
     public partial class FoodLookupView : UserControl, IFoodLookupView
     {
         private ListBox lbFood;
-        private ListBox lbCategory;
 
         public FoodLookupView()
         {
             InitializeComponent();
+        }
+
+        public ICategoryLookupView CategoryLookupView
+        {
+            get { return categoryLookupView; }
         }
 
         public IList<Food> Foods
@@ -40,30 +44,6 @@ namespace Jack.FoodTracker
         {
             get { return lbFood.SelectedIndex; }
             set { lbFood.SelectedIndex = value; }
-        }
-
-        public IList<FoodCategory> Categories
-        {
-            set { lbCategory.DataSource = value; }
-        }
-
-        public FoodCategory SelectedCategory
-        {
-            get
-            {
-                return (FoodCategory)lbCategory.SelectedItem;
-            }
-
-            set
-            {
-                lbCategory.SelectedItem = value;
-            }
-        }
-
-        public event EventHandler CategorySelectedChanged
-        {
-            add { lbCategory.SelectedIndexChanged += value; }
-            remove { lbCategory.SelectedIndexChanged -= value; }
         }
 
         public event EventHandler FoodSelectedChanged

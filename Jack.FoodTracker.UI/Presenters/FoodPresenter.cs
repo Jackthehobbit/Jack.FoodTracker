@@ -97,7 +97,7 @@ namespace Jack.FoodTracker
 
                     FoodTracker.EditFood(dto, selectedFood);
 
-                    if (!dto.Category.Equals(FoodView.FoodLookupView.SelectedCategory))
+                    if (!dto.Category.Equals(FoodLookupPresenter.SelectedCategory))
                     {
                         FoodLookupPresenter.SelectedCategory = dto.Category;
                         FoodLookupPresenter.SelectedFood = selectedFood;
@@ -153,7 +153,7 @@ namespace Jack.FoodTracker
                 AddFoodPresenter addFoodPresenter = new AddFoodPresenter(addFood, FoodTracker);
                 DialogResult result = addFood.ShowDialog();
 
-                if (result == DialogResult.OK && addFoodPresenter.GetFoodCategorySelected().Equals(FoodView.FoodLookupView.SelectedCategory))
+                if (result == DialogResult.OK && addFoodPresenter.GetFoodCategorySelected().Equals(FoodLookupPresenter.SelectedCategory))
                 {
                     FoodLookupPresenter.SetFoodList();
                 }
