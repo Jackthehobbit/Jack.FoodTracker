@@ -53,7 +53,7 @@ namespace Jack.FoodTracker
             IList<FoodCategory> fCatList = FoodTracker.GetAllFoodCategories(true);
             IList<FoodCategory> fCatList2 = FoodTracker.GetNonEmptyFoodCategories(FoodTracker.GetAllFood());
 
-            FoodItemPresenter = new FoodItemPresenter(FoodView.FoodItemView, fCatList);
+            FoodItemPresenter = new FoodItemPresenter(FoodView.FoodItemView, FoodTracker, fCatList);
             FoodLookupPresenter = new FoodLookupPresenter(FoodView.FoodLookupView, FoodTracker, fCatList2);
             FoodSearchPresenter = new FoodSearchPresenter(FoodView.FoodSearchView, FoodTracker, FoodLookupPresenter);
 
@@ -83,6 +83,18 @@ namespace Jack.FoodTracker
 
                 try
                 {
+                    if (dto.Category == null)
+                    {
+                         CategoryDTO categoryDto = new CategoryDTO()
+                        {
+                            Name = FoodItemPresenter.GetNewCategoryName()
+                        };
+
+                        FoodCategory newCategory = FoodTracker.AddCategory(categoryDto);
+
+                        dto.Category = newCategory;
+                    }
+
                     FoodTracker.EditFood(dto, selectedFood);
 
                     if (!dto.Category.Equals(FoodView.FoodLookupView.SelectedCategory))

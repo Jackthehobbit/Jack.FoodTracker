@@ -18,7 +18,7 @@ namespace Jack.FoodTracker
         {
             AddFoodView = addFoodView;
             FoodTracker = foodTracker;
-            FoodItemPresenter = new FoodItemPresenter(AddFoodView.FoodItemView, FoodTracker.GetAllFoodCategories(true));
+            FoodItemPresenter = new FoodItemPresenter(AddFoodView.FoodItemView, FoodTracker, FoodTracker.GetAllFoodCategories(true));
 
             AddFoodView.AddFoodClick += new EventHandler(OnAddFoodButtonClick);
             AddFoodView.CancelClick += new EventHandler(OnCancelButtonClick);
@@ -29,6 +29,18 @@ namespace Jack.FoodTracker
             try
             {
                 FoodDTO dto = FoodItemPresenter.GetInputs();
+
+                if (dto.Category == null)
+                {
+                    CategoryDTO categoryDto = new CategoryDTO()
+                    {
+                        Name = FoodItemPresenter.GetNewCategoryName()
+                    };
+
+                    FoodCategory newCategory = FoodTracker.AddCategory(categoryDto);
+
+                    dto.Category = newCategory;
+                }
 
                 FoodTracker.AddFood(dto);
 

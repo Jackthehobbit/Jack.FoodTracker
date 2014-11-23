@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CategoryChecker.cs" />
+    <Compile Include="CategoryDTO.cs" />
     <Compile Include="CheckerService.cs" />
     <Compile Include="FoodDTO.cs" />
     <Compile Include="FoodDTOParser.cs" />

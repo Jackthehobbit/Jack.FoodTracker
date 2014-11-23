@@ -27,7 +27,7 @@ namespace Jack.FoodTracker
             }
         }
 
-        public void AddFood(FoodDTO dto)
+        public Food AddFood(FoodDTO dto)
         {
             //Parse input strings into a food object
             FoodDTOParser parser = new FoodDTOParser();
@@ -43,6 +43,8 @@ namespace Jack.FoodTracker
             //Add the food to the database
             UnitOfWork.FoodRepository.Add(newFood);
             UnitOfWork.Save();
+
+            return newFood;
         }
 
         public void EditFood(FoodDTO dto, Food food)
@@ -79,23 +81,24 @@ namespace Jack.FoodTracker
             }
         }
 
-        public void AddCategory(string categoryName)
+        public FoodCategory AddCategory(CategoryDTO categoryDto)
         {
-            categoryName = categoryName.Trim();
+            string categoryName = categoryDto.Name.Trim();
 
             CheckerService checker = new CheckerService();
-            try
+
+            checker.notBlankCheck("Name",categoryName);
+            checker.checkRecordExists<FoodCategory>(UnitOfWork.FoodCategoryRepository.GetAll(), "Name", categoryName);
+
+            FoodCategory newCategory = new FoodCategory()
             {
-                checker.notBlankCheck("Name",categoryName);
-                checker.checkRecordExists<FoodCategory>(UnitOfWork.FoodCategoryRepository.GetAll(), "Name", categoryName);
-            }
-            catch(ArgumentException aex)
-            {
-                throw new ArgumentException(""+aex.Message);
-                
-            }       
-            UnitOfWork.FoodCategoryRepository.Add(new FoodCategory() { Name = categoryName });
+                Name = categoryName
+            };
+
+            UnitOfWork.FoodCategoryRepository.Add(newCategory);
             UnitOfWork.Save();
+
+            return newCategory;
         }
 
         public void EditFoodCategory(string newCategoryName, FoodCategory foodCategory)

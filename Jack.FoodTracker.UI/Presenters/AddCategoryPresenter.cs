@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Jack.FoodTracker.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,7 +28,12 @@ namespace Jack.FoodTracker
         {
             try
             {
-                FoodTracker.AddCategory(AddCategoryView.CategoryName);
+                CategoryDTO newCategory = new CategoryDTO()
+                {
+                    Name = AddCategoryView.CategoryName
+                };
+
+                FoodTracker.AddCategory(newCategory);
                 CategoryLookupPresenter.UpdateCategories(CategoryLookupPresenter.SelectedCategory);
                 AddCategoryView.CategoryName = "";
             }

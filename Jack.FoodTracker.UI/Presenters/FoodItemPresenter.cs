@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Jack.FoodTracker
 {
@@ -32,11 +33,6 @@ namespace Jack.FoodTracker
                 Saturates = FoodItemView.SatFat,
                 Salt = FoodItemView.Salt
             };
-
-            if(dto.Category == null)
-            {
-                FoodCategory newFoodCategory = FoodTracker.AddCategory(FoodItemView.NewCategoryName);
-            }
 
             return dto;
         }
@@ -79,6 +75,11 @@ namespace Jack.FoodTracker
         {
             get { return FoodItemView.Enabled; }
             set { FoodItemView.Enabled = value; }
+        }
+
+        public string GetNewCategoryName()
+        {
+            return FoodItemView.NewCategoryName;
         }
     }
 }
