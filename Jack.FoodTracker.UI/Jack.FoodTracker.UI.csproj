@@ -124,6 +124,7 @@
     <Compile Include="Views\IFoodSearchView.cs" />
     <Compile Include="Views\IFoodView.cs" />
     <Compile Include="Views\IMainView.cs" />
+    <Compile Include="Views\IPresetMealView.cs" />
     <Compile Include="Views\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
