@@ -211,7 +211,9 @@ namespace Jack.FoodTracker
             return fCatListResult;
         }
 
-        
-
+        public FoodCategory GetCategoryByName(string Name)
+        {
+            return UnitOfWork.FoodCategoryRepository.GetByName(Name);
+        }
     }
 }

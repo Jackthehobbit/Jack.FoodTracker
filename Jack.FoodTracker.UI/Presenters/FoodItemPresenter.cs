@@ -18,7 +18,9 @@ namespace Jack.FoodTracker
             FoodItemView = foodItemView;
             FoodTracker = foodTracker;
             FoodItemView.Categories = foodCategories;
+            FoodItemView.LeaveCategoryField += new EventHandler(CheckExistingCategory);
         }
+
 
         public FoodDTO GetInputs()
         {
@@ -80,6 +82,18 @@ namespace Jack.FoodTracker
         public string GetNewCategoryName()
         {
             return FoodItemView.NewCategoryName;
+        }
+
+        private void CheckExistingCategory(object sender, EventArgs e)
+        {
+            if (FoodItemView.Category == null)
+            {
+                FoodCategory existingCategory = FoodTracker.GetCategoryByName(FoodItemView.NewCategoryName);
+                if(existingCategory != null)
+                {
+                    FoodItemView.Category = existingCategory;
+                }
+            }
         }
     }
 }

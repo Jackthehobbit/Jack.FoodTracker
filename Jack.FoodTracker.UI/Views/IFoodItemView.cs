@@ -21,5 +21,6 @@ namespace Jack.FoodTracker
         string Fat { get; set; }
         string SatFat { get; set; }
         string Salt { get; set; }
+        event EventHandler LeaveCategoryField;
     }
 }

@@ -48,5 +48,9 @@ namespace Jack.FoodTracker.EntityDatabase
         {
             context.Categories.Remove(foodCategory);
         }
+        public FoodCategory GetByName(String Name)
+        {
+            return context.Categories.Where(x => x.Name.ToLower() == Name.ToLower()).FirstOrDefault();
+        }
     }
 }

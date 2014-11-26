@@ -36,5 +36,9 @@ namespace Jack.FoodTracker.Tests
         {
 
         }
+        public FoodCategory GetByName(String Name)
+        {
+
+        }
     }
 }

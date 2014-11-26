@@ -87,5 +87,10 @@ namespace Jack.FoodTracker
         {
             get { return cbCategory.Text; }
         }
+        public event EventHandler LeaveCategoryField
+        {
+            add { cbCategory.Leave += value;}
+            remove { cbCategory.Leave -= value; }
+        }
     }
 }

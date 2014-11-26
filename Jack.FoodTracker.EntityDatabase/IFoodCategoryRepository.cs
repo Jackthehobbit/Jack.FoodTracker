@@ -12,5 +12,7 @@ namespace Jack.FoodTracker.EntityDatabase
         void Edit(FoodCategory foodCategory);
 
         void Delete(FoodCategory foodCategory);
+
+        FoodCategory GetByName(String Name);
     }
 }
