@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Jack.FoodTracker.Tests
 {
-    class MockFoodCategoryRepository : IFoodCategoryRepository
+    public class MockFoodCategoryRepository : IFoodCategoryRepository
     {
         public List<FoodCategory> cats { get; set; }
 
@@ -38,7 +38,7 @@ namespace Jack.FoodTracker.Tests
         }
         public FoodCategory GetByName(String Name)
         {
-
+            return cats.Where(x => x.Name.ToLower() == Name.ToLower()).FirstOrDefault();
         }
     }
 }

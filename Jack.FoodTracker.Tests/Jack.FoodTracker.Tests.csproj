@@ -25,6 +25,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -35,6 +36,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <Choose>
@@ -53,8 +57,10 @@
     <Compile Include="AddFoodTest.cs" />
     <Compile Include="MockFoodCategoryRepository.cs" />
     <Compile Include="MockFoodRepository.cs" />
+    <Compile Include="MockPresetMealRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DeleteFoodTest.cs" />
+    <Compile Include="TestData.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Jack.FoodTracker.Entities\Jack.FoodTracker.Entities.csproj">

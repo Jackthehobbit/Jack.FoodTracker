@@ -8,7 +8,7 @@ using Jack.FoodTracker.Entities;
 
 namespace Jack.FoodTracker.Tests
 {
-    class MockFoodRepository : IFoodRepository
+    public class MockFoodRepository : IFoodRepository
     {
         public List<Food> foods { get; set; }
 

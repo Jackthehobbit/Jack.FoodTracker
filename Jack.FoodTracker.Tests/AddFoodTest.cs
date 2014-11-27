@@ -1,41 +1,38 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Jack.FoodTracker.EntityDatabase;
 
 namespace Jack.FoodTracker.Tests
 {
     [TestClass]
-    public class AddFoodTest
+    public class AddFoodTest : TestData
     {
-        /*
+       
         [TestMethod]
         public void SuccessfulAdd()
         {
             Exception ex = null;
-
-            FoodTracker ftracker = new FoodTracker();
 
             FoodDTO dto = helper("Bacon", "Filthy Pig", "200", "100", "99", "12", "6");
 
             try
             {
                 ftracker.AddFood(dto);
-
             }
             catch(Exception aex)
             {
                 ex = aex;
             }
+            Console.WriteLine("TESTING!");
 
             
             Assert.IsNull(ex);
         }
-
+        
         [TestMethod]
         public void EmptyName()
         {
             Exception ex = null;
-
-            FoodTracker ftracker = new FoodTracker(new MockFoodRepository(), new MockFoodCategoryRepository());
 
             FoodDTO dto = helper("", "Filthy Pig", "200", "100", "99", "12", "6");
 
@@ -57,8 +54,6 @@ namespace Jack.FoodTracker.Tests
         {
             Exception ex = null;
 
-            FoodTracker ftracker = new FoodTracker(new MockFoodRepository(), new MockFoodCategoryRepository());
-
             FoodDTO dto = helper("Bacon", "Filthy Pig", "hello", "100", "99", "12", "6");
 
             try
@@ -79,8 +74,6 @@ namespace Jack.FoodTracker.Tests
         {
             Exception ex = null;
 
-            FoodTracker ftracker = new FoodTracker(new MockFoodRepository(), new MockFoodCategoryRepository());
-
             FoodDTO dto = helper("Bacon", "Filthy Pig", "", "100", "99", "12", "6");
 
             try
@@ -99,8 +92,6 @@ namespace Jack.FoodTracker.Tests
         public void SugarNotANumber()
         {
             Exception ex = null;
-
-            FoodTracker ftracker = new FoodTracker(new MockFoodRepository(), new MockFoodCategoryRepository());
 
             FoodDTO dto = helper("Bacon", "Filthy Pig", "200", "hello", "99", "12", "6");
 
@@ -122,8 +113,6 @@ namespace Jack.FoodTracker.Tests
         {
             Exception ex = null;
 
-            FoodTracker ftracker = new FoodTracker(new MockFoodRepository(), new MockFoodCategoryRepository());
-
             FoodDTO dto = helper("Bacon", "Filthy Pig", "100", "", "99", "12", "6");
 
             try
@@ -142,8 +131,6 @@ namespace Jack.FoodTracker.Tests
         public void FatNotANumber()
         {
             Exception ex = null;
-
-            FoodTracker ftracker = new FoodTracker(new MockFoodRepository(), new MockFoodCategoryRepository());
 
             FoodDTO dto = helper("Bacon", "Filthy Pig", "200", "100", "hello", "12", "6");
 
@@ -165,8 +152,6 @@ namespace Jack.FoodTracker.Tests
         {
             Exception ex = null;
 
-            FoodTracker ftracker = new FoodTracker(new MockFoodRepository(), new MockFoodCategoryRepository());
-
             FoodDTO dto = helper("Bacon", "Filthy Pig", "100", "100", "", "12", "6");
 
             try
@@ -185,8 +170,6 @@ namespace Jack.FoodTracker.Tests
         public void SatFatNotANumber()
         {
             Exception ex = null;
-
-            FoodTracker ftracker = new FoodTracker(new MockFoodRepository(), new MockFoodCategoryRepository());
 
             FoodDTO dto = helper("Bacon", "Filthy Pig", "200", "100", "99", "hello", "6");
 
@@ -208,8 +191,6 @@ namespace Jack.FoodTracker.Tests
         {
             Exception ex = null;
 
-            FoodTracker ftracker = new FoodTracker(new MockFoodRepository(), new MockFoodCategoryRepository());
-
             FoodDTO dto = helper("Bacon", "Filthy Pig", "12", "100", "99", "", "6");
 
             try
@@ -229,7 +210,6 @@ namespace Jack.FoodTracker.Tests
         {
             Exception ex = null;
 
-            FoodTracker ftracker = new FoodTracker(new MockFoodRepository(), new MockFoodCategoryRepository());
 
             FoodDTO dto = helper("Bacon", "Filthy Pig", "200", "100", "99", "12", "food");
 
@@ -251,8 +231,6 @@ namespace Jack.FoodTracker.Tests
         {
             Exception ex = null;
 
-            FoodTracker ftracker = new FoodTracker(new MockFoodRepository(), new MockFoodCategoryRepository());
-
             FoodDTO dto = helper("Bacon", "Filthy Pig", "12", "100", "99", "12", "");
 
             try
@@ -272,8 +250,6 @@ namespace Jack.FoodTracker.Tests
         {
             Exception ex = null;
 
-            FoodTracker ftracker = new FoodTracker(new MockFoodRepository(), new MockFoodCategoryRepository());
-
             FoodDTO dto = helper("Bacon", "Filthy Pig", "200", "100", "99", "12", "6");
 
             try
@@ -289,7 +265,7 @@ namespace Jack.FoodTracker.Tests
             Assert.IsNotNull(ex);
             Assert.AreEqual("This food already exists.", ex.Message);
         }
-
+        
         private FoodDTO helper(string name, string description, string calories, string sugar, string fat, string sats, string salt)
         {
             FoodDTO dto = new FoodDTO();
@@ -303,6 +279,6 @@ namespace Jack.FoodTracker.Tests
             dto.Salt = salt;
 
             return dto;
-        }*/
+        }
     }
 }
