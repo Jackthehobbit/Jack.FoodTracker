@@ -18,11 +18,7 @@ namespace Jack.FoodTracker.EntityDatabase
 
         public List<FoodCategory> GetAll()
         {
-
-            // Either change the properety on the entity to virtual and use:
-            // return context.Categories.ToList();
-            // or dont and use :
-            return context.Categories.Include("Foods").ToList();
+            return context.Categories.ToList();
         }
 
         public void Add(FoodCategory foodCategory)

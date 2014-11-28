@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataAnnotationsExtensions;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -19,14 +20,19 @@ namespace Jack.FoodTracker.Entities
 
         public string Description { get; set; }
 
+        [Min(0)]
         public int Calories { get; set; }
 
+        [Min(0)]
         public double Sugars { get; set; }
 
+        [Min(0)]
         public double Fat { get; set; }
 
+        [Min(0)]
         public double Saturates { get; set; }
 
+        [Min(0)]
         public double Salt { get; set; }
 
         [Required]

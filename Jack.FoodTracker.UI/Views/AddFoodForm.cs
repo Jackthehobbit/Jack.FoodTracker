@@ -17,15 +17,10 @@ namespace Jack.FoodTracker
             InitializeComponent();
 
             // Create Food Item Panel
-            FoodItemView = new FoodItemView();
-            FoodItemView.AutoSize = true;
-            FoodItemView.Location = new System.Drawing.Point(1, 69);
-            FoodItemView.TabIndex = 0;
-
-            Controls.Add(this.FoodItemView);
+            FoodItemView = foodItemView;
         }
 
-        public FoodItemView FoodItemView { get; private set; }
+        public IFoodItemView FoodItemView { get; private set; }
 
         public event EventHandler AddFoodClick
         {

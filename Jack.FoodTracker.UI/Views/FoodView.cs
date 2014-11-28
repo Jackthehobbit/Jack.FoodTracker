@@ -19,17 +19,6 @@ namespace Jack.FoodTracker
         {
             InitializeComponent();
 
-            foodItemView.Enabled = false;
-
-            foodLookupView = new FoodLookupView();
-            foodLookupView.AutoSize = true;
-            foodLookupView.Location = new System.Drawing.Point(46, 143);
-
-            Controls.Add(foodItemView);
-            Controls.Add(foodLookupView);
-
-            foodLookupView.BringToFront();
-
             FoodItemView = foodItemView;
             FoodLookupView = foodLookupView;
             FoodSearchView = foodSearchView;

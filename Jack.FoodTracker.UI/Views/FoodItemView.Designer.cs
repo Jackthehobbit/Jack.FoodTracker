@@ -120,6 +120,7 @@ namespace Jack.FoodTracker
             // 
             // tbDesc
             // 
+            this.tbDesc.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.tbDesc.Location = new System.Drawing.Point(96, 67);
             this.tbDesc.Name = "tbDesc";
             this.tbDesc.Size = new System.Drawing.Size(150, 20);

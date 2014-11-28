@@ -20,7 +20,7 @@ namespace Jack.FoodTracker.Entities
 
         public int Order { get; set; }
 
-        public List<Food> Foods { get; set; }
+        public virtual List<Food> Foods { get; set; }
     }
 
 

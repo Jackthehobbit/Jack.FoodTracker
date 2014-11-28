@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.ComponentModel.DataAnnotations;
 
 namespace Jack.FoodTracker
 {
@@ -27,12 +28,38 @@ namespace Jack.FoodTracker
             }
         }
 
+        private Food parseFoodDTO(FoodDTO dto)
+        {
+            int calories;
+            double sugar;
+            double fat;
+            double saturates;
+            double salt;
+
+            int.TryParse(dto.Calories, out calories);
+            double.TryParse(dto.Sugar, out sugar);
+            double.TryParse(dto.Fat, out fat);
+            double.TryParse(dto.Saturates, out saturates);
+            double.TryParse(dto.Salt, out salt);
+
+            return new Food()
+            {
+                Name = dto.Name,
+                Category = dto.Category,
+                Description = dto.Description,
+                Calories = calories,
+                Sugars = sugar,
+                Fat = fat,
+                Saturates = saturates,
+                Salt = salt
+            };
+        }
+
         public Food AddFood(FoodDTO dto)
         {
-            //Parse input strings into a food object
-            FoodDTOParser parser = new FoodDTOParser();
+            Food newFood = parseFoodDTO(dto);
 
-            Food newFood = parser.Parse(dto);
+            Validator.ValidateObject(newFood, new ValidationContext(newFood), true);
 
             //Check the food doesn't already exist in the database
             if (UnitOfWork.FoodRepository.GetAll().Where(x => x.Name.ToLower().Equals(newFood.Name.ToLower())).Any())
@@ -61,7 +88,7 @@ namespace Jack.FoodTracker
                 }
             }
 
-            Food newFood = parser.ParseIntoExisting(dto, food);
+            Food newFood = null;
             
             //Add the food to the database
             UnitOfWork.FoodRepository.Edit(newFood);

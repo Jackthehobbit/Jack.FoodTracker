@@ -9,7 +9,7 @@ namespace Jack.FoodTracker
 {
     public interface IAddFoodView
     {
-        FoodItemView FoodItemView { get; }
+        IFoodItemView FoodItemView { get; }
         DialogResult DialogResult { get; set; }
 
         event EventHandler AddFoodClick;

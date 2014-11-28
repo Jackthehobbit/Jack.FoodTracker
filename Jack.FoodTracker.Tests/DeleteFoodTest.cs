@@ -38,7 +38,7 @@ namespace Jack.FoodTracker.Tests
         {
             Exception ex = null;
 
-            Food food = new Food("Bacon", null, "Meat", 1, 2, 3, 4, 5);
+            Food food = null;
 
             try
             {

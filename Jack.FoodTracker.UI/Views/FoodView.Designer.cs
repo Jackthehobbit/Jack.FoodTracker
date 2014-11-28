@@ -17,6 +17,7 @@ namespace Jack.FoodTracker
             this.btnEditFood = new System.Windows.Forms.Button();
             this.foodSearchView = new Jack.FoodTracker.FoodSearchView();
             this.foodItemView = new Jack.FoodTracker.FoodItemView();
+            this.foodLookupView = new Jack.FoodTracker.FoodLookupView();
             this.SuspendLayout();
             // 
             // btnAddFood
@@ -68,15 +69,16 @@ namespace Jack.FoodTracker
             this.foodSearchView.Size = new System.Drawing.Size(460, 29);
             this.foodSearchView.TabIndex = 23;
             // 
-            // foodItemView1
+            // foodItemView
             // 
             this.foodItemView.Calories = "";
             this.foodItemView.Category = null;
             this.foodItemView.CategoryIndex = -1;
             this.foodItemView.Description = "";
+            this.foodItemView.Enabled = false;
             this.foodItemView.Fat = "";
             this.foodItemView.FoodName = "";
-            this.foodItemView.Location = new System.Drawing.Point(430, 147);
+            this.foodItemView.Location = new System.Drawing.Point(428, 117);
             this.foodItemView.Name = "foodItemView";
             this.foodItemView.Salt = "";
             this.foodItemView.SatFat = "";
@@ -84,8 +86,18 @@ namespace Jack.FoodTracker
             this.foodItemView.Sugar = "";
             this.foodItemView.TabIndex = 24;
             // 
+            // foodLookupView
+            // 
+            this.foodLookupView.Location = new System.Drawing.Point(55, 117);
+            this.foodLookupView.Name = "foodLookupView";
+            this.foodLookupView.SelectedFood = null;
+            this.foodLookupView.SelectedFoodIndex = -1;
+            this.foodLookupView.Size = new System.Drawing.Size(262, 255);
+            this.foodLookupView.TabIndex = 25;
+            // 
             // FoodView
             // 
+            this.Controls.Add(this.foodLookupView);
             this.Controls.Add(this.foodItemView);
             this.Controls.Add(this.foodSearchView);
             this.Controls.Add(this.btnAddFood);
@@ -102,8 +114,8 @@ namespace Jack.FoodTracker
         private System.Windows.Forms.Button btnEditFood;
         private System.Windows.Forms.Button btnAddFood;
         private FoodItemView foodItemView;
-        private FoodLookupView foodLookupView;
         private Label lTitle;
         private FoodSearchView foodSearchView;
+        private FoodLookupView foodLookupView;
     }
 }
