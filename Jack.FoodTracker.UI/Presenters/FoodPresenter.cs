@@ -41,6 +41,7 @@ namespace Jack.FoodTracker
 
                 FoodLookupPresenter.ViewEnabled = !_inEditMode;
                 FoodView.AddFoodButtonEnabled = !_inEditMode;
+                FoodSearchPresenter.ViewEnabled = !_inEditMode;
 
                 FoodItemPresenter.ViewEnabled = _inEditMode;
             }

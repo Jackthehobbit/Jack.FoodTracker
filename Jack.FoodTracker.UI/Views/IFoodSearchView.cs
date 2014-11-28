@@ -11,6 +11,8 @@ namespace Jack.FoodTracker
     {
         string SearchText { get; }
 
+        bool Enabled { set; get; }
+
         event EventHandler SearchBarTextChanged;
         event KeyPressEventHandler SearchEntered;
     }

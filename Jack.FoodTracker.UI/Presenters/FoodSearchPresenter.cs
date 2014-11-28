@@ -25,10 +25,8 @@ namespace Jack.FoodTracker
         {
             if (FoodSearchView.SearchText == "")
             {
-                IList<FoodCategory> fCatList = FoodTracker.GetAllFoodCategories(true);
                 FoodLookupPresenter.SearchResults = null;
-                FoodLookupPresenter.SetCatList(fCatList);
-
+                FoodLookupPresenter.UpdateCategories();
             }
         }
 
@@ -40,6 +38,25 @@ namespace Jack.FoodTracker
                 GetSearchResults();
             }
         }
+
+        private IList<FoodCategory> GetNonEmptyFoodCategories(IList<Food> foods)
+        {
+            IList<FoodCategory> fCatList = FoodTracker.GetNonEmptyFoodCategories(true);
+            IList<FoodCategory> fCatListResult = new List<FoodCategory>(fCatList);
+
+            foreach (FoodCategory item in fCatList)
+            {
+                Food findCat = foods.Where(x => x.Category.Id.Equals(item.Id)).FirstOrDefault();
+
+                if (findCat == null)
+                {
+                    fCatListResult.Remove(item);
+                }
+            }
+
+            return fCatListResult;
+        }
+
 
         public void GetSearchResults()
         {
@@ -74,7 +91,7 @@ namespace Jack.FoodTracker
                     searchResults = SearchForFood(SearchService, searchResults, key, exp, val);
                 }
 
-                IList<FoodCategory> finalCatList = null; // FoodTracker.GetNonEmptyFoodCategories(searchResults);
+                IList<FoodCategory> finalCatList = GetNonEmptyFoodCategories(searchResults);
 
                 FoodLookupPresenter.SetCatList(finalCatList);
                 FoodLookupPresenter.SetFoodList(searchResults);
@@ -162,6 +179,12 @@ namespace Jack.FoodTracker
                 default:
                     throw new ArgumentException(Key.Trim() + "is not a valid search key");
             }
+        }
+
+        public bool ViewEnabled
+        {
+            get { return FoodSearchView.Enabled; }
+            set { FoodSearchView.Enabled = value; }
         }
     }
 }
