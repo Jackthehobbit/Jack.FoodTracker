@@ -24,7 +24,7 @@ namespace Jack.FoodTracker
             FoodView = new FoodView();
             CategoryView = new CategoryView();
 
-            _CurrentView = FoodView;
+            _CurrentView = CategoryView;
             Controls.Add(_CurrentView);
         }
 

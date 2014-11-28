@@ -1,6 +1,7 @@
 ﻿using Jack.FoodTracker.Entities;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -74,7 +75,6 @@ namespace Jack.FoodTracker
                 enabled = false;
             }
 
-            CategoryItemPresenter.Enabled = enabled;
             CategoryView.DeleteButtonEnabled = enabled;
             CategoryView.EditButtonEnabled = enabled;
             CategoryView.MoveUpButtonEnabled = enabled;
@@ -116,14 +116,16 @@ namespace Jack.FoodTracker
                 {
                     FoodCategory selectedFoodCat = CategoryLookupPresenter.SelectedCategory;
 
-                    FoodTracker.EditFoodCategory(CategoryItemPresenter.Name, selectedFoodCat);
+                    CategoryDTO dto = CategoryItemPresenter.GetInputs();
+
+                    FoodTracker.EditFoodCategory(dto, selectedFoodCat);
 
                     InEditMode = false;
                     CategoryLookupPresenter.UpdateCategories(selectedFoodCat);
                 }
-                catch (ArgumentException aex)
+                catch (ValidationException vex)
                 {
-                    MessageBox.Show(aex.Message);
+                    MessageBox.Show(vex.Message);
                 }
 
             }
@@ -143,7 +145,7 @@ namespace Jack.FoodTracker
             {
                 try
                 {
-                    DialogResult delete = MessageBox.Show("Are you sure you want to delete " + CategoryItemPresenter.Name + "?", "Delete Category?", MessageBoxButtons.YesNo);
+                    DialogResult delete = MessageBox.Show("Are you sure you want to delete " + CategoryItemPresenter.GetInputs().Name + "?", "Delete Category?", MessageBoxButtons.YesNo);
 
                     if (delete == DialogResult.Yes)
                     {

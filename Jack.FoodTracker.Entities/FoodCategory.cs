@@ -21,6 +21,11 @@ namespace Jack.FoodTracker.Entities
         public int Order { get; set; }
 
         public virtual List<Food> Foods { get; set; }
+
+        public void Update(FoodCategory editedCategory)
+        {
+            Name = editedCategory.Name;
+        }
     }
 
 

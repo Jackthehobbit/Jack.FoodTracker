@@ -34,7 +34,6 @@
             // 
             // tbName
             // 
-            this.tbName.Enabled = false;
             this.tbName.Location = new System.Drawing.Point(48, 3);
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(171, 20);
@@ -55,6 +54,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.lName);
             this.Controls.Add(this.tbName);
+            this.Enabled = false;
             this.Name = "CategoryItemView";
             this.Size = new System.Drawing.Size(224, 28);
             this.ResumeLayout(false);

@@ -20,7 +20,7 @@ namespace Jack.FoodTracker
             MainView = mainView;
             FoodTracker = foodTracker;
             FoodPresenter = new FoodPresenter(MainView.FoodView, FoodTracker);
-            //CategoryPresenter = new CategoryPresenter((ICategoryView)MainView.CurrentView, FoodTracker);
+            CategoryPresenter = new CategoryPresenter((ICategoryView)MainView.CurrentView, FoodTracker);
         }
     }
 }

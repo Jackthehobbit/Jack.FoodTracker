@@ -103,7 +103,7 @@ namespace Jack.FoodTracker
             Validator.ValidateObject(editedFood, new ValidationContext(editedFood), true);
 
             //if the name has changed check that there isn't an existing food with the new name
-            if(dto.Name != food.Name)
+            if(dto.Name.ToLower() != food.Name.ToLower())
             {
                 if (UnitOfWork.FoodRepository.GetAll().Where(x => x.Name.ToLower().Equals(dto.Name.ToLower())).Any())
                 {
@@ -131,19 +131,26 @@ namespace Jack.FoodTracker
             }
         }
 
+        private FoodCategory parseCategoryDTO(CategoryDTO dto)
+        {
+            dto.Name = dto.Name.Trim();
+
+            return new FoodCategory()
+            {
+                Name = dto.Name
+            };
+        }
+
         public FoodCategory AddCategory(CategoryDTO categoryDto)
         {
-            string categoryName = categoryDto.Name.Trim();
+            FoodCategory newCategory = parseCategoryDTO(categoryDto);
 
-            CheckerService checker = new CheckerService();
+            Validator.ValidateObject(newCategory, new ValidationContext(newCategory), true);
 
-            checker.notBlankCheck("Name",categoryName);
-            checker.checkRecordExists<FoodCategory>(UnitOfWork.FoodCategoryRepository.GetAll(), "Name", categoryName);
-
-            FoodCategory newCategory = new FoodCategory()
+            if (UnitOfWork.FoodCategoryRepository.GetAll().Where(x => x.Name.ToLower().Equals(newCategory.Name.ToLower())).Any())
             {
-                Name = categoryName
-            };
+                throw new ValidationException("A category with this name already exists.");
+            }
 
             UnitOfWork.FoodCategoryRepository.Add(newCategory);
             UnitOfWork.Save();
@@ -151,22 +158,20 @@ namespace Jack.FoodTracker
             return newCategory;
         }
 
-        public void EditFoodCategory(string newCategoryName, FoodCategory foodCategory)
+        public void EditFoodCategory(CategoryDTO categoryDto, FoodCategory foodCategory)
         {
-            newCategoryName = newCategoryName.Trim();
+            FoodCategory editedCategory = parseCategoryDTO(categoryDto);
 
-            CategoryChecker checker = new CategoryChecker();
+            Validator.ValidateObject(editedCategory, new ValidationContext(editedCategory), true);
 
-            checker.Check(newCategoryName);
-
-            if(newCategoryName != foodCategory.Name)
+            if (editedCategory.Name.ToLower() != foodCategory.Name.ToLower())
             {
-                if (UnitOfWork.FoodCategoryRepository.GetAll().Where(o => o.Name.ToLower().Equals(newCategoryName.ToLower())).Any())
+                if (UnitOfWork.FoodCategoryRepository.GetAll().Where(o => o.Name.ToLower().Equals(editedCategory.Name.ToLower())).Any())
                 {
                     throw new ArgumentException("A category with this name already exists.");
                 }
 
-                foodCategory.Name = newCategoryName;
+                foodCategory.Update(editedCategory);
             }
 
             UnitOfWork.FoodCategoryRepository.Edit(foodCategory);

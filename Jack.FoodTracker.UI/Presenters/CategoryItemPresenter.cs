@@ -26,9 +26,12 @@ namespace Jack.FoodTracker
             CategoryItemView.CategoryName = "";
         }
 
-        public string Name
+        public CategoryDTO GetInputs()
         {
-            get { return CategoryItemView.CategoryName; }
+            return new CategoryDTO()
+            {
+                Name = CategoryItemView.CategoryName
+            };
         }
 
         public bool Enabled
