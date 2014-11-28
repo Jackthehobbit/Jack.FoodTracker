@@ -103,12 +103,9 @@ namespace Jack.FoodTracker
             Validator.ValidateObject(editedFood, new ValidationContext(editedFood), true);
 
             //if the name has changed check that there isn't an existing food with the new name
-            if(dto.Name.ToLower() != food.Name.ToLower())
+            if(dto.Name.ToLower() != food.Name.ToLower() && UnitOfWork.FoodRepository.GetAll().Where(x => x.Name.ToLower().Equals(dto.Name.ToLower())).Any())
             {
-                if (UnitOfWork.FoodRepository.GetAll().Where(x => x.Name.ToLower().Equals(dto.Name.ToLower())).Any())
-                {
-                    throw new ValidationException("A food with this name already exists.");
-                }
+                throw new ValidationException("A food with this name already exists.");
             }
 
             food.Update(editedFood);
@@ -164,15 +161,13 @@ namespace Jack.FoodTracker
 
             Validator.ValidateObject(editedCategory, new ValidationContext(editedCategory), true);
 
-            if (editedCategory.Name.ToLower() != foodCategory.Name.ToLower())
+            if (editedCategory.Name.ToLower() != foodCategory.Name.ToLower() &&
+                UnitOfWork.FoodCategoryRepository.GetAll().Where(o => o.Name.ToLower().Equals(editedCategory.Name.ToLower())).Any())
             {
-                if (UnitOfWork.FoodCategoryRepository.GetAll().Where(o => o.Name.ToLower().Equals(editedCategory.Name.ToLower())).Any())
-                {
-                    throw new ArgumentException("A category with this name already exists.");
-                }
-
-                foodCategory.Update(editedCategory);
+                throw new ArgumentException("A category with this name already exists."); 
             }
+
+            foodCategory.Update(editedCategory);
 
             UnitOfWork.FoodCategoryRepository.Edit(foodCategory);
         }
