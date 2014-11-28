@@ -55,5 +55,17 @@ namespace Jack.FoodTracker.Entities
             this.Saturates = saturates;
             this.Salt = salt;
         }
+
+        public void Update(Food editedFood)
+        {
+            Name = editedFood.Name;
+            Description = editedFood.Description;
+            Category = editedFood.Category;
+            Calories = editedFood.Calories;
+            Sugars = editedFood.Sugars;
+            Fat = editedFood.Fat;
+            Saturates = editedFood.Saturates;
+            Salt = editedFood.Salt;
+        }
     }
 }

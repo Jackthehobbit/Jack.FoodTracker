@@ -1,6 +1,7 @@
 ﻿using Jack.FoodTracker.Entities;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -46,9 +47,9 @@ namespace Jack.FoodTracker
 
                 AddFoodView.DialogResult = DialogResult.OK;
             }
-            catch (ArgumentException ex)
+            catch (ValidationException vex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(vex.Message);
             }
         }
 

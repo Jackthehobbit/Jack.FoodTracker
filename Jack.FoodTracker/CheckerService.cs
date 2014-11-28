@@ -17,7 +17,7 @@ namespace Jack.FoodTracker
                 throw new ArgumentException(fieldName + " cannot be Blank");
             }
         }
-        public void checkRecordExists<T>(IList<T> recordList,string propertyName,string value)
+        public void checkRecordExists<T>(IList<T> recordList, string propertyName,string value)
         {
             ParameterExpression parameter = Expression.Parameter(typeof(T), "x");
             Expression prop = Expression.PropertyOrField(parameter, propertyName);

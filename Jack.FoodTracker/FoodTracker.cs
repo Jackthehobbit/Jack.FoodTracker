@@ -36,11 +36,33 @@ namespace Jack.FoodTracker
             double saturates;
             double salt;
 
-            int.TryParse(dto.Calories, out calories);
-            double.TryParse(dto.Sugar, out sugar);
-            double.TryParse(dto.Fat, out fat);
-            double.TryParse(dto.Saturates, out saturates);
-            double.TryParse(dto.Salt, out salt);
+            dto.Name = dto.Name.Trim();
+            dto.Description = dto.Description.Trim();
+
+            if(!int.TryParse(dto.Calories, out calories))
+            {
+                throw new ValidationException("Calories is not a number.");
+            }
+
+            if(!double.TryParse(dto.Sugar, out sugar))
+            {
+                throw new ValidationException("Sugar is not a number.");
+            }
+
+            if(!double.TryParse(dto.Fat, out fat))
+            {
+                throw new ValidationException("Fat is not a number.");
+            }
+
+            if(!double.TryParse(dto.Saturates, out saturates))
+            {
+                throw new ValidationException("Saturates is not a number.");
+            }
+
+            if(!double.TryParse(dto.Salt, out salt))
+            {
+                throw new ValidationException("Salt is not a number.");
+            }
 
             return new Food()
             {
@@ -64,7 +86,7 @@ namespace Jack.FoodTracker
             //Check the food doesn't already exist in the database
             if (UnitOfWork.FoodRepository.GetAll().Where(x => x.Name.ToLower().Equals(newFood.Name.ToLower())).Any())
             {
-                throw new ArgumentException("This food already exists.");
+                throw new ValidationException("This food already exists.");
             }
 
             //Add the food to the database
@@ -76,22 +98,23 @@ namespace Jack.FoodTracker
 
         public void EditFood(FoodDTO dto, Food food)
         {
-            //Parse input strings into a food object
-            FoodDTOParser parser = new FoodDTOParser();
-            
+            Food editedFood = parseFoodDTO(dto);
+
+            Validator.ValidateObject(editedFood, new ValidationContext(editedFood), true);
+
             //if the name has changed check that there isn't an existing food with the new name
             if(dto.Name != food.Name)
             {
                 if (UnitOfWork.FoodRepository.GetAll().Where(x => x.Name.ToLower().Equals(dto.Name.ToLower())).Any())
                 {
-                    throw new ArgumentException("A food with this name already exists.");
+                    throw new ValidationException("A food with this name already exists.");
                 }
             }
 
-            Food newFood = null;
-            
+            food.Update(editedFood);
+
             //Add the food to the database
-            UnitOfWork.FoodRepository.Edit(newFood);
+            UnitOfWork.FoodRepository.Edit(food);
             UnitOfWork.Save();
         }
 
