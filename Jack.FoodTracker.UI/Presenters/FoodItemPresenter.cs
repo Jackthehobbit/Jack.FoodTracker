@@ -13,11 +13,12 @@ namespace Jack.FoodTracker
         private readonly IFoodItemView FoodItemView;
         private readonly FoodTracker FoodTracker;
 
-        public FoodItemPresenter(IFoodItemView foodItemView, FoodTracker foodTracker, IList<FoodCategory> foodCategories)
+        public FoodItemPresenter(IFoodItemView foodItemView, FoodTracker foodTracker)
         {
             FoodItemView = foodItemView;
             FoodTracker = foodTracker;
-            FoodItemView.Categories = foodCategories;
+
+            FoodItemView.Categories = FoodTracker.GetAllFoodCategories(false);
             FoodItemView.LeaveCategoryField += new EventHandler(CheckExistingCategory);
         }
 
@@ -89,11 +90,17 @@ namespace Jack.FoodTracker
             if (FoodItemView.Category == null)
             {
                 FoodCategory existingCategory = FoodTracker.GetCategoryByName(FoodItemView.NewCategoryName);
+
                 if(existingCategory != null)
                 {
                     FoodItemView.Category = existingCategory;
                 }
             }
+        }
+
+        public void UpdateCategories()
+        {
+            FoodItemView.Categories = FoodTracker.GetAllFoodCategories(false);
         }
     }
 }

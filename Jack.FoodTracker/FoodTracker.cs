@@ -30,36 +30,36 @@ namespace Jack.FoodTracker
 
         private Food parseFoodDTO(FoodDTO dto)
         {
-            int calories;
-            double sugar;
-            double fat;
-            double saturates;
-            double salt;
+            int calories = 0;
+            double sugar = 0;
+            double fat = 0;
+            double saturates = 0;
+            double salt = 0;
 
             dto.Name = dto.Name.Trim();
             dto.Description = dto.Description.Trim();
 
-            if(!int.TryParse(dto.Calories, out calories))
+            if(dto.Calories != "" && !int.TryParse(dto.Calories, out calories))
             {
                 throw new ValidationException("Calories is not a number.");
             }
 
-            if(!double.TryParse(dto.Sugar, out sugar))
+            if (dto.Sugar != "" && !double.TryParse(dto.Sugar, out sugar))
             {
                 throw new ValidationException("Sugar is not a number.");
             }
 
-            if(!double.TryParse(dto.Fat, out fat))
+            if (dto.Fat != "" && !double.TryParse(dto.Fat, out fat))
             {
                 throw new ValidationException("Fat is not a number.");
             }
 
-            if(!double.TryParse(dto.Saturates, out saturates))
+            if (dto.Saturates != "" && !double.TryParse(dto.Saturates, out saturates))
             {
                 throw new ValidationException("Saturates is not a number.");
             }
 
-            if(!double.TryParse(dto.Salt, out salt))
+            if (dto.Salt != "" && !double.TryParse(dto.Salt, out salt))
             {
                 throw new ValidationException("Salt is not a number.");
             }
@@ -191,6 +191,8 @@ namespace Jack.FoodTracker
 
         public IList<Food> GetFoodByCategory(FoodCategory category)
         {
+
+
             return UnitOfWork.FoodRepository.GetByCategory(category);
         }
 
@@ -243,22 +245,9 @@ namespace Jack.FoodTracker
             return UnitOfWork.FoodRepository.GetAll();
         }
         
-        public IList<FoodCategory> GetNonEmptyFoodCategories(IList<Food> foods)
+        public IList<FoodCategory> GetNonEmptyFoodCategories(bool showUncategorised)
         {
-            IList<FoodCategory> fCatList = GetAllFoodCategories(true);
-            IList<FoodCategory> fCatListResult = new List<FoodCategory>(fCatList);
-
-            foreach (FoodCategory item in fCatList)
-            {
-                Food findCat = foods.Where(x => x.Category.Id.Equals(item.Id)).FirstOrDefault();
-
-                if (findCat == null)
-                {
-                    fCatListResult.Remove(item);
-                }
-            }
-
-            return fCatListResult;
+            return GetAllFoodCategories(showUncategorised).Where(cat => cat.Foods.Count > 0).ToList();
         }
 
         public FoodCategory GetCategoryByName(string Name)

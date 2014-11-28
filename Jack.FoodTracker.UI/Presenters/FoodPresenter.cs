@@ -51,11 +51,8 @@ namespace Jack.FoodTracker
             FoodView = foodView;
             FoodTracker = foodTracker;
 
-            IList<FoodCategory> fCatList = FoodTracker.GetAllFoodCategories(true);
-            IList<FoodCategory> fCatList2 = FoodTracker.GetNonEmptyFoodCategories(FoodTracker.GetAllFood());
-
-            FoodItemPresenter = new FoodItemPresenter(FoodView.FoodItemView, FoodTracker, fCatList);
-            FoodLookupPresenter = new FoodLookupPresenter(FoodView.FoodLookupView, FoodTracker, fCatList2);
+            FoodItemPresenter = new FoodItemPresenter(FoodView.FoodItemView, FoodTracker);
+            FoodLookupPresenter = new FoodLookupPresenter(FoodView.FoodLookupView, FoodTracker);
             FoodSearchPresenter = new FoodSearchPresenter(FoodView.FoodSearchView, FoodTracker, FoodLookupPresenter);
 
             FoodView.AddFoodClick += new EventHandler(OnAddFoodButtonClick);
@@ -67,7 +64,7 @@ namespace Jack.FoodTracker
 
             InEditMode = false;
 
-            if (fCatList.Count == 0)
+            if (FoodTracker.GetAllFoodCategories(true).Count == 0)
             {
                 FoodView.AddFoodButtonEnabled = false;
             }
@@ -97,6 +94,8 @@ namespace Jack.FoodTracker
                     }
 
                     FoodTracker.EditFood(dto, selectedFood);
+
+                    FoodItemPresenter.UpdateCategories();
 
                     if (!dto.Category.Equals(FoodLookupPresenter.SelectedCategory))
                     {
@@ -137,13 +136,22 @@ namespace Jack.FoodTracker
                 {
                     Food selectedFood = FoodLookupPresenter.SelectedFood;
 
+                    FoodCategory selectedCategory = selectedFood.Category;
+
                     FoodTracker.DeleteFood(selectedFood);
 
                     int foodIndex = FoodLookupPresenter.SelectedFoodIndex;
+                    int categoryIndex = FoodLookupPresenter.SelectedCategoryIndex;
 
-                    FoodLookupPresenter.SetFoodList(foodIndex > 0 ? foodIndex - 1 : 0);
+                    if(selectedCategory.Foods.Count == 0)
+                    {
+                        FoodLookupPresenter.UpdateCategories(categoryIndex > 0 ? categoryIndex - 1 : 0);
+                    }
+                    else
+                    {
+                        FoodLookupPresenter.SetFoodList(foodIndex > 0 ? foodIndex - 1 : 0);
+                    }
                 }
-
             }
         }
 
@@ -154,10 +162,8 @@ namespace Jack.FoodTracker
                 AddFoodPresenter addFoodPresenter = new AddFoodPresenter(addFood, FoodTracker);
                 DialogResult result = addFood.ShowDialog();
 
-                if (result == DialogResult.OK && addFoodPresenter.GetFoodCategorySelected().Equals(FoodLookupPresenter.SelectedCategory))
-                {
-                    FoodLookupPresenter.SetFoodList();
-                }
+                FoodLookupPresenter.UpdateCategories(FoodLookupPresenter.SelectedCategory);
+                FoodItemPresenter.UpdateCategories();
             }
         }
 

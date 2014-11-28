@@ -53,7 +53,7 @@ namespace Jack.FoodTracker
             FoodTracker = foodTracker;
             _inEditMode = false;
 
-            CategoryLookupPresenter = new CategoryLookupPresenter(CategoryView.CategoryLookupView, FoodTracker, false);
+            CategoryLookupPresenter = new CategoryLookupPresenter(CategoryView.CategoryLookupView, FoodTracker, true, false);
             AddCategoryPresenter = new AddCategoryPresenter(CategoryView.AddCategoryView, FoodTracker, CategoryLookupPresenter);
             CategoryItemPresenter = new CategoryItemPresenter(CategoryView.CategoryItemView);
 
@@ -121,6 +121,7 @@ namespace Jack.FoodTracker
                     FoodTracker.EditFoodCategory(dto, selectedFoodCat);
 
                     InEditMode = false;
+
                     CategoryLookupPresenter.UpdateCategories(selectedFoodCat);
                 }
                 catch (ValidationException vex)

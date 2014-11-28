@@ -11,15 +11,17 @@ namespace Jack.FoodTracker
     {
         private readonly ICategoryLookupView CategoryLookupView;
         private readonly FoodTracker FoodTracker;
+        private readonly bool ShowEmptyCategories;
         private readonly bool ShowUncategorised;
 
-        public CategoryLookupPresenter(ICategoryLookupView categoryLookupView, FoodTracker foodTracker, bool showUncategorised)
+        public CategoryLookupPresenter(ICategoryLookupView categoryLookupView, FoodTracker foodTracker, bool showEmptyCategories, bool showUncategorised)
         {
             CategoryLookupView = categoryLookupView;
             FoodTracker = foodTracker;
             ShowUncategorised = showUncategorised;
+            ShowEmptyCategories = showEmptyCategories;
 
-            UpdateCategories(0);
+            UpdateCategories();
         }
 
         public event EventHandler SelectedCategoryChanged
@@ -52,9 +54,23 @@ namespace Jack.FoodTracker
             set { CategoryLookupView.Enabled = value; }
         }
 
+        public void UpdateCategories()
+        {
+            UpdateCategories(0);
+        }
+
         public void UpdateCategories(int selectedIndex)
         {
-            IList<FoodCategory> categories = FoodTracker.GetAllFoodCategories(ShowUncategorised);
+            IList<FoodCategory> categories;
+
+            if (ShowEmptyCategories)
+            {
+                categories = FoodTracker.GetAllFoodCategories(ShowUncategorised);
+            }
+            else
+            {
+                categories = FoodTracker.GetNonEmptyFoodCategories(ShowUncategorised);
+            }
 
             if (categories.Count == 0)
             {
@@ -65,14 +81,24 @@ namespace Jack.FoodTracker
 
             if (categories.Count != 0)
             {
-                CategoryLookupView.SelectedCategoryIndex = selectedIndex > 0 ? selectedIndex - 1 : 0;
+                CategoryLookupView.SelectedCategoryIndex = selectedIndex;
             }
 
         }
 
         public void UpdateCategories(FoodCategory selectedFCat)
         {
-            IList<FoodCategory> categories = FoodTracker.GetAllFoodCategories(ShowUncategorised);
+            IList<FoodCategory> categories;
+
+            if (ShowEmptyCategories)
+            {
+                
+                categories = FoodTracker.GetAllFoodCategories(ShowUncategorised);
+            }
+            else
+            {
+                categories = FoodTracker.GetNonEmptyFoodCategories(ShowUncategorised);
+            }
 
             if (categories.Count == 0)
             {

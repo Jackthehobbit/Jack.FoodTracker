@@ -74,7 +74,7 @@ namespace Jack.FoodTracker
                     searchResults = SearchForFood(SearchService, searchResults, key, exp, val);
                 }
 
-                IList<FoodCategory> finalCatList = FoodTracker.GetNonEmptyFoodCategories(searchResults);
+                IList<FoodCategory> finalCatList = null; // FoodTracker.GetNonEmptyFoodCategories(searchResults);
 
                 FoodLookupPresenter.SetCatList(finalCatList);
                 FoodLookupPresenter.SetFoodList(searchResults);

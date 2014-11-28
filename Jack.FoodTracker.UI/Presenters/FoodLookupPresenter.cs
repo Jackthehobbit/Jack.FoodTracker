@@ -15,15 +15,15 @@ namespace Jack.FoodTracker
 
         public IList<Food> SearchResults { get; set; }
 
-        public FoodLookupPresenter(IFoodLookupView foodLookupView, FoodTracker foodTracker, IList<FoodCategory> foodCategories)
+        public FoodLookupPresenter(IFoodLookupView foodLookupView, FoodTracker foodTracker)
         {
             FoodLookupView = foodLookupView;
             FoodTracker = foodTracker;
-            CategoryLookupPresenter = new CategoryLookupPresenter(FoodLookupView.CategoryLookupView, FoodTracker, true);
+            CategoryLookupPresenter = new CategoryLookupPresenter(FoodLookupView.CategoryLookupView, FoodTracker, false, true);
 
             CategoryLookupPresenter.SelectedCategoryChanged += new EventHandler(OnCategoriesSelectedIndexChanged);
 
-            CategoryLookupPresenter.Categories = foodCategories;
+            SetFoodList();
         }
 
         private void OnCategoriesSelectedIndexChanged(object sender, EventArgs e)
@@ -142,7 +142,13 @@ namespace Jack.FoodTracker
         public FoodCategory SelectedCategory
         {
             get { return CategoryLookupPresenter.SelectedCategory; }
-            set { CategoryLookupPresenter.SelectedCategory = value; }
+            set { CategoryLookupPresenter.UpdateCategories(value); }
+        }
+
+        public int SelectedCategoryIndex
+        {
+            get { return CategoryLookupPresenter.SelectedCategoryIndex; }
+            set { CategoryLookupPresenter.UpdateCategories(value); }
         }
 
         public bool ViewEnabled
@@ -154,6 +160,21 @@ namespace Jack.FoodTracker
         public void SetCatList(IList<FoodCategory> fCatList)
         {
             CategoryLookupPresenter.Categories = fCatList;
+        }
+
+        public void UpdateCategories()
+        {
+            CategoryLookupPresenter.UpdateCategories();
+        }
+
+        public void UpdateCategories(int selectedIndex)
+        {
+            CategoryLookupPresenter.UpdateCategories(selectedIndex);
+        }
+
+        public void UpdateCategories(FoodCategory selectedCategory)
+        {
+            CategoryLookupPresenter.UpdateCategories(selectedCategory);
         }
     }
 }

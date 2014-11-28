@@ -15,11 +15,13 @@ namespace Jack.FoodTracker
         private readonly FoodItemPresenter FoodItemPresenter;
         private readonly FoodTracker FoodTracker;
 
+        private FoodCategory newCategory;
+
         public AddFoodPresenter(IAddFoodView addFoodView, FoodTracker foodTracker)
         {
             AddFoodView = addFoodView;
             FoodTracker = foodTracker;
-            FoodItemPresenter = new FoodItemPresenter(AddFoodView.FoodItemView, FoodTracker, FoodTracker.GetAllFoodCategories(true));
+            FoodItemPresenter = new FoodItemPresenter(AddFoodView.FoodItemView, FoodTracker);
 
             AddFoodView.AddFoodClick += new EventHandler(OnAddFoodButtonClick);
             AddFoodView.CancelClick += new EventHandler(OnCancelButtonClick);
@@ -38,7 +40,7 @@ namespace Jack.FoodTracker
                         Name = FoodItemPresenter.GetNewCategoryName()
                     };
 
-                    FoodCategory newCategory = FoodTracker.AddCategory(categoryDto);
+                    newCategory = FoodTracker.AddCategory(categoryDto);
 
                     dto.Category = newCategory;
                 }
@@ -55,7 +57,15 @@ namespace Jack.FoodTracker
 
         public FoodCategory GetFoodCategorySelected()
         {
-            return FoodItemPresenter.GetSelectedCategory();
+            if(FoodItemPresenter.GetSelectedCategory() != null)
+            {
+                return FoodItemPresenter.GetSelectedCategory();
+            }
+            else
+            {
+                return newCategory;
+            }
+            
         }
 
         private void OnCancelButtonClick(object sender, EventArgs e)
