@@ -52,130 +52,130 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Presenters\AddCategoryPresenter.cs" />
-    <Compile Include="Views\AddCategoryView.cs">
+    <Compile Include="Categories\Presenters\AddCategoryPresenter.cs" />
+    <Compile Include="Categories\Views\AddCategoryView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\AddCategoryView.Designer.cs">
+    <Compile Include="Categories\Views\AddCategoryView.Designer.cs">
       <DependentUpon>AddCategoryView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\AddFoodForm.cs">
+    <Compile Include="Foods\Views\AddFoodForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\AddFoodForm.Designer.cs">
+    <Compile Include="Foods\Views\AddFoodForm.Designer.cs">
       <DependentUpon>AddFoodForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Presenters\AddFoodPresenter.cs" />
-    <Compile Include="Presenters\CategoryItemPresenter.cs" />
-    <Compile Include="Views\CategoryItemView.cs">
+    <Compile Include="Foods\Presenters\AddFoodPresenter.cs" />
+    <Compile Include="Categories\Presenters\CategoryItemPresenter.cs" />
+    <Compile Include="Categories\Views\CategoryItemView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\CategoryItemView.Designer.cs">
+    <Compile Include="Categories\Views\CategoryItemView.Designer.cs">
       <DependentUpon>CategoryItemView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Presenters\CategoryLookupPresenter.cs" />
-    <Compile Include="Views\CategoryLookupView.cs">
+    <Compile Include="Categories\Presenters\CategoryLookupPresenter.cs" />
+    <Compile Include="Categories\Views\CategoryLookupView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\CategoryLookupView.Designer.cs">
+    <Compile Include="Categories\Views\CategoryLookupView.Designer.cs">
       <DependentUpon>CategoryLookupView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Presenters\CategoryPresenter.cs" />
-    <Compile Include="Views\CategoryView.cs">
+    <Compile Include="Categories\Presenters\CategoryPresenter.cs" />
+    <Compile Include="Categories\Views\CategoryView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\CategoryView.Designer.cs">
+    <Compile Include="Categories\Views\CategoryView.Designer.cs">
       <DependentUpon>CategoryView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Presenters\FoodItemPresenter.cs" />
-    <Compile Include="Views\FoodItemView.cs">
+    <Compile Include="Foods\Presenters\FoodItemPresenter.cs" />
+    <Compile Include="Foods\Views\FoodItemView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\FoodItemView.Designer.cs">
+    <Compile Include="Foods\Views\FoodItemView.Designer.cs">
       <DependentUpon>FoodItemView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Presenters\FoodLookupPresenter.cs" />
-    <Compile Include="Views\FoodLookupView.cs">
+    <Compile Include="Foods\Presenters\FoodLookupPresenter.cs" />
+    <Compile Include="Foods\Views\FoodLookupView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\FoodLookupView.Designer.cs">
+    <Compile Include="Foods\Views\FoodLookupView.Designer.cs">
       <DependentUpon>FoodLookupView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Presenters\FoodPresenter.cs" />
-    <Compile Include="Presenters\FoodSearchPresenter.cs" />
-    <Compile Include="Views\FoodSearchView.cs">
+    <Compile Include="Foods\Presenters\FoodPresenter.cs" />
+    <Compile Include="Foods\Presenters\FoodSearchPresenter.cs" />
+    <Compile Include="Foods\Views\FoodSearchView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\FoodSearchView.Designer.cs">
+    <Compile Include="Foods\Views\FoodSearchView.Designer.cs">
       <DependentUpon>FoodSearchView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\FoodView.cs">
+    <Compile Include="Foods\Views\FoodView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\FoodView.Designer.cs">
+    <Compile Include="Foods\Views\FoodView.Designer.cs">
       <DependentUpon>FoodView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\IAddCategoryView.cs" />
-    <Compile Include="Views\IAddFoodView.cs" />
-    <Compile Include="Views\ICategoryItemView.cs" />
-    <Compile Include="Views\ICategoryLookupView.cs" />
-    <Compile Include="Views\ICategoryView.cs" />
-    <Compile Include="Views\IFoodItemView.cs" />
-    <Compile Include="Views\IFoodLookupView.cs" />
-    <Compile Include="Views\IFoodSearchView.cs" />
-    <Compile Include="Views\IFoodView.cs" />
-    <Compile Include="Views\IMainView.cs" />
-    <Compile Include="Views\IPresetMealView.cs" />
-    <Compile Include="Views\MainForm.cs">
+    <Compile Include="Categories\IViews\IAddCategoryView.cs" />
+    <Compile Include="Foods\IViews\IAddFoodView.cs" />
+    <Compile Include="Categories\IViews\ICategoryItemView.cs" />
+    <Compile Include="Categories\IViews\ICategoryLookupView.cs" />
+    <Compile Include="Categories\IViews\ICategoryView.cs" />
+    <Compile Include="Foods\IViews\IFoodItemView.cs" />
+    <Compile Include="Foods\IViews\IFoodLookupView.cs" />
+    <Compile Include="Foods\IViews\IFoodSearchView.cs" />
+    <Compile Include="Foods\IViews\IFoodView.cs" />
+    <Compile Include="Main\IMainView.cs" />
+    <Compile Include="Preset Meals\IView\IPresetMealView.cs" />
+    <Compile Include="Main\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\MainForm.Designer.cs">
+    <Compile Include="Main\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Presenters\MainPresenter.cs" />
-    <Compile Include="Presenters\PresetMealPresenter.cs" />
-    <Compile Include="Views\PresetMealView.cs">
+    <Compile Include="Main\MainPresenter.cs" />
+    <Compile Include="Preset Meals\Presenters\PresetMealPresenter.cs" />
+    <Compile Include="Preset Meals\Views\PresetMealView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\PresetMealView.Designer.cs">
+    <Compile Include="Preset Meals\Views\PresetMealView.Designer.cs">
       <DependentUpon>PresetMealView.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Views\RightView.cs">
+    <Compile Include="Main\RightView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <EmbeddedResource Include="Views\AddCategoryView.resx">
+    <EmbeddedResource Include="Categories\Views\AddCategoryView.resx">
       <DependentUpon>AddCategoryView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\AddFoodForm.resx">
+    <EmbeddedResource Include="Foods\Views\AddFoodForm.resx">
       <DependentUpon>AddFoodForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\CategoryItemView.resx">
+    <EmbeddedResource Include="Categories\Views\CategoryItemView.resx">
       <DependentUpon>CategoryItemView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\CategoryLookupView.resx">
+    <EmbeddedResource Include="Categories\Views\CategoryLookupView.resx">
       <DependentUpon>CategoryLookupView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\CategoryView.resx">
+    <EmbeddedResource Include="Categories\Views\CategoryView.resx">
       <DependentUpon>CategoryView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\FoodItemView.resx">
+    <EmbeddedResource Include="Foods\Views\FoodItemView.resx">
       <DependentUpon>FoodItemView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\FoodLookupView.resx">
+    <EmbeddedResource Include="Foods\Views\FoodLookupView.resx">
       <DependentUpon>FoodLookupView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\FoodSearchView.resx">
+    <EmbeddedResource Include="Foods\Views\FoodSearchView.resx">
       <DependentUpon>FoodSearchView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\FoodView.resx">
+    <EmbeddedResource Include="Foods\Views\FoodView.resx">
       <DependentUpon>FoodView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\MainForm.resx">
+    <EmbeddedResource Include="Main\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\PresetMealView.resx">
+    <EmbeddedResource Include="Preset Meals\Views\PresetMealView.resx">
       <DependentUpon>PresetMealView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -214,6 +214,7 @@
       <Name>Jack.FoodTracker</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
