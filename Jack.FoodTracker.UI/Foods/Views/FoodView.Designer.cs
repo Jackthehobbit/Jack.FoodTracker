@@ -104,7 +104,6 @@ namespace Jack.FoodTracker
             this.Controls.Add(this.btnDeleteFood);
             this.Controls.Add(this.lTitle);
             this.Controls.Add(this.btnEditFood);
-            this.Location = new System.Drawing.Point(0, 0);
             this.Name = "FoodView";
             this.ResumeLayout(false);
             this.PerformLayout();

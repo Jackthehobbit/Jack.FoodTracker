@@ -12,7 +12,7 @@ namespace Jack.FoodTracker
         public RightView()
         {
             Size = new System.Drawing.Size(800, 500);
-            Location = new System.Drawing.Point(200,0);
+            Location = new System.Drawing.Point(200, 0);
         }
     }
 }

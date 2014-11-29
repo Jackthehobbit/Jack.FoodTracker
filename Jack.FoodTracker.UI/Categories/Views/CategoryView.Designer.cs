@@ -106,7 +106,6 @@
             this.Controls.Add(this.btnCategoryMoveUp);
             this.Controls.Add(this.btnDeleteCategory);
             this.Controls.Add(this.btnEditCategory);
-            this.Location = new System.Drawing.Point(0, 0);
             this.Name = "CategoryView";
             this.Size = new System.Drawing.Size(829, 420);
             this.ResumeLayout(false);
