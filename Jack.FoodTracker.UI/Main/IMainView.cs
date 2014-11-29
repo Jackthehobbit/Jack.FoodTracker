@@ -11,5 +11,7 @@ namespace Jack.FoodTracker
         RightView CurrentView { get; set; }
 
         FoodView FoodView { get; }
+
+        CategoryView CategoryView { get; }
     }
 }

@@ -17,15 +17,19 @@ namespace Jack.FoodTracker
     {
         public FoodView FoodView { get; private set; }
         public CategoryView CategoryView { get; private set; }
+        public LeftView LeftView;
 
         public MainForm(FoodTracker FoodTracker)
         {
             InitializeComponent();
             FoodView = new FoodView();
             CategoryView = new CategoryView();
+            LeftView = new LeftView(this);
 
-            _CurrentView = CategoryView;
+
+            _CurrentView = FoodView;
             Controls.Add(_CurrentView);
+            Controls.Add(LeftView);
         }
 
 

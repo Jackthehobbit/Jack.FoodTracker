@@ -124,6 +124,12 @@
     <Compile Include="Foods\IViews\IFoodLookupView.cs" />
     <Compile Include="Foods\IViews\IFoodSearchView.cs" />
     <Compile Include="Foods\IViews\IFoodView.cs" />
+    <Compile Include="Main\LeftView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Main\LeftView.Designer.cs">
+      <DependentUpon>LeftView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Main\IMainView.cs" />
     <Compile Include="Preset Meals\IView\IPresetMealView.cs" />
     <Compile Include="Main\MainForm.cs">
@@ -172,6 +178,9 @@
     <EmbeddedResource Include="Foods\Views\FoodView.resx">
       <DependentUpon>FoodView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Main\LeftView.resx">
+      <DependentUpon>LeftView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Main\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -186,6 +195,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -215,6 +225,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\ArrowUp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Downarrow.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
